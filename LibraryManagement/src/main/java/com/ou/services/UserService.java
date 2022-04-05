@@ -45,7 +45,7 @@ public class UserService {
         }
     }
     
-    public void addUser(User user) throws SQLException {
+    public boolean addUser(User user) throws SQLException {
         try(Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("INSERT INTO "
                                             + "user(id,username,password,fullname,gender,dob,address,phone,role_id,department_id,create_date) "
@@ -61,6 +61,8 @@ public class UserService {
             stm.setInt(9, user.getRole_id());
             stm.setInt(10, user.getDepartment_id());
             stm.setDate(11, Utils.convertUtilToSql(user.getCreated_date()));
+            
+            return stm.executeUpdate() > 0;
         }
     }
 }

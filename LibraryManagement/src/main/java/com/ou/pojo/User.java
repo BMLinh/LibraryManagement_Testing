@@ -11,8 +11,7 @@ import java.util.Date;
  * @author Admin
  */
 public class User {
-    private static int autoinc; 
-    private int id = ++autoinc;
+    private int id;
     private String username;
     private String password;
     private String fullname;
