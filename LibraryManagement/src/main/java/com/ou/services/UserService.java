@@ -58,9 +58,18 @@ public class UserService {
             stm.setDate(6, Utils.convertUtilToSql(user.getBirth()));
             stm.setString(7, user.getAddress());
             stm.setString(8, user.getPhone());
-            stm.setInt(9, user.getRole_id());
-            stm.setInt(10, user.getDepartment_id());
-            stm.setDate(11, Utils.convertUtilToSql(user.getCreated_date()));
+            stm.setInt(9, user.getRoleId());
+            stm.setInt(10, user.getDepartmentId());
+            stm.setDate(11, Utils.convertUtilToSql(user.getCreatedDate()));
+            
+            return stm.executeUpdate() > 0;
+        }
+    }
+    
+    public boolean deleteUser(int id) throws SQLException {
+        try(Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("DELETE FROM user WHERE id=?");
+            stm.setInt(1, id);
             
             return stm.executeUpdate() > 0;
         }
