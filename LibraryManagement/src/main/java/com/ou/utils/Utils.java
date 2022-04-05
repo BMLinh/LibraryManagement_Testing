@@ -11,10 +11,16 @@ import javafx.scene.control.Alert;
  * @author Admin
  */
 public class Utils {
-    public Alert setAlert(String message, Alert.AlertType alertType){
+    public static Alert setAlert(String message, Alert.AlertType alertType){
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
         
         return alert;
+    }
+    
+    public static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+        
+        return sDate;
     }
 }
