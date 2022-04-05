@@ -193,4 +193,11 @@ public class User {
         this.department_id = department_id;
     }
 
+    /**
+     * @return the created_date
+     */
+    public Date getCreated_date() {
+        return created_date;
+    }
+
 }
