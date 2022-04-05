@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javafx.scene.control.Alert;
 /**
  *
@@ -72,6 +73,38 @@ public class UserService {
             stm.setInt(1, id);
             
             return stm.executeUpdate() > 0;
+        }
+    }
+    
+    public List<User> findUser(Map<String, String> params) throws SQLException {
+        try(Connection conn = JdbcUtils.getConn()) {
+            if(!params.isEmpty()) {
+                String temp = "";
+                PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE ?");
+                if(params.containsKey("id"))
+                    temp = "id = " + params.get("id");
+                if(params.containsKey("username"))
+                    temp = "username = '" + params.get("username") + "'";
+                if(params.containsKey("fullname"))
+                    temp = "fullname like N'" + params.get("fullname") + "'";
+                if(params.containsKey("gender"))
+                    temp = "gender = " + params.get("gender");
+                if(params.containsKey("from_date")){
+                    temp = "dob >= '" + params.get("from_date") + "'";
+                    if(params.containsKey("to_date"))
+                        temp = "dob <= '" + params.get("to_date") + "'";
+                }
+                if(params.containsKey("address"))
+                    temp = "address like N'" + params.get("id") + "'";
+                if(params.containsKey("phone"))
+                    temp = "phone = '" + params.get("id") + "'";
+                if(params.containsKey("roleId"))
+                    temp = "role_id = " + params.get("roleId");
+                if(params.containsKey("departmentId"))
+                    temp = "department_id = " + params.get("departmentId");
+                if(params.containsKey("crea"))
+                    temp = "id = " + params.get("id");
+            } 
         }
     }
 }
