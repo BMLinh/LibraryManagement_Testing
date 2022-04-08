@@ -52,7 +52,7 @@ public class DepartmentService {
 
     public boolean addDepartment(Department d) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO department(name ) VALUES (?)");
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO department(name) VALUES (?)");
             stm.setString(1, d.getName());
             return stm.executeUpdate() > 0;
         }

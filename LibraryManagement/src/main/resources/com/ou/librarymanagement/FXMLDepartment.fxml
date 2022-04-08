@@ -15,14 +15,14 @@
             <children>
                 <HBox alignment="CENTER" prefHeight="56.0" prefWidth="822.0">
                     <children>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" onAction="#addDepartment" text="Thêm" />
                     </children>
                 </HBox>
-                <TextField promptText="Nhập tên quyền cần tìm..." />
-                <TableView prefHeight="244.0" prefWidth="901.0" />
+                <TextField fx:id="txtKeyword" promptText="Nhập tên đối tượng cần tìm..." />
+                <TableView fx:id="tbDepartment" prefHeight="244.0" prefWidth="901.0" />
             </children>
         </VBox>
-      <Text layoutX="259.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ ???? AI BIẾT TÊN GÌ ĐÂU">
+      <Text layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ ???????" textAlignment="CENTER" wrappingWidth="910.4000000000001">
          <font>
             <Font size="26.0" />
          </font>
@@ -37,7 +37,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="227.0" layoutY="68.0" prefHeight="26.0" prefWidth="158.0" />
-      <TextField layoutX="227.0" layoutY="111.0" prefHeight="26.0" prefWidth="417.0" />
+      <TextField fx:id="txtId" layoutX="227.0" layoutY="68.0" prefHeight="26.0" prefWidth="158.0" />
+      <TextField fx:id="txtName" layoutX="227.0" layoutY="111.0" prefHeight="26.0" prefWidth="417.0" />
     </children>
 </AnchorPane>
