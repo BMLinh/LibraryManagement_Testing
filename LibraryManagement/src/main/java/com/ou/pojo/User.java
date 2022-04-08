@@ -19,9 +19,9 @@ public class User {
     private Date birth;
     private String address;
     private String phone;
-    private int role_id;
-    private int department_id;
-    private Date created_date  = new Date();
+    private int roleId;
+    private int departmentId;
+    private Date createdDate  = new Date();
 
     public User() {}
     
@@ -34,24 +34,10 @@ public class User {
         this.birth = birth;
         this.address = address;
         this.phone = phone;
-        this.role_id = role_id;
-        this.department_id = department_id;
+        this.roleId = role_id;
+        this.departmentId = department_id;
     }
-
-    /**
-     * @return the autoinc
-     */
-    public static int getAutoinc() {
-        return autoinc;
-    }
-
-    /**
-     * @param aAutoinc the autoinc to set
-     */
-    public static void setAutoinc(int aAutoinc) {
-        autoinc = aAutoinc;
-    }
-
+    
     /**
      * @return the id
      */
@@ -165,38 +151,38 @@ public class User {
     }
 
     /**
-     * @return the role_id
+     * @return the roleId
      */
-    public int getRole_id() {
-        return role_id;
+    public int getRoleId() {
+        return roleId;
     }
 
     /**
-     * @param role_id the role_id to set
+     * @param roleId the roleId to set
      */
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     /**
-     * @return the department_id
+     * @return the departmentId
      */
-    public int getDepartment_id() {
-        return department_id;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
     /**
-     * @param department_id the department_id to set
+     * @param departmentId the departmentId to set
      */
-    public void setDepartment_id(int department_id) {
-        this.department_id = department_id;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
     /**
-     * @return the created_date
+     * @return the createdDate
      */
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
 }
