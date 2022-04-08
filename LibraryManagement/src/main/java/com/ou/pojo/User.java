@@ -21,11 +21,11 @@ public class User {
     private String phone;
     private int roleId;
     private int departmentId;
-    private Date createdDate  = new Date();
+    private Date createdDate;
 
     public User() {}
     
-    public User(int id, String username, String password, String fullname, byte gender, Date birth, String address, String phone, int role_id, int department_id) {
+    public User(int id, String username, String password, String fullname, byte gender, Date birth, String address, String phone, int role_id, int department_id, Date createdDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -36,6 +36,8 @@ public class User {
         this.phone = phone;
         this.roleId = role_id;
         this.departmentId = department_id;
+        this.createdDate = createdDate;
+        
     }
     
     /**

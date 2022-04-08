@@ -16,19 +16,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.control.Alert;
 /**
  *
  * @author Admin
  */
 public class UserService {
     public List<User> getUsers() throws SQLException {
-        try (Connection conn = JdbcUtils.getConn()){
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM user");
+        try(Connection conn = JdbcUtils.getConn()){
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * from user");
             
             List<User> users = new ArrayList<>();
-            while(rs.next()) {
+            
+            while(rs.next()){
+                System.out.print(rs.getString("username"));
                 int id = rs.getInt("id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
@@ -37,11 +37,13 @@ public class UserService {
                 Date birth = rs.getDate("dob");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
-                int role_id = rs.getInt("role_id");
-                int department_id = rs.getInt("department_id");
-                Date created_date = rs.getDate("create_date");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
             }
-            
+                
             return users;
         }
     }
@@ -78,33 +80,88 @@ public class UserService {
     
     public List<User> findUser(Map<String, String> params) throws SQLException {
         try(Connection conn = JdbcUtils.getConn()) {
-            if(!params.isEmpty()) {
-                String temp = "";
-                PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE ?");
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user ?");
+            if(params != null) {
+                String temp = "WHERE ";
+                
                 if(params.containsKey("id"))
-                    temp = "id = " + params.get("id");
+                    temp += "id = " + params.get("id") + "AND ";
                 if(params.containsKey("username"))
-                    temp = "username = '" + params.get("username") + "'";
+                    temp += "username = '" + params.get("username") + "' AND ";
                 if(params.containsKey("fullname"))
-                    temp = "fullname like N'" + params.get("fullname") + "'";
+                    temp += "fullname like N'" + params.get("fullname") + "' AND ";
                 if(params.containsKey("gender"))
-                    temp = "gender = " + params.get("gender");
-                if(params.containsKey("from_date")){
-                    temp = "dob >= '" + params.get("from_date") + "'";
-                    if(params.containsKey("to_date"))
-                        temp = "dob <= '" + params.get("to_date") + "'";
-                }
+                    temp += "gender = " + params.get("gender") + " AND ";
+                if(params.containsKey("from_date"))
+                    temp += "dob >= '" + params.get("from_date") + ", AND ";
+                else if(params.containsKey("to_date"))
+                        temp += "dob <= '" + params.get("to_date") + "' AND ";
+                else if (params.containsKey("from_date") && params.containsKey("to_date"))
+                        temp += "dob BETWEEN '" + params.get("from_date") + "' AND '" + params.get("to_date") + "' AND ";
                 if(params.containsKey("address"))
-                    temp = "address like N'" + params.get("id") + "'";
+                    temp += "address like N'" + params.get("id") + "' AND ";
                 if(params.containsKey("phone"))
-                    temp = "phone = '" + params.get("id") + "'";
+                    temp += "phone = '" + params.get("id") + "' AND ";
                 if(params.containsKey("roleId"))
-                    temp = "role_id = " + params.get("roleId");
+                    temp += "role_id = " + params.get("roleId") + " AND ";
                 if(params.containsKey("departmentId"))
-                    temp = "department_id = " + params.get("departmentId");
-                if(params.containsKey("crea"))
-                    temp = "id = " + params.get("id");
-            } 
+                    temp += "department_id = " + params.get("departmentId") + " AND ";
+                if(params.containsKey("createdDate"))
+                    temp += "created_date = " + params.get("id") + " AND ";
+                
+                stm.setString(1, temp);
+            }
+            
+            ResultSet rs = stm.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                byte gender = rs.getByte("gender");
+                Date birth = rs.getDate("dob");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
+            }
+            
+            return users;
+        }
+    }
+    
+    public boolean updateUser(int id, Map<String, String> params) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            String temp = "";
+            PreparedStatement stm = conn.prepareStatement("UPDATE user SET ? WHERE id = ?");
+            stm.setInt(2, id);
+            
+            if(!params.isEmpty()){
+                if(params.containsKey("username"))
+                    temp += "username = '" + params.get("username") + "' , ";
+                if(params.containsKey("fullname"))
+                    temp += "fullname = N'" + params.get("fullname") + "' , ";
+                if(params.containsKey("gender"))
+                    temp += "gender = " + params.get("gender") + " , ";
+                if(params.containsKey("birth"))
+                    temp += "dob = '" + params.get("birth") + "' , ";
+                if(params.containsKey("address"))
+                    temp += "address = N'" + params.get("id") + "' , ";
+                if(params.containsKey("phone"))
+                    temp += "phone = '" + params.get("id") + "' , ";
+                if(params.containsKey("roleId"))
+                    temp += "role_id = " + params.get("roleId") + " , ";
+                if(params.containsKey("departmentId"))
+                    temp += "department_id = " + params.get("departmentId") + " , ";
+            }
+            stm.setString(1, temp);
+            
+            return stm.executeUpdate() > 0;
         }
     }
 }
