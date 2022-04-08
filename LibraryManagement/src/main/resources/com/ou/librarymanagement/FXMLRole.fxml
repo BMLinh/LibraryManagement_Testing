@@ -24,7 +24,7 @@
             <TableView fx:id="tbRoles" prefHeight="244.0" prefWidth="901.0" />
          </children>
       </VBox>
-      <Text layoutX="270.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ QUYỀN NGƯỜI DÙNG">
+      <Text layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ QUYỀN NGƯỜI DÙNG" textAlignment="CENTER" wrappingWidth="916.4">
          <font>
             <Font size="26.0" />
          </font>

@@ -30,6 +30,7 @@ public class RoleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txtId.setEditable(false);
         this.loadColumns();
         this.loadData(null);
 
