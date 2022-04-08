@@ -26,21 +26,43 @@ public class DepartmentController implements Initializable {
     private TextField txtName;
     @FXML
     private TableView<Department> tbDepartment;
+    @FXML
+    private Button btnUpdate;
+    @FXML
+    private Button btnInsert;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtId.setEditable(false);
         this.loadColumns();
         this.loadData(null);
 
+        //Ẩn button sửa
+        this.btnUpdate.setVisible(false);
+
+        //Tìm kiếm đối tượng theo tên đối tượng
         this.txtKeyword.textProperty().addListener((evt) ->{
             this.loadData(this.txtKeyword.getText());
+        });
+
+        //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
+        this.tbDepartment.setRowFactory(et ->{
+            TableRow row = new TableRow();
+            row.setOnMouseClicked(r ->{
+                this.btnUpdate.setVisible(true);
+                this.btnInsert.setVisible(false);
+                Department d = (Department) this.tbDepartment.getSelectionModel().getSelectedItem();
+                this.txtId.setText(String.valueOf(d.getId()));
+                this.txtName.setText(d.getName());
+            });
+            return row;
         });
     }
     private void loadData(String kw){
         try {
             this.tbDepartment.setItems(FXCollections.observableList(s.getDepartments(kw)));
-        } catch (SQLException ex){
-            Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE,null, ex);
+        } catch (SQLException e){
+            e.printStackTrace();
         }
     }
 
@@ -63,6 +85,7 @@ public class DepartmentController implements Initializable {
                 try{
                     if (s.deleteDepartment(String.valueOf(d.getId())) == true){
                         Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
+                        reset();
                         this.loadData(null);
                     }
                     else {
@@ -79,14 +102,40 @@ public class DepartmentController implements Initializable {
         this.tbDepartment.getColumns().addAll(col1, col2, col3);
     }
 
+    public void reset() {
+        this.txtId.setText("");
+        this.txtName.setText("");
+        this.btnUpdate.setVisible(false);
+        this.btnInsert.setVisible(true);
+        this.tbDepartment.getSelectionModel().select(null);
+    }
+
+    public void resetHandler(ActionEvent evt){
+        reset();
+    }
+
     public void addDepartment(ActionEvent evt) throws SQLException{
         Department d = new Department();
         d.setName(txtName.getText());
         if (s.addDepartment(d) == true){
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
+            reset();
             this.loadData(null);
         }
         else
             Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+    }
+
+    public void updateDepartment(ActionEvent evt) throws SQLException{
+        try {
+            if (s.updateDepartment(this.txtId.getText(), this.txtName.getText()) == true){
+                Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
+                this.loadData(null);
+            }
+            else
+                Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

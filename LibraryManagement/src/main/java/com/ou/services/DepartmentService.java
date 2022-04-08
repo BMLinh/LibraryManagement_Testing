@@ -61,4 +61,16 @@ public class DepartmentService {
             return false;
         }
     }
+
+    public boolean updateDepartment(String departmentId, String departName) throws SQLException{
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("UPDATE department SET name=? WHERE id=?");
+            stm.setString(1, departName);
+            stm.setString(2, departmentId);
+            return stm.executeUpdate() > 0;
+        } catch (SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }
