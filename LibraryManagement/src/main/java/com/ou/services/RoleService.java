@@ -35,6 +35,7 @@ public class RoleService {
         }
     }
 
+    //Để đây chưa biết dùng cho việt gì không
     public  Role getRoleById(String roleId) throws  SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM role WHERE id=?");
@@ -52,12 +53,23 @@ public class RoleService {
     }
 
     public boolean addRole(Role r) throws SQLException{
-        try (Connection conn = JdbcUtils.getConn()){
+        try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("INSERT INTO role(name) VALUES (?)");
             stm.setString(1, r.getName());
             return stm.executeUpdate() > 0;
+        } catch (SQLException ex){
+            ex.printStackTrace();
+            return false;
         }
-        catch (SQLException ex){
+    }
+
+    public boolean updateRole(String roleId, String roleName) throws SQLException{
+        try (Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("UPDATE role SET name=? WHERE id=?");
+            stm.setString(1, roleName);
+            stm.setString(2, roleId);
+            return stm.executeUpdate() > 0;
+        } catch (SQLException ex){
             ex.printStackTrace();
             return false;
         }

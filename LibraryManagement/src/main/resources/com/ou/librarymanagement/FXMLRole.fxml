@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -9,16 +10,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="497.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.RoleController">
+<AnchorPane onDragDetected="#reset" prefHeight="497.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.RoleController">
    <children>
       <TextField fx:id="txtId" layoutX="227.0" layoutY="74.0" prefHeight="26.0" prefWidth="158.0" />
       <TextField fx:id="txtName" layoutX="227.0" layoutY="117.0" prefHeight="26.0" prefWidth="417.0" />
       <VBox layoutY="175.0" prefHeight="322.0" prefWidth="910.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="822.0">
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="822.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#addRole" text="Thêm" />
+                  <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#addRole" text="Thêm" />
+                  <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateRole" text="Sửa" />
+                  <Button mnemonicParsing="false" onAction="#resetHandler" text="Làm mới" />
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
             <TextField fx:id="txtKeyword" prefHeight="26.0" prefWidth="900.0" promptText="Nhập tên quyền cần tìm..." />
             <TableView fx:id="tbRoles" prefHeight="244.0" prefWidth="901.0" />
