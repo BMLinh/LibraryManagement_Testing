@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -131,18 +132,18 @@
                   <Insets left="15.0" />
                </GridPane.margin>
             </Text>
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="3" />
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="idTxtFld" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="usernameTxtFld" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="addressTxtFld" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="createdDateTxtFld" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="fullnameTxtFld" GridPane.columnIndex="3" />
+            <TextField fx:id="passwordTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <TextField fx:id="phoneTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <ComboBox prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <ComboBox prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <DatePicker fx:id="birthTxtFld" prefHeight="25.0" prefWidth="179.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <ComboBox fx:id="genderCb" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" prefHeight="110.0" prefWidth="1080.0" style="-fx-background-color: #333;">
@@ -206,6 +207,6 @@
             </Text>
          </children>
       </GridPane>
-      <Button layoutX="827.0" layoutY="422.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm" />
+      <Button layoutX="827.0" layoutY="417.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm" />
    </children>
 </AnchorPane>

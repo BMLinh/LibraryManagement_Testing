@@ -4,9 +4,13 @@
  */
 package com.ou.librarymanagement;
 
+import com.ou.pojo.User;
 import com.ou.services.UserService;
+import com.ou.utils.Utils;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,8 +18,12 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -27,17 +35,64 @@ public class UserController implements Initializable {
     private static final UserService s = new UserService();
     @FXML
     private TableView userTabView;
+    @FXML
+    private TextField idTxtFld;
+    @FXML
+    private TextField usernameTxtFld;
+    @FXML
+    private TextField passwordTxtFld;
+    @FXML
+    private TextField fullnameTxtFld;
+    @FXML
+    private ComboBox genderCb;
+    @FXML
+    private DatePicker birthTxtFld;
+    @FXML
+    private TextField addressTxtFld;
+    @FXML
+    private TextField phoneTxtFld;
+    @FXML
+    private TextField createdDateTxtFld;
+   
 
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        this.initCb();
         this.loadTableView();
         this.loadData();
         
+        
+        this.userTabView.setRowFactory(et ->{
+            TableRow row = new TableRow();
+            row.setOnMouseClicked(r ->{
+                User user = (User)this.userTabView.getSelectionModel().getSelectedItem();
+                this.idTxtFld.setText(String.valueOf(user.getId()));
+                this.usernameTxtFld.setText(user.getUsername());
+                this.passwordTxtFld.setText(user.getPassword());
+                this.fullnameTxtFld.setText(user.getFullname());
+                if(1 == user.getGender())
+                    this.genderCb.getSelectionModel().select(0);
+                else this.genderCb.getSelectionModel().select(1);
+                this.birthTxtFld.setValue(Utils.convertUtilToSql(user.getBirth()).toLocalDate());
+                this.addressTxtFld.setText(user.getAddress());
+                this.phoneTxtFld.setText(user.getPhone());
+                this.createdDateTxtFld.setText(Utils.convertDateToString(user.getCreatedDate()));
+            });
+            return row;
+        });
     }    
+    
+    public void initCb(){
+        List<String> gender = new ArrayList<>();
+        gender.add("Nam");
+        gender.add("Nữ");
+        genderCb.setItems(FXCollections.observableList(gender));
+    }
     
     public void loadData() {
         try {
@@ -94,4 +149,5 @@ public class UserController implements Initializable {
         
         this.userTabView.getColumns().addAll(col1,col2,col3,col4,col5,col6,col7,col8,col9,col10,col11);
     }
+    
 }

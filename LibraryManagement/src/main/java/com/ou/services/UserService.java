@@ -28,7 +28,6 @@ public class UserService {
             List<User> users = new ArrayList<>();
             
             while(rs.next()){
-                System.out.print(rs.getString("username"));
                 int id = rs.getInt("id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
