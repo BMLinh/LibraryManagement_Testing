@@ -71,7 +71,7 @@ public class DepartmentController implements Initializable {
         col1.setCellValueFactory(new PropertyValueFactory("id"));
         col1.setPrefWidth(300);
 
-        TableColumn col2 = new TableColumn(("Tên đối tượng"));
+        TableColumn col2 = new TableColumn(("Tên bộ phận"));
         col2.setCellValueFactory(new PropertyValueFactory("name"));
         col2.setPrefWidth(300);
 
