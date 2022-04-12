@@ -1,14 +1,22 @@
 package com.ou.tester;
 
+import com.ou.pojo.Department;
 import com.ou.services.DepartmentService;
 import com.ou.utils.JdbcUtils;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DepartmentTestSuite {
     private static Connection conn;
@@ -27,11 +35,115 @@ public class DepartmentTestSuite {
 
     @AfterAll
     public static void afterAll() {
-        if(conn != null)
-            try{
+        if (conn != null)
+            try {
                 conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(UserTestSuite.class.getName()).log(Level.SEVERE, null, ex);
             }
+    }
+
+    @Test
+    public void testDepartmentNameNotNull() {
+        try {
+            List<Department> departments = s.getDepartments(null);
+            departments.forEach(d -> Assertions.assertNotNull(d.getName()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testDepartmentNameUnique() {
+        try {
+            List<Department> departments = s.getDepartments(null);
+            List<String> listTest = departments.stream().flatMap(d -> Stream.of(d.getName())).collect(Collectors.toList());
+            Set<String> others = new HashSet<>(listTest);
+            Assertions.assertEquals(departments.size(), others.size());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testSearchSuccessful() throws SQLException {
+        String kw = "c";
+        List<Department> departments = s.getDepartments(kw);
+
+        for (Department d : departments) {
+            Assertions.assertTrue(d.getName().toLowerCase().contains(kw.toLowerCase()));
+        }
+    }
+
+    @Test
+    public void testSearchInvalid() throws SQLException {
+        String kw = "wwwww";
+        List<Department> departments = s.getDepartments(kw);
+        Assertions.assertEquals(departments.size(), 0);
+    }
+
+    @Test
+    public void testSearchUnscure() throws SQLException {
+        String kw = "1 OR 1=1";
+        List<Department> roles = s.getDepartments(kw);
+
+        Assertions.assertEquals(roles.size(), 0);
+    }
+
+    @Test
+    public void deleteFail() throws SQLException {
+        String id = "999999999";
+        Assertions.assertFalse(s.deleteDepartment(id));
+    }
+
+    @Test
+    public void deleteSuccess() throws SQLException {
+        try {
+            Department d = new Department();
+            d.setName("Test");
+            s.addDepartment(d);
+            String id = String.valueOf(s.getDepartments("Test").get(0).getId());
+            Assertions.assertTrue(s.deleteDepartment(id));
+            Assertions.assertNull(s.getDepartmentById(id));
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testAddSuccess() throws SQLException {
+        Department d = new Department();
+        d.setName("MMMMMMMMM9");
+        Assertions.assertTrue(s.addDepartment(d));
+
+        Department rTest = s.getDepartments("MMMMMMMMM9").get(0);
+        Assertions.assertEquals(d.getName(), rTest.getName());
+    }
+
+    @Test
+    public void testAddFailWithExist() throws SQLException {
+        List<Department> departments = s.getDepartments(null);
+        Department d = new Department();
+        //Set cho department mới có tên giống với tên của 1 role trong db
+        d.setName(departments.get(0).getName());
+        Assertions.assertFalse(s.addDepartment(d));
+    }
+
+    @Test
+    public void testUpdateSuccess() throws SQLException {
+        List<Department> departments = s.getDepartments(null);
+        //Gán cho một department trong danh sách role trong db một tên chưa từng tồn tại
+        Assertions.assertTrue(s.updateDepartment(String.valueOf(departments.get(0).getId()), "YYYYYYYY9"));
+    }
+
+    @Test
+    public void testUpdateFailWithExist() throws SQLException {
+        List<Department> roles = s.getDepartments(null);
+        //Gán cho department thứ 1 trong danh sách bằng tên của role thứ 2 trong danh sách
+        Assertions.assertFalse(s.updateDepartment(String.valueOf(roles.get(0).getId()), roles.get(1).getName()));
+        //Sửa thông tin một department có id không tồn tại
+        Assertions.assertFalse(s.updateDepartment("111111", "ddddddddddd"));
+
     }
 }
