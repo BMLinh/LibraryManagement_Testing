@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="908386f7-5195-4da8-bcc4-a52697a1bae1" name="Changes" comment="up">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLDepartment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLDepartment.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,6 +189,8 @@
       <workItem from="1649868852977" duration="149000" />
       <workItem from="1649869084547" duration="63000" />
       <workItem from="1649869240685" duration="42000" />
+      <workItem from="1649870970864" duration="621000" />
+      <workItem from="1649871619336" duration="315000" />
     </task>
     <task id="LOCAL-00001" summary="up">
       <created>1649868972569</created>
