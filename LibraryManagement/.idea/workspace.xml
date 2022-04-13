@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="908386f7-5195-4da8-bcc4-a52697a1bae1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/DepartmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLDepartment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLDepartment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/DepartmentTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/DepartmentTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/RoleTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/RoleTestSuite.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +52,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.DepartmentTestSuite.testAddSuccess">
     <configuration name="App" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.ou.librarymanagement.App" />
       <module name="LibraryManagement" />
@@ -63,6 +60,94 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DepartmentTestSuite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibraryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ou.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ou.tester" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DepartmentTestSuite.deleteSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibraryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ou.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ou.tester" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
+      <option name="METHOD_NAME" value="deleteSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DepartmentTestSuite.testAddSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibraryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ou.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ou.tester" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
+      <option name="METHOD_NAME" value="testAddSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DepartmentTestSuite.testUpdateSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibraryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ou.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ou.tester" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
+      <option name="METHOD_NAME" value="testUpdateSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RoleTestSuite.deleteSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibraryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ou.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ou.tester" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.RoleTestSuite" />
+      <option name="METHOD_NAME" value="deleteSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DepartmentTestSuite.testAddSuccess" />
+        <item itemvalue="JUnit.DepartmentTestSuite.testUpdateSuccess" />
+        <item itemvalue="JUnit.DepartmentTestSuite" />
+        <item itemvalue="JUnit.RoleTestSuite.deleteSuccess" />
+        <item itemvalue="JUnit.DepartmentTestSuite.deleteSuccess" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -81,6 +166,13 @@
       <workItem from="1649400362220" duration="4069000" />
       <workItem from="1649405831012" duration="4483000" />
       <workItem from="1649428414649" duration="13362000" />
+      <workItem from="1649485032591" duration="2241000" />
+      <workItem from="1649508104156" duration="884000" />
+      <workItem from="1649517085615" duration="4717000" />
+      <workItem from="1649574084602" duration="5928000" />
+      <workItem from="1649599526409" duration="8335000" />
+      <workItem from="1649609325290" duration="2464000" />
+      <workItem from="1649772160096" duration="447000" />
     </task>
     <servers />
   </component>

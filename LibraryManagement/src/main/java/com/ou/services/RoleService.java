@@ -27,7 +27,7 @@ public class RoleService {
     }
 
     public boolean deleteRole(String roleId) throws  SQLException{
-        try (Connection conn = JdbcUtils.getConn()){
+        try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("DELETE FROM role WHERE id=?");
             stm.setString(1, roleId);
 

@@ -20,11 +20,11 @@
                   <Button mnemonicParsing="false" onAction="#resetHandler" text="Làm mới" />
                     </children>
                 </HBox>
-                <TextField fx:id="txtKeyword" promptText="Nhập tên đối tượng cần tìm..." />
+                <TextField fx:id="txtKeyword" promptText="Nhập tên bộ phận cần tìm..." />
                 <TableView fx:id="tbDepartment" prefHeight="244.0" prefWidth="901.0" />
             </children>
         </VBox>
-      <Text layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ ???????" textAlignment="CENTER" wrappingWidth="910.4000000000001">
+      <Text layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ BỘ PHẬN" textAlignment="CENTER" wrappingWidth="910.4000000000001">
          <font>
             <Font size="26.0" />
          </font>
@@ -34,7 +34,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="78.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên đối tượng">
+      <Text layoutX="78.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên bộ phận">
          <font>
             <Font size="18.0" />
          </font>
