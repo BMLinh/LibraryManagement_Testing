@@ -30,6 +30,8 @@ public class DepartmentController implements Initializable {
     private Button btnUpdate;
     @FXML
     private Button btnInsert;
+    @FXML
+    private Button btnDelete;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -39,6 +41,9 @@ public class DepartmentController implements Initializable {
 
         //Ẩn button sửa
         this.btnUpdate.setVisible(false);
+
+        //Ẩn button xóa
+        this.btnDelete.setVisible(false);
 
         //Tìm kiếm đối tượng theo tên đối tượng
         this.txtKeyword.textProperty().addListener((evt) ->{
