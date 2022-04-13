@@ -11,20 +11,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javafx.scene.control.Alert;
+
 /**
  *
  * @author Admin
  */
 public class UserService {
-    public List<User> getUsers() throws SQLException {
-        try (Connection conn = JdbcUtils.getConn()){
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM user");
+     public List<User> getUser() throws SQLException {
+        try(Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user");
+           
+            ResultSet rs = stm.executeQuery();
             
             List<User> users = new ArrayList<>();
             while(rs.next()) {
@@ -32,35 +32,55 @@ public class UserService {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 String fullname = rs.getString("fullname");
-                byte gender = rs.getByte("gender");
+                int gender = rs.getByte("gender");
                 Date birth = rs.getDate("dob");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
-                int role_id = rs.getInt("role_id");
-                int department_id = rs.getInt("department_id");
-                Date created_date = rs.getDate("create_date");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
             }
             
             return users;
         }
     }
     
+    public boolean updateUser(int id, User u) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("UPDATE user SET username=?, password=?, fullname=?, gender=?, dob=?, address=?, phone=?,"
+                    + "role_id=?, department_id=? WHERE id = ?");
+            stm.setString(1, u.getUsername());
+            stm.setString(2, u.getPassword());
+            stm.setString(3, u.getFullname());
+            stm.setInt(4, u.getGender());
+            stm.setDate(5, Utils.convertUtilToSql(u.getBirth()));
+            stm.setString(6, u.getAddress());
+            stm.setString(7, u.getPhone());
+            stm.setInt(8, u.getRoleId());
+            stm.setInt(9, u.getDepartmentId());
+            stm.setInt(10, id);
+            
+            return stm.executeUpdate() > 0;
+        }
+    }
+    
     public boolean addUser(User user) throws SQLException {
         try(Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("INSERT INTO "
-                                            + "user(id,username,password,fullname,gender,dob,address,phone,role_id,department_id,create_date) "
-                                            + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-            stm.setInt(1, user.getId());
-            stm.setString(2, user.getUsername());
-            stm.setString(3, user.getPassword());
-            stm.setString(4, user.getFullname());
-            stm.setByte(5, user.getGender());
-            stm.setDate(6, Utils.convertUtilToSql(user.getBirth()));
-            stm.setString(7, user.getAddress());
-            stm.setString(8, user.getPhone());
-            stm.setInt(9, user.getRoleId());
-            stm.setInt(10, user.getDepartmentId());
-            stm.setDate(11, Utils.convertUtilToSql(user.getCreatedDate()));
+                                            + "user(username,password,fullname,gender,dob,address,phone,role_id,department_id,created_date) "
+                                            + "VALUES(?,?,?,?,?,?,?,?,?,?)");
+            stm.setString(1, user.getUsername());
+            stm.setString(2, user.getPassword());
+            stm.setString(3, user.getFullname());
+            stm.setInt(4, user.getGender());
+            stm.setDate(5, Utils.convertUtilToSql(user.getBirth()));
+            stm.setString(6, user.getAddress());
+            stm.setString(7, user.getPhone());
+            stm.setInt(8, user.getRoleId());
+            stm.setInt(9, user.getDepartmentId());
+            stm.setDate(10, Utils.convertUtilToSql(user.getCreatedDate()));
             
             return stm.executeUpdate() > 0;
         }
@@ -72,6 +92,180 @@ public class UserService {
             stm.setInt(1, id);
             
             return stm.executeUpdate() > 0;
+        }
+    }
+    
+    public List<User> findUserById(int userId) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE id = ?");
+            
+            stm.setInt(1, userId);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                int gender = rs.getByte("gender");
+                Date birth = rs.getDate("dob");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
+            }
+            
+            return users;
+        }
+    }
+    
+    public List<User> findUserByName(String userName) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE fullname like concat('%', ?, '%')");
+            
+            stm.setString(1, userName);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                int gender = rs.getByte("gender");
+                Date birth = rs.getDate("dob");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
+            }
+            
+            return users;
+        }
+    }
+    
+    public List<User> findUserByPhone(String tel) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE phone like concat('%', ?, '%')");
+            
+            stm.setString(1, tel);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                int gender = rs.getByte("gender");
+                Date birth = rs.getDate("dob");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
+            }
+            
+            return users;
+        }
+    }
+    
+    public List<User> findUserByGender(int userGender) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE gender = ?");
+            
+            stm.setInt(1, userGender);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                int gender = rs.getByte("gender");
+                Date birth = rs.getDate("dob");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
+            }
+            
+            return users;
+        }
+    }
+    
+    public List<User> findUserByRole(int RoleId) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE role_id = ?");
+            
+            stm.setInt(1, RoleId);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                int gender = rs.getByte("gender");
+                Date birth = rs.getDate("dob");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
+            }
+            
+            return users;
+        }
+    }
+    
+    public List<User> findUserByDepartment(int DepartmentId) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE department_id = ?");
+            
+            stm.setInt(1, DepartmentId);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            List<User> users = new ArrayList<>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String fullname = rs.getString("fullname");
+                int gender = rs.getByte("gender");
+                Date birth = rs.getDate("dob");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                int roleId = rs.getInt("role_id");
+                int departmentId = rs.getInt("department_id");
+                Date createdDate = rs.getDate("created_date");
+                
+                users.add(new User(id, username, password, fullname, gender, birth, address, phone, roleId, departmentId, createdDate));
+            }
+            
+            return users;
         }
     }
 }
