@@ -15,7 +15,7 @@ public class User {
     private String username;
     private String password;
     private String fullname;
-    private byte gender;
+    private int gender;
     private Date birth;
     private String address;
     private String phone;
@@ -25,7 +25,7 @@ public class User {
 
     public User() {}
     
-    public User(int id, String username, String password, String fullname, byte gender, Date birth, String address, String phone, int role_id, int department_id, Date createdDate) {
+    public User(int id, String username, String password, String fullname, int gender, Date birth, String address, String phone, int role_id, int department_id, Date createdDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -99,14 +99,14 @@ public class User {
     /**
      * @return the gender
      */
-    public byte getGender() {
+    public int getGender() {
         return gender;
     }
 
     /**
      * @param gender the gender to set
      */
-    public void setGender(byte gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -185,6 +185,13 @@ public class User {
      */
     public Date getCreatedDate() {
         return createdDate;
+    }
+
+    /**
+     * @param createdDate the createdDate to set
+     */
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
 }

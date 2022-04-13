@@ -140,8 +140,8 @@
             <TextField fx:id="passwordTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <TextField fx:id="phoneTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <ComboBox prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ComboBox prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <ComboBox fx:id="roleCb" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="departmentCb" prefHeight="25.0" prefWidth="177.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <DatePicker fx:id="birthTxtFld" prefHeight="25.0" prefWidth="179.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <ComboBox fx:id="genderCb" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
@@ -166,22 +166,22 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Thêm">
+            <Button mnemonicParsing="false" onAction="#addUser" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Thêm">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Sửa" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" onAction="#updateUser" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Sửa" GridPane.columnIndex="1">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Xoá" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" onAction="#deleteUser" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Xoá" GridPane.columnIndex="2">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Làm mới" GridPane.columnIndex="3">
+            <Button mnemonicParsing="false" onAction="#resetHandler" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Làm mới" GridPane.columnIndex="3">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
@@ -198,8 +198,9 @@
           <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox prefHeight="25.0" prefWidth="250.0" GridPane.rowIndex="1" />
-            <TextField GridPane.rowIndex="2" />
+            <ComboBox fx:id="searchCb" prefHeight="25.0" prefWidth="253.0" GridPane.rowIndex="2" />
+            <ComboBox fx:id="optionCb" onAction="#changeSearchingContentInput" prefHeight="25.0" prefWidth="250.0" GridPane.rowIndex="1" />
+            <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm">
                <font>
                   <Font name="Arial" size="16.0" />
@@ -207,6 +208,6 @@
             </Text>
          </children>
       </GridPane>
-      <Button layoutX="827.0" layoutY="417.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm" />
+      <Button layoutX="827.0" layoutY="417.0" mnemonicParsing="false" onAction="#searchUser" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm" />
    </children>
 </AnchorPane>
