@@ -8,14 +8,10 @@ import com.ou.services.UserService;
 import com.ou.pojo.User;
 import com.ou.utils.JdbcUtils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -49,4 +45,10 @@ public class UserTestSuite {
             Logger.getLogger(UserTestSuite.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+//    @Test
+//    public void addSuccess() throws SQLException{
+//        User user = new User(, );
+//        Assertions.assertTrue(u.addUser(user));
+//    }
 }
