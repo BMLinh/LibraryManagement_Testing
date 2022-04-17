@@ -31,7 +31,7 @@ public class ReaderCardService {
                 Date startDate = rs.getDate("start_date");
                 Date endDate = rs.getDate("end_date");
                 int amount = rs.getInt("amount");
-                int userId = rs.getInt("userId");
+                int userId = rs.getInt("user_id");
                 
                 readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
             }
@@ -43,7 +43,7 @@ public class ReaderCardService {
     public boolean addReaderCard(ReaderCard readerCard) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("INSERT INTO "
-                                                    + "readercard(start_date,end_date,amount,userId) "
+                                                    + "readercard(start_date,end_date,amount,user_id) "
                                                     + "VALUES (?,?,?,?)");
             
             stm.setDate(1, Utils.convertUtilToSql(readerCard.getStartDate()));
@@ -58,7 +58,7 @@ public class ReaderCardService {
     public boolean updateReaderCard(int id, ReaderCard readerCard) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("UPDATE readercard "
-                                                    + "SET start_date=?, end_date=?, amount=?, userId=? WHERE id=?");
+                                                    + "SET start_date=?, end_date=?, amount=?, user_id=? WHERE id=?");
             
             stm.setDate(1, Utils.convertUtilToSql(readerCard.getStartDate()));
             stm.setDate(2, Utils.convertUtilToSql(readerCard.getEndDate()));
@@ -90,34 +90,10 @@ public class ReaderCardService {
             List<ReaderCard> readerCards = new ArrayList<>();
             while(rs.next()){
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
                 Date startDate = rs.getDate("start_date");
                 Date endDate = rs.getDate("end_date");
                 int amount = rs.getInt("amount");
-                int userId = rs.getInt("userId");
-                
-                readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
-            }
-            
-            return readerCards;
-        }
-    }
-    
-    public List<ReaderCard> finReaderCardsByName(String readerCardName) throws SQLException{
-        try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM readercard WHERE name like concat('%', ? , '%')");
-            stm.setString(1, readerCardName);
-            
-            ResultSet rs = stm.executeQuery();
-            
-            List<ReaderCard> readerCards = new ArrayList<>();
-            while(rs.next()){
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                Date startDate = rs.getDate("start_date");
-                Date endDate = rs.getDate("end_date");
-                int amount = rs.getInt("amount");
-                int userId = rs.getInt("userId");
+                int userId = rs.getInt("user_id");
                 
                 readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
             }
@@ -138,11 +114,10 @@ public class ReaderCardService {
             List<ReaderCard> readerCards = new ArrayList<>();
             while(rs.next()){
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
                 Date startDate = rs.getDate("start_date");
                 Date endDate = rs.getDate("end_date");
                 int amount = rs.getInt("amount");
-                int userId = rs.getInt("userId");
+                int userId = rs.getInt("user_id");
                 
                 readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
             }
@@ -162,11 +137,10 @@ public class ReaderCardService {
             List<ReaderCard> readerCards = new ArrayList<>();
             while(rs.next()){
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
                 Date startDate = rs.getDate("start_date");
                 Date endDate = rs.getDate("end_date");
                 int amount = rs.getInt("amount");
-                int userId = rs.getInt("userId");
+                int userId = rs.getInt("user_id");
                 
                 readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
             }
@@ -186,11 +160,10 @@ public class ReaderCardService {
             List<ReaderCard> readerCards = new ArrayList<>();
             while(rs.next()){
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
                 Date startDate = rs.getDate("start_date");
                 Date endDate = rs.getDate("end_date");
                 int amount = rs.getInt("amount");
-                int userId = rs.getInt("userId");
+                int userId = rs.getInt("user_id");
                 
                 readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
             }

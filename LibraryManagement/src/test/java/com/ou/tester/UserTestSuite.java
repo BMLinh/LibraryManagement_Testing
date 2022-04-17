@@ -9,6 +9,7 @@ import com.ou.pojo.User;
 import com.ou.utils.JdbcUtils;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,6 +48,31 @@ public class UserTestSuite {
                 conn.close();
             } catch (SQLException ex) {
             Logger.getLogger(UserTestSuite.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
+    }
+    
+    @Test
+    public void addSuccess() throws SQLException{
+        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
+        
+        Assertions.assertTrue(u.addUser(user));
+    }
+    
+    @Test
+    public void updateSuccess() throws SQLException{
+        List<User> users = u.getUser();
+        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
+        
+        Assertions.assertTrue(u.updateUser(users.get(0).getId(),user));
+    }
+    
+    @Test
+    public void deleteSuccess() throws SQLException {
+        Assertions.assertTrue(u.deleteUser(20));
+    }
+    
+    @Test
+    public void addFailed(){
+
     }
 }
