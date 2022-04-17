@@ -65,15 +65,15 @@ public class AuthorService {
     }
 
     public boolean update(int id, String authorName) throws SQLException {
-        Author currrentAuthor = getById(id);
-        if (currrentAuthor != null) {
+        Author currentAuthor = getById(id);
+        if (currentAuthor != null) {
             try (Connection conn = JdbcUtils.getConn()) {
 
                 PreparedStatement stm = conn.prepareStatement("UPDATE author" +
                         " SET name=?" +
                         " WHERE id=?");
 
-                stm.setString(1, currrentAuthor.getName());
+                stm.setString(1, currentAuthor.getName());
 
                 if (authorName != null) {
                     stm.setString(1, authorName);
