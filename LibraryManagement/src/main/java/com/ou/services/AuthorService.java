@@ -9,10 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AuthorService {
-    public List<Author> getAuthours(String kw) throws SQLException {
+    public List<Author> getAuthors(String kw) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM author WHERE name like concat('%', ?, '%')");
             if (kw == null)
@@ -20,23 +19,23 @@ public class AuthorService {
             stm.setString(1, kw);
             ResultSet rs = stm.executeQuery();
 
-            List<Author> authours = new ArrayList<>();
+            List<Author> authors = new ArrayList<>();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
 
-                authours.add(new Author(id, name));
+                authors.add(new Author(id, name));
             }
 
-            return authours;
+            return authors;
         }
     }
 
-    public Author getAuthorById(int authourId) throws SQLException {
+    public Author getById(int authorId) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM author WHERE id=?");
-            stm.setString(1, String.valueOf(authourId));
+            stm.setString(1, String.valueOf(authorId));
 
             ResultSet rs = stm.executeQuery();
             Author author = null;
@@ -52,7 +51,7 @@ public class AuthorService {
         }
     }
 
-    public boolean addAuthor(Author author) throws SQLException {
+    public boolean add(Author author) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("INSERT INTO author(name) VALUES (?)");
 
@@ -65,8 +64,8 @@ public class AuthorService {
         }
     }
 
-    public boolean updateAuthor(int authorId, String authorName) throws SQLException {
-        Author currrentAuthor = getAuthorById(authorId);
+    public boolean update(int id, String authorName) throws SQLException {
+        Author currrentAuthor = getById(id);
         if (currrentAuthor != null) {
             try (Connection conn = JdbcUtils.getConn()) {
 
@@ -79,7 +78,7 @@ public class AuthorService {
                 if (authorName != null) {
                     stm.setString(1, authorName);
                 }
-                stm.setInt(2, authorId);
+                stm.setInt(2, id);
                 return stm.executeUpdate() > 0;
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -90,10 +89,10 @@ public class AuthorService {
         }
     }
 
-    public boolean deleteAuthor(int authorId) throws SQLException{
+    public boolean delete(int id) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("DELETE FROM author WHERE id=?");
-            stm.setInt(1, authorId);
+            stm.setInt(1, id);
 
             return stm.executeUpdate() > 0;
         }
