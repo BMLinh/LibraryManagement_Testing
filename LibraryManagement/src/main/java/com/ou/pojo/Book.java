@@ -7,34 +7,34 @@ package com.ou.pojo;
 
 import java.util.Date;
 
-/**
- *
- * @author Lightning
- */
 public class Book {
     private int id;
     private String name;
-    private String description;
+    private String descriptions;
     private int amount;
-    private int publishingYear;
-    private int publishingCompanyId;
+    private Date publishingYear;
     private int categoryId;
+    private int publishingCompanyId;
     private Date dateOfEntering;
-    private String position;
 
     public Book() {
     }
 
-    public Book(int id, String name, String description, int amount, int publishingYear, int publishingCompanyId, int categoryId, Date dateOfEntering, String position) {
+    public Book(int id, String name, String description, int amount, Date publishingYear,
+                int publishingCompanyId, int categoryId, Date dateOfEntering) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.descriptions = description;
         this.amount = amount;
         this.publishingYear = publishingYear;
         this.publishingCompanyId = publishingCompanyId;
         this.categoryId = categoryId;
         this.dateOfEntering = dateOfEntering;
-        this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d %s %s", id, name, descriptions);
     }
 
     public int getId() {
@@ -43,7 +43,7 @@ public class Book {
 
     public void setId(int id) {
         this.id = id;
-    }    
+    }
 
     public String getName() {
         return name;
@@ -53,12 +53,12 @@ public class Book {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptions() {
+        return descriptions;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptions(String descriptions) {
+        this.descriptions = descriptions;
     }
 
     public int getAmount() {
@@ -69,20 +69,12 @@ public class Book {
         this.amount = amount;
     }
 
-    public int getPublishingYear() {
+    public Date getPublishingYear() {
         return publishingYear;
     }
 
-    public void setPublishingYear(int publishingYear) {
+    public void setPublishingYear(Date publishingYear) {
         this.publishingYear = publishingYear;
-    }
-
-    public int getPublishingCompanyId() {
-        return publishingCompanyId;
-    }
-
-    public void setPublishingCompanyId(int publishingCompanyId) {
-        this.publishingCompanyId = publishingCompanyId;
     }
 
     public int getCategoryId() {
@@ -93,6 +85,14 @@ public class Book {
         this.categoryId = categoryId;
     }
 
+    public int getPublishingCompanyId() {
+        return publishingCompanyId;
+    }
+
+    public void setPublishingCompanyId(int publishingCompanyId) {
+        this.publishingCompanyId = publishingCompanyId;
+    }
+
     public Date getDateOfEntering() {
         return dateOfEntering;
     }
@@ -100,15 +100,4 @@ public class Book {
     public void setDateOfEntering(Date dateOfEntering) {
         this.dateOfEntering = dateOfEntering;
     }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-    
-    
-    
 }

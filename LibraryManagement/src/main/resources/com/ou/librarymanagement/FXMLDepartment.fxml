@@ -17,6 +17,7 @@
                     <children>
                         <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#addDepartment" text="Thêm" />
                   <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateDepartment" text="Sửa" />
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteDepartment" text="Xóa" />
                   <Button mnemonicParsing="false" onAction="#resetHandler" text="Làm mới" />
                     </children>
                 </HBox>

@@ -30,6 +30,8 @@ public class DepartmentController implements Initializable {
     private Button btnUpdate;
     @FXML
     private Button btnInsert;
+    @FXML
+    private Button btnDelete;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -39,6 +41,9 @@ public class DepartmentController implements Initializable {
 
         //Ẩn button sửa
         this.btnUpdate.setVisible(false);
+
+        //Ẩn button xóa
+        this.btnDelete.setVisible(false);
 
         //Tìm kiếm đối tượng theo tên đối tượng
         this.txtKeyword.textProperty().addListener((evt) ->{
@@ -50,6 +55,7 @@ public class DepartmentController implements Initializable {
             TableRow row = new TableRow();
             row.setOnMouseClicked(r ->{
                 this.btnUpdate.setVisible(true);
+                this.btnDelete.setVisible(true);
                 this.btnInsert.setVisible(false);
                 Department d = (Department) this.tbDepartment.getSelectionModel().getSelectedItem();
                 this.txtId.setText(String.valueOf(d.getId()));
@@ -74,38 +80,14 @@ public class DepartmentController implements Initializable {
         TableColumn col2 = new TableColumn(("Tên bộ phận"));
         col2.setCellValueFactory(new PropertyValueFactory("name"));
         col2.setPrefWidth(300);
-
-        TableColumn col3 = new TableColumn();
-        col3.setCellFactory((p) -> {
-            Button btn = new Button("Xóa");
-
-            btn.setOnAction((evt) ->{
-                TableCell c = (TableCell) ((Button)evt.getSource()).getParent();
-                Department d = (Department) c.getTableRow().getItem();
-                try{
-                    if (s.deleteDepartment(String.valueOf(d.getId())) == true){
-                        Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
-                        reset();
-                        this.loadData(null);
-                    }
-                    else {
-                        Utils.setAlert("Xóa thất bại!!!", Alert.AlertType.ERROR).show();
-                    }
-                }catch (SQLException ex){
-                    Logger.getLogger(RoleController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            TableCell cell= new TableCell();
-            cell.setGraphic(btn);
-            return cell;
-        });
-        this.tbDepartment.getColumns().addAll(col1, col2, col3);
+        this.tbDepartment.getColumns().addAll(col1, col2);
     }
 
     public void reset() {
         this.txtId.setText("");
         this.txtName.setText("");
         this.btnUpdate.setVisible(false);
+        this.btnDelete.setVisible(false);
         this.btnInsert.setVisible(true);
         this.tbDepartment.getSelectionModel().select(null);
     }
@@ -135,6 +117,20 @@ public class DepartmentController implements Initializable {
             else
                 Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteDepartment(ActionEvent evt) throws SQLException{
+        try{
+            if (s.deleteDepartment(this.txtId.getText()) == true){
+                Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
+                reset();
+                this.loadData(null);
+            }
+            else
+                Utils.setAlert("Xóa thất bại!!!", Alert.AlertType.ERROR).show();
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
