@@ -37,6 +37,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -45,11 +46,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Admin
  */
 public class UserController implements Initializable {
-    private static final UserService userService = new UserService();
-    private static final RoleService roleService = new RoleService();
-    private static final DepartmentService departmentService = new DepartmentService();
-    private static final List<String> gender = new ArrayList<>();
-    private static final List<String> searchOption = new ArrayList<>();
     @FXML
     private TableView<User> userTabView;
     @FXML
@@ -75,13 +71,18 @@ public class UserController implements Initializable {
     @FXML
     private ComboBox<Department> departmentCb;
     @FXML
-    private ComboBox<String> optionCb;
-    @FXML
     private TextField searchContentTxtFld;
-    @FXML
-    private ComboBox searchCb;
+    
+    private static final UserService userService = new UserService();
+    private static final RoleService roleService = new RoleService();
+    private static final DepartmentService departmentService = new DepartmentService();
+    private static final List<String> gender = new ArrayList<>();
+    private static final List<String> searchOptions = new ArrayList<>();
    
-
+    {
+        this.gender.add("Nam");
+        this.gender.add("Nữ");
+    }
     
     /**
      * Initializes the controller class.
@@ -125,15 +126,6 @@ public class UserController implements Initializable {
     }    
     
     public void init() throws SQLException{
-        this.gender.add("Nam");
-        this.gender.add("Nữ");
-        this.searchOption.add("Id");
-        this.searchOption.add("Họ tên");
-        this.searchOption.add("SĐT");
-        this.searchOption.add("Giới tính");
-        this.searchOption.add("Role");
-        this.searchOption.add("Department");
-        
         this.birthTxtFld.setEditable(false);
         
         this.genderCb.setItems(FXCollections.observableList(gender));
@@ -142,8 +134,9 @@ public class UserController implements Initializable {
 
         this.departmentCb.setItems(FXCollections.observableList(departmentService.getDepartments(null)));
         
-        this.optionCb.setItems(FXCollections.observableList(searchOption));
-        this.optionCb.getSelectionModel().select(0);
+        this.genderCb.getSelectionModel().select(0);
+        
+        this.birthTxtFld.setValue(LocalDate.now(ZoneId.systemDefault()));
         
         this.phoneTxtFld.textProperty().addListener(new ChangeListener<String>(){
             @Override
@@ -155,8 +148,34 @@ public class UserController implements Initializable {
                     phoneTxtFld.setText(s);
                 }
             }
-            
         });
+        
+        this.searchContentTxtFld.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if(!t1.matches("\\d*"))
+                    searchContentTxtFld.setText(t1.replaceAll("[^\\d]", ""));
+                if(searchContentTxtFld.getText().length() > 12){
+                    String s = searchContentTxtFld.getText().substring(0, 12);
+                    searchContentTxtFld.setText(s);
+                }
+            }
+        });
+        
+        this.usernameTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().equals(" ")){
+                change.setText("");
+            }
+            return change;
+        }));
+        
+        this.passwordTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().equals(" ")){
+                change.setText("");
+            }
+            return change;
+        }));
+        
     }
     
     public void loadData() {
@@ -220,7 +239,7 @@ public class UserController implements Initializable {
         this.usernameTxtFld.clear();
         this.passwordTxtFld.clear();
         this.fullnameTxtFld.clear();
-        this.birthTxtFld.getEditor().clear();
+        this.birthTxtFld.setValue(LocalDate.now(ZoneId.systemDefault()));
         this.addressTxtFld.clear();
         this.phoneTxtFld.clear();
         this.genderCb.getSelectionModel().select(0);
@@ -231,17 +250,22 @@ public class UserController implements Initializable {
     }
     
     public void addUser(ActionEvent evt) throws SQLException{
-        if (userService.addUser(this.getUserFromFx()) == true){
-            Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
-            this.loadData();
-            reset();
+        User user = this.getUserFromFx();
+        if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(user.getUsername()).isEmpty()){
+            if(this.userService.addUser(this.getUserFromFx())){
+                Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
+                this.loadData();
+                reset();
+            }
+            else 
+                Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
         }
-        else
-            Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+            else 
+                Utils.setAlert("Có User trùng!!!", Alert.AlertType.ERROR).show();
     }
     
     public void updateUser(ActionEvent evt) throws SQLException{
-        if (userService.updateUser(Integer.parseInt(this.idTxtFld.getText()),this.getUserFromFx()) == true){
+        if (userService.updateUser(this.userTabView.getSelectionModel().getSelectedItem().getId(),this.getUserFromFx()) == true){
             Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
             this.loadData();
             reset();
@@ -266,91 +290,13 @@ public class UserController implements Initializable {
     }
     
     public void searchUser(ActionEvent evt) throws SQLException{
-        switch(this.optionCb.getSelectionModel().getSelectedItem()){
-            case "Id":
-                if(this.userService.findUserById(Integer.parseInt(this.searchContentTxtFld.getText())).size() > 0){
-                    this.userTabView.setItems(FXCollections.observableList(this.userService.findUserById(Integer.parseInt(this.searchContentTxtFld.getText()))));
-                }
-                else 
-                    Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
-                break;
-            case "Họ tên":
-                if(this.userService.findUserByName(this.searchContentTxtFld.getText()).size() > 0){
-                    this.userTabView.setItems(FXCollections.observableList(this.userService.findUserByName(this.searchContentTxtFld.getText())));
-                }
-                else 
-                    Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
-                break;
-            case "Giới tính":
-                int genderOption;
-                if(this.searchCb.getSelectionModel().getSelectedItem() == "Nam")
-                    genderOption = 0;
-                else genderOption = 1;
-                if(this.userService.findUserByGender(genderOption).size() > 0){
-                    this.userTabView.setItems(FXCollections.observableList(this.userService.findUserByGender(genderOption)));
-                }
-                else 
-                    Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
-                break;
-            case "SĐT":
-                if(this.userService.findUserByPhone(this.searchContentTxtFld.getText()).size() > 0){
-                    this.userTabView.setItems(FXCollections.observableList(this.userService.findUserByPhone(this.searchContentTxtFld.getText())));
-                }
-                else 
-                    Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
-                break;
-            case "Role":
-                Role role = (Role)this.searchCb.getSelectionModel().getSelectedItem();
-                if(this.userService.findUserByRole(role.getId()).size() > 0){
-                    this.userTabView.setItems(FXCollections.observableList(this.userService.findUserByRole(role.getId())));
-                }
-                else 
-                    Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
-                break;
-            case "Department":
-                Department department = (Department)this.searchCb.getSelectionModel().getSelectedItem();
-                if(this.userService.findUserByDepartment(department.getId()).size() > 0){
-                    this.userTabView.setItems(FXCollections.observableList(this.userService.findUserByDepartment(department.getId())));
-                }
-                else 
-                    Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
-                break;
-            default:
-                this.genderCb.setItems(FXCollections.observableList(gender));
-                break;
+        if(this.userService.findUserByPhone(this.searchContentTxtFld.getText()).size() > 0){
+            this.userTabView.setItems(FXCollections.observableList(this.userService.findUserByPhone(this.searchContentTxtFld.getText())));
         }
+        else 
+            Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
         
         this.searchContentTxtFld.clear();
-        this.searchCb.getSelectionModel().clearSelection();
-    }
-    
-    public void changeSearchingContentInput(ActionEvent evt) throws SQLException{
-        if(this.optionCb.getSelectionModel().getSelectedItem() == "Giới tính" 
-                || this.optionCb.getSelectionModel().getSelectedItem() == "Role"
-                || this.optionCb.getSelectionModel().getSelectedItem() == "Department"){
-            this.searchContentTxtFld.setVisible(false);
-            this.searchCb.setVisible(true);
-        }
-        
-        else{
-            this.searchContentTxtFld.setVisible(true);
-            this.searchCb.setVisible(false);
-        }
-            
-        
-        if(this.optionCb.getSelectionModel().getSelectedItem() == "Giới tính"){
-            this.searchCb.getItems().clear();
-            this.searchCb.setItems(FXCollections.observableList(gender));
-        }
-        else if(this.optionCb.getSelectionModel().getSelectedItem() == "Role"){
-            this.searchCb.getItems().clear();
-            this.searchCb.setItems(FXCollections.observableList(this.roleService.getRoles(null)));
-        }
-        else if(this.optionCb.getSelectionModel().getSelectedItem() == "Department"){
-            this.searchCb.getItems().clear();
-            this.searchCb.setItems(FXCollections.observableList(this.departmentService.getDepartments(null)));
-        }
-        else this.searchCb.getItems().clear();
     }
     
     private User getUserFromFx(){
@@ -370,4 +316,5 @@ public class UserController implements Initializable {
         
         return u;
     }
+    
 }
