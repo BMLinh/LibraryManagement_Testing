@@ -37,6 +37,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -133,6 +134,10 @@ public class UserController implements Initializable {
 
         this.departmentCb.setItems(FXCollections.observableList(departmentService.getDepartments(null)));
         
+        this.genderCb.getSelectionModel().select(0);
+        
+        this.birthTxtFld.setValue(LocalDate.now(ZoneId.systemDefault()));
+        
         this.phoneTxtFld.textProperty().addListener(new ChangeListener<String>(){
             @Override
             public void changed(ObservableValue<? extends String> ov, String t, String t1) {
@@ -156,6 +161,21 @@ public class UserController implements Initializable {
                 }
             }
         });
+        
+        this.usernameTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().equals(" ")){
+                change.setText("");
+            }
+            return change;
+        }));
+        
+        this.passwordTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().equals(" ")){
+                change.setText("");
+            }
+            return change;
+        }));
+        
     }
     
     public void loadData() {
@@ -231,14 +251,17 @@ public class UserController implements Initializable {
     
     public void addUser(ActionEvent evt) throws SQLException{
         User user = this.getUserFromFx();
-        if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(user.getUsername()).isEmpty())
+        if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(user.getUsername()).isEmpty()){
             if(this.userService.addUser(this.getUserFromFx())){
                 Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData();
                 reset();
             }
-        else
-            Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+            else 
+                Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+        }
+            else 
+                Utils.setAlert("Có User trùng!!!", Alert.AlertType.ERROR).show();
     }
     
     public void updateUser(ActionEvent evt) throws SQLException{
@@ -267,10 +290,8 @@ public class UserController implements Initializable {
     }
     
     public void searchUser(ActionEvent evt) throws SQLException{
-        if(this.userService.findUserById(Integer.parseInt(this.searchContentTxtFld.getText())) != null){
-            List<User> user = new ArrayList<>();
-            user.add(this.userService.findUserById(Integer.parseInt(this.searchContentTxtFld.getText())));
-            this.userTabView.setItems(FXCollections.observableList(user));
+        if(this.userService.findUserByPhone(this.searchContentTxtFld.getText()).size() > 0){
+            this.userTabView.setItems(FXCollections.observableList(this.userService.findUserByPhone(this.searchContentTxtFld.getText())));
         }
         else 
             Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();

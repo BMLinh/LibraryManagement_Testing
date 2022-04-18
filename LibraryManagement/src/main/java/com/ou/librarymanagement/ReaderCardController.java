@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -52,32 +55,18 @@ public class ReaderCardController implements Initializable {
     @FXML
     private TextField userIdTxtFld;
     @FXML
-    private ComboBox<String> searchCb;
-    @FXML
     private TextField searchContentTxtFld;
-    @FXML 
-    private DatePicker fromDate;
-    @FXML
-    private DatePicker toDate;
     
-    private static final List<String> searchOptions = new ArrayList<String>();
     private static final ReaderCardService readerCardService = new ReaderCardService();
     private static final UserService userService = new UserService();
-    
-    {
-        this.searchOptions.add("Id");
-        this.searchOptions.add("Ngày mở");
-        this.searchOptions.add("Ngày hết hạn");
-        this.searchOptions.add("Số lượng");
-        this.searchOptions.add("User Id");
-    }
-
+   
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        init();
         loadTableView();
         loadData();
         
@@ -99,6 +88,54 @@ public class ReaderCardController implements Initializable {
             return row;
         });
     }    
+    
+    public void init(){
+        this.amountTxtFld.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if(!t1.matches("\\d*"))
+                    amountTxtFld.setText(t1.replaceAll("[^\\d]", ""));
+                }
+        });
+
+        
+        this.userIdTxtFld.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if(!t1.matches("\\d*"))
+                    userIdTxtFld.setText(t1.replaceAll("[^\\d]", ""));
+                }
+        });
+        
+        this.searchContentTxtFld.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if(!t1.matches("\\d*"))
+                    searchContentTxtFld.setText(t1.replaceAll("[^\\d]", ""));
+                }
+        });
+        
+        this.amountTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().equals(" ")){
+                change.setText("");
+            }
+            return change;
+        }));
+        
+        this.userIdTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().equals(" ")){
+                change.setText("");
+            }
+            return change;
+        }));
+        
+        this.searchContentTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(change.getText().equals(" ")){
+                change.setText("");
+            }
+            return change;
+        }));
+    }
     
     public void loadData(){
         try {
@@ -133,11 +170,15 @@ public class ReaderCardController implements Initializable {
     }
     
     public void addReaderCard(ActionEvent evt) throws SQLException{
-        if(this.readerCardService.addReaderCard(getReaderCardFromFx())){
-            Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
-            reset();
+        ReaderCard readerCard = this.getReaderCardFromFx();
+        if(this.readerCardService.findReaderCardsByUserId(readerCard.getUserId()).isEmpty()){
+            if(this.readerCardService.addReaderCard(getReaderCardFromFx())){
+                Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
+                reset();
+            }
+            else Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
         }
-        else Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+        else Utils.setAlert("Đã có thẻ!!!", Alert.AlertType.ERROR).show();
     }
     
     public void deleteReaderCard(ActionEvent evt) throws SQLException{
@@ -182,8 +223,8 @@ public class ReaderCardController implements Initializable {
     }
     
     public void searchReaderCard(ActionEvent evt) throws SQLException{
-        if(this.readerCardService.findReaderCardById(Integer.parseInt(this.searchContentTxtFld.getText())).size() > 0){
-            this.readerCardTabView.setItems(FXCollections.observableList(this.readerCardService.findReaderCardById(Integer.parseInt(this.searchContentTxtFld.getText()))));
+        if(this.readerCardService.findReaderCardsByUserId(Integer.parseInt(this.searchContentTxtFld.getText())).size() > 0){
+            this.readerCardTabView.setItems(FXCollections.observableList(this.readerCardService.findReaderCardsByUserId(Integer.parseInt(this.searchContentTxtFld.getText()))));
         }
         else Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
         

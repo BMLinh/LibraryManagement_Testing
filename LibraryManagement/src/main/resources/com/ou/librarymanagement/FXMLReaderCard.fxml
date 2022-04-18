@@ -146,7 +146,7 @@
          <children>
             <ComboBox fx:id="searchCb" prefHeight="25.0" prefWidth="253.0" GridPane.rowIndex="1" />
             <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm ID">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm UserID">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>

@@ -198,7 +198,7 @@
         </rowConstraints>
          <children>
             <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm ID">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm SĐT">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>

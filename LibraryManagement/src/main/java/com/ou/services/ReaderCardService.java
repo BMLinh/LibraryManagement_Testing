@@ -53,6 +53,10 @@ public class ReaderCardService {
             
             return stm.executeUpdate() > 0;
         }
+        catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
     
     public boolean updateReaderCard(int id, ReaderCard readerCard) throws SQLException{
@@ -68,6 +72,10 @@ public class ReaderCardService {
             
             return stm.executeUpdate() > 0;
         }
+        catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
     
     public boolean deleteReaderCard(int id) throws SQLException{
@@ -78,59 +86,16 @@ public class ReaderCardService {
             
             return stm.executeUpdate() > 0;
         }
+        catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
     
     public List<ReaderCard> findReaderCardById(int readerCardId) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM readercard WHERE id=?");
             stm.setInt(1, readerCardId);
-            
-            ResultSet rs = stm.executeQuery();
-            
-            List<ReaderCard> readerCards = new ArrayList<>();
-            while(rs.next()){
-                int id = rs.getInt("id");
-                Date startDate = rs.getDate("start_date");
-                Date endDate = rs.getDate("end_date");
-                int amount = rs.getInt("amount");
-                int userId = rs.getInt("user_id");
-                
-                readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
-            }
-            
-            return readerCards;
-        }
-    }
-    
-    public List<ReaderCard> findReaderCardsByDate(Date fromDate, Date toDate, String date) throws SQLException{
-        try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM readercard WHERE ? between '?' and '?'");
-            stm.setString(1, date);
-            stm.setDate(2, Utils.convertUtilToSql(fromDate));
-            stm.setDate(3, Utils.convertUtilToSql(toDate));
-            
-            ResultSet rs = stm.executeQuery();
-            
-            List<ReaderCard> readerCards = new ArrayList<>();
-            while(rs.next()){
-                int id = rs.getInt("id");
-                Date startDate = rs.getDate("start_date");
-                Date endDate = rs.getDate("end_date");
-                int amount = rs.getInt("amount");
-                int userId = rs.getInt("user_id");
-                
-                readerCards.add(new ReaderCard(id, startDate, endDate, amount, userId));
-            }
-            
-            return readerCards;
-        }
-    }
-    
-    public List<ReaderCard> findReaderCardsByAmount(int readerCardAmount) throws SQLException{
-        try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM readercard WHERE amount=?");
-            stm.setInt(1, readerCardAmount);
-
             
             ResultSet rs = stm.executeQuery();
             

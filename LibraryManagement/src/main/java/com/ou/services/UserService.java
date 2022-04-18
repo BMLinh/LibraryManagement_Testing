@@ -64,9 +64,13 @@ public class UserService {
             
             return stm.executeUpdate() > 0;
         }
+        catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
     
-    public boolean addUser(User user) throws SQLException {
+    public boolean addUser(User user) {
         try(Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("INSERT INTO "
                                             + "user(username,password,fullname,gender,dob,address,phone,role_id,department_id,created_date) "
@@ -84,6 +88,10 @@ public class UserService {
             
             return stm.executeUpdate() > 0;
         }
+        catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
     
     public boolean deleteUser(int id) throws SQLException {
@@ -92,6 +100,10 @@ public class UserService {
             stm.setInt(1, id);
             
             return stm.executeUpdate() > 0;
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
         }
     }
     
