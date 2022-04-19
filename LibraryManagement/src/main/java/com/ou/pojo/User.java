@@ -37,7 +37,6 @@ public class User {
         this.roleId = role_id;
         this.departmentId = department_id;
         this.createdDate = createdDate;
-        
     }
     
     /**

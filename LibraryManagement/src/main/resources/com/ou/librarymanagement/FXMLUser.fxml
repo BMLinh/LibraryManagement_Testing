@@ -17,9 +17,9 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="802.0" prefWidth="1080.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.UserController">
-    <stylesheets>
-        <URL value="@/styles/user.css" />
-    </stylesheets>
+<!--    <stylesheets>-->
+<!--        <URL value="@/styles/user.css" />-->
+<!--    </stylesheets>-->
    <children>
       <Pane layoutX="51.0" layoutY="137.0" prefHeight="265.0" prefWidth="617.0" style="-fx-border-color: black; -fx-border-radius: 10;" />
       <Pane layoutX="748.0" layoutY="227.0" prefHeight="147.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
@@ -193,15 +193,12 @@
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox fx:id="searchCb" prefHeight="25.0" prefWidth="253.0" GridPane.rowIndex="2" />
-            <ComboBox fx:id="optionCb" onAction="#changeSearchingContentInput" prefHeight="25.0" prefWidth="250.0" GridPane.rowIndex="1" />
-            <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="2" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm">
+            <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm SĐT">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
