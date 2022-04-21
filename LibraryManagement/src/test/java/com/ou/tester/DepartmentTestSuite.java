@@ -1,6 +1,7 @@
 package com.ou.tester;
 
 import com.ou.pojo.Department;
+import com.ou.pojo.Role;
 import com.ou.services.DepartmentService;
 import com.ou.utils.JdbcUtils;
 import org.junit.jupiter.api.AfterAll;
@@ -114,10 +115,10 @@ public class DepartmentTestSuite {
     @Test
     public void testAddSuccess() throws SQLException {
         Department d = new Department();
-        d.setName("MMMMMMMMM9");
+        d.setName("MMMMMMMMM55");
         Assertions.assertTrue(s.addDepartment(d));
 
-        Department rTest = s.getDepartments("MMMMMMMMM9").get(0);
+        Department rTest = s.getDepartments("MMMMMMMMM55").get(0);
         Assertions.assertEquals(d.getName(), rTest.getName());
     }
 
@@ -132,9 +133,16 @@ public class DepartmentTestSuite {
 
     @Test
     public void testUpdateSuccess() throws SQLException {
-        List<Department> departments = s.getDepartments(null);
-        //Gán cho một department trong danh sách role trong db một tên chưa từng tồn tại
-        Assertions.assertTrue(s.updateDepartment(String.valueOf(departments.get(0).getId()), "YYYYYYYY9"));
+        Department department = s.getDepartmentById("4");
+        String name = department.getName();
+        System.out.println(name);
+        //Gán cho role có id là 8 trong db một tên chưa từng tồn tại
+        Assertions.assertTrue(s.updateDepartment("4", "TestUpdate4"));
+        //Lấy ra tên của role sau update
+        String nameAfter = s.getDepartmentById("4").getName();
+        System.out.println(nameAfter);
+        //Kiểm tra tên của role đã thay đổi khác với tên ban đầu
+        Assertions.assertNotEquals(name, nameAfter);
     }
 
     @Test

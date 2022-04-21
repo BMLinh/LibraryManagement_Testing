@@ -96,6 +96,7 @@ public class RoleTestSuite {
 
     @Test
     public void deleteSuccess() throws SQLException {
+        //Tạo mới 1 role và tiến hành xóa nó
         Role role = new Role();
         role.setName("Test");
         s.addRole(role);
@@ -108,10 +109,10 @@ public class RoleTestSuite {
     @Test
     public void testAddSuccess() throws SQLException {
         Role r = new Role();
-        r.setName("MMMMMMMMM");
+        r.setName("MMMMMMMMM12");
         Assertions.assertTrue(s.addRole(r));
 
-        Role rTest = s.getRoles("MMMMMMMMM").get(0);
+        Role rTest = s.getRoles("MMMMMMMMM12").get(0);
         Assertions.assertEquals(r.getName(),rTest.getName());
     }
 
@@ -126,9 +127,16 @@ public class RoleTestSuite {
 
     @Test
     public void testUpdateSuccess() throws SQLException{
-        List<Role> roles = s.getRoles(null);
-        //Gán cho một role trong danh sách role trong db một tên chưa từng tồn tại
-        Assertions.assertTrue(s.updateRole(String.valueOf(roles.get(0).getId()), "YYYYYYYY1"));
+        Role role = s.getRoleById("8");
+        String name = role.getName();
+        System.out.println(name);
+        //Gán cho role có id là 8 trong db một tên chưa từng tồn tại
+        Assertions.assertTrue(s.updateRole("8", "TestUpdate4"));
+        //Lấy ra tên của role sau update
+        String nameAfter = s.getRoleById("8").getName();
+        System.out.println(nameAfter);
+        //Kiểm tra tên của role đã thay đổi khác với tên ban đầu
+        Assertions.assertNotEquals(name, nameAfter);
     }
 
     @Test

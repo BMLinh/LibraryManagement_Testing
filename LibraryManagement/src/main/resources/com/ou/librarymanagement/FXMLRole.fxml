@@ -20,6 +20,7 @@
                <children>
                   <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#addRole" text="Thêm" />
                   <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateRole" text="Sửa" />
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteRole" text="Xóa" />
                   <Button mnemonicParsing="false" onAction="#resetHandler" text="Làm mới" />
                </children>
                <VBox.margin>
