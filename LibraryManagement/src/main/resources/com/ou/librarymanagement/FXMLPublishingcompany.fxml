@@ -16,8 +16,9 @@
                 <HBox alignment="CENTER" prefHeight="56.0" prefWidth="822.0" spacing="30.0">
                     <children>
                         <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#addPublishingCompany" text="Thêm" />
-                  <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updatePublishingCompany" text="Sửa" />
-                  <Button mnemonicParsing="false" onAction="resetHandler" text="Làm mới" />
+                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updatePublishingCompany" text="Sửa" />
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deletePublishingCompany" text="Xóa" />
+                        <Button mnemonicParsing="false" onAction="#resetHandler" text="Làm mới" />
                     </children>
                 </HBox>
                 <TextField fx:id="txtKeyword" promptText="Nhập tên nhà xuất bản cần tìm..." />
