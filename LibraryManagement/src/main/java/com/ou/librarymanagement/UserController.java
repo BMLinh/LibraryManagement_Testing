@@ -115,8 +115,8 @@ public class UserController implements Initializable {
                 this.phoneTxtFld.setText(user.getPhone());
                 this.createdDateTxtFld.setText(Utils.convertDateToString(user.getCreatedDate()));
                 try {
-                    this.roleCb.getSelectionModel().select(this.roleService.getRoleById(String.valueOf(user.getRoleId())));
-                    this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(String.valueOf(user.getDepartmentId())));
+                    this.roleCb.getSelectionModel().select(this.roleService.getRoleById(user.getRoleId()));
+                    this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(user.getDepartmentId()));
                 } catch (SQLException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 }

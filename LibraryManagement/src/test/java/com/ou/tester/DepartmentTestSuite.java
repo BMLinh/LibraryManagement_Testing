@@ -93,7 +93,7 @@ public class DepartmentTestSuite {
 
     @Test
     public void deleteFail() throws SQLException {
-        String id = "999999999";
+        int id = 999999999;
         Assertions.assertFalse(s.deleteDepartment(id));
     }
 
@@ -103,7 +103,7 @@ public class DepartmentTestSuite {
             Department d = new Department();
             d.setName("Test");
             s.addDepartment(d);
-            String id = String.valueOf(s.getDepartments("Test").get(0).getId());
+            int id = s.getDepartments("Test").get(0).getId();
             Assertions.assertTrue(s.deleteDepartment(id));
             Assertions.assertNull(s.getDepartmentById(id));
         } catch (SQLException e){
@@ -133,13 +133,13 @@ public class DepartmentTestSuite {
 
     @Test
     public void testUpdateSuccess() throws SQLException {
-        Department department = s.getDepartmentById("4");
+        Department department = s.getDepartmentById(4);
         String name = department.getName();
         System.out.println(name);
         //Gán cho role có id là 8 trong db một tên chưa từng tồn tại
-        Assertions.assertTrue(s.updateDepartment("4", "TestUpdate4"));
+        Assertions.assertTrue(s.updateDepartment(4, "TestUpdate4"));
         //Lấy ra tên của role sau update
-        String nameAfter = s.getDepartmentById("4").getName();
+        String nameAfter = s.getDepartmentById(4).getName();
         System.out.println(nameAfter);
         //Kiểm tra tên của role đã thay đổi khác với tên ban đầu
         Assertions.assertNotEquals(name, nameAfter);
@@ -149,9 +149,8 @@ public class DepartmentTestSuite {
     public void testUpdateFailWithExist() throws SQLException {
         List<Department> roles = s.getDepartments(null);
         //Gán cho department thứ 1 trong danh sách bằng tên của role thứ 2 trong danh sách
-        Assertions.assertFalse(s.updateDepartment(String.valueOf(roles.get(0).getId()), roles.get(1).getName()));
+        Assertions.assertFalse(s.updateDepartment(roles.get(0).getId(), roles.get(1).getName()));
         //Sửa thông tin một department có id không tồn tại
-        Assertions.assertFalse(s.updateDepartment("111111", "ddddddddddd"));
-
+        Assertions.assertFalse(s.updateDepartment(111111, "ddddddddddd"));
     }
 }

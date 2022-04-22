@@ -79,30 +79,6 @@ public class RoleController implements Initializable {
         TableColumn col2 = new TableColumn(("Tên quyền"));
         col2.setCellValueFactory(new PropertyValueFactory("name"));
         col2.setPrefWidth(300);
-
-//        TableColumn col3 = new TableColumn();
-//        col3.setCellFactory((p) -> {
-//            Button btn = new Button("Xóa");
-//
-//            btn.setOnAction((evt) ->{
-//                TableCell c = (TableCell) ((Button)evt.getSource()).getParent();
-//                Role r = (Role) c.getTableRow().getItem();
-//                try{
-//                    if (s.deleteRole(String.valueOf(r.getId())) == true){
-//                        Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
-//                        reset();
-//                        this.loadData(null);
-//                    }
-//                    else
-//                        Utils.setAlert("Xóa thất bại!!!", Alert.AlertType.ERROR).show();
-//                }catch (SQLException e){
-//                    e.printStackTrace();
-//                }
-//            });
-//            TableCell cell= new TableCell();
-//            cell.setGraphic(btn);
-//            return cell;
-//        });
         this.tbRoles.getColumns().addAll(col1, col2);
     }
 
@@ -131,7 +107,7 @@ public class RoleController implements Initializable {
 
     public void updateRole(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateRole(this.txtId.getText(), this.txtName.getText()) == true){
+            if (s.updateRole(Integer.parseInt(this.txtId.getText()), this.txtName.getText()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }
@@ -144,7 +120,7 @@ public class RoleController implements Initializable {
 
     public void deleteRole(ActionEvent evt) throws SQLException{
             try{
-                if (s.deleteRole(this.txtId.getText()) == true){
+                if (s.deleteRole(Integer.parseInt(this.txtId.getText())) == true){
                     Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
                     reset();
                     this.loadData(null);
