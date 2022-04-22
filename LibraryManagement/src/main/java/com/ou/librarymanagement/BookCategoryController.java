@@ -131,7 +131,7 @@ public class BookCategoryController implements Initializable{
 
     public void updateBookCategory(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateBookCategory(this.txtId.getText(), this.txtName.getText(), this.txtPosition.getText()) == true){
+            if (s.updateBookCategory(Integer.parseInt(this.txtId.getText()), this.txtName.getText(), this.txtPosition.getText()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }
@@ -144,7 +144,7 @@ public class BookCategoryController implements Initializable{
     
     public void deleteBookCategory(ActionEvent evt) throws SQLException{
         try{
-            if (s.deleteBookCategory(this.txtId.getText()) == true){
+            if (s.deleteBookCategory(Integer.parseInt(this.txtId.getText())) == true){
                 Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
                 reset();
                 this.loadData(null);
