@@ -31,7 +31,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btn1" alignment="CENTER" mnemonicParsing="false" onAction="#switch1" prefHeight="80.0" prefWidth="136.0" text="Mượn sách" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btn1" alignment="CENTER" mnemonicParsing="false" onAction="#switch1" prefHeight="80.0" prefWidth="136.0" text="Đặt sách" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>

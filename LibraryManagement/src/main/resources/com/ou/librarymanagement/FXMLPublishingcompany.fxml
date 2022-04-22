@@ -9,23 +9,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="497.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.DepartmentController">
-    <children>
+<AnchorPane id="AnchorPane" prefHeight="497.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.PublishingCompanyController">
+   <children>
         <VBox layoutY="175.0" prefHeight="322.0" prefWidth="910.0">
             <children>
                 <HBox alignment="CENTER" prefHeight="56.0" prefWidth="822.0" spacing="30.0">
                     <children>
-                        <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#addDepartment" text="Thêm" />
-                  <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateDepartment" text="Sửa" />
-                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteDepartment" text="Xóa" />
-                  <Button mnemonicParsing="false" onAction="#resetHandler" text="Làm mới" />
+                        <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#addPublishingCompany" text="Thêm" />
+                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updatePublishingCompany" text="Sửa" />
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deletePublishingCompany" text="Xóa" />
+                        <Button mnemonicParsing="false" onAction="#resetHandler" text="Làm mới" />
                     </children>
                 </HBox>
-                <TextField fx:id="txtKeyword" promptText="Nhập tên bộ phận cần tìm..." />
-                <TableView fx:id="tbDepartment" prefHeight="244.0" prefWidth="901.0" />
+                <TextField fx:id="txtKeyword" promptText="Nhập tên nhà xuất bản cần tìm..." />
+                <TableView fx:id="tbPublishingCompany" prefHeight="244.0" prefWidth="901.0" />
             </children>
         </VBox>
-      <Text layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ BỘ PHẬN" textAlignment="CENTER" wrappingWidth="910.4000000000001">
+      <Text layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ NHÀ XUẤT BẢN" textAlignment="CENTER" wrappingWidth="910.4000000000001">
          <font>
             <Font size="26.0" />
          </font>
@@ -35,7 +35,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="78.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên bộ phận">
+      <Text layoutX="78.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên nhà xuất bản">
          <font>
             <Font size="18.0" />
          </font>

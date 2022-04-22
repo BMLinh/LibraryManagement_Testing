@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="908386f7-5195-4da8-bcc4-a52697a1bae1" name="Changes" comment="">
+    <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLUser.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/DepartmentTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/DepartmentTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/RoleTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/RoleTestSuite.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -27,14 +21,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="27NvTMDy7tStgrI1mmuXVCcfAXX" />
+  <component name="ProjectId" id="27qIjASnLAuDlCpQG2bVgo5OWqE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -43,52 +30,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration name="App" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.ou.librarymanagement.App" />
-      <module name="LibraryManagement" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DepartmentTestSuite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibraryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ou.tester.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DepartmentTestSuite.deleteSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibraryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ou.tester.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
-      <option name="METHOD_NAME" value="deleteSuccess" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.DepartmentTestSuite.testAddSuccess">
     <configuration name="DepartmentTestSuite.testAddSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibraryManagement" />
       <extension name="coverage">
@@ -100,6 +47,22 @@
       <option name="PACKAGE_NAME" value="com.ou.tester" />
       <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
       <option name="METHOD_NAME" value="testAddSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DepartmentTestSuite.testUpdateFailWithExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibraryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ou.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ou.tester" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
+      <option name="METHOD_NAME" value="testUpdateFailWithExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -121,7 +84,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RoleTestSuite.deleteSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RoleTestSuite.testAddSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibraryManagement" />
       <extension name="coverage">
         <pattern>
@@ -131,7 +94,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ou.tester" />
       <option name="MAIN_CLASS_NAME" value="com.ou.tester.RoleTestSuite" />
-      <option name="METHOD_NAME" value="deleteSuccess" />
+      <option name="METHOD_NAME" value="testAddSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RoleTestSuite.testUpdateSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="LibraryManagement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ou.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ou.tester" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.RoleTestSuite" />
+      <option name="METHOD_NAME" value="testUpdateSuccess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -140,39 +119,25 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.DepartmentTestSuite.testAddSuccess" />
+        <item itemvalue="JUnit.DepartmentTestSuite.testUpdateFailWithExist" />
         <item itemvalue="JUnit.DepartmentTestSuite.testUpdateSuccess" />
-        <item itemvalue="JUnit.DepartmentTestSuite" />
-        <item itemvalue="JUnit.RoleTestSuite.deleteSuccess" />
-        <item itemvalue="JUnit.DepartmentTestSuite.deleteSuccess" />
+        <item itemvalue="JUnit.RoleTestSuite.testUpdateSuccess" />
+        <item itemvalue="JUnit.RoleTestSuite.testAddSuccess" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="908386f7-5195-4da8-bcc4-a52697a1bae1" name="Changes" comment="" />
-      <created>1649173365851</created>
+      <changelist id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="" />
+      <created>1650041322847</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1649173365851</updated>
-      <workItem from="1649173366984" duration="2785000" />
-      <workItem from="1649180451896" duration="1736000" />
-      <workItem from="1649253583217" duration="9285000" />
-      <workItem from="1649265887873" duration="99000" />
-      <workItem from="1649266834694" duration="43000" />
-      <workItem from="1649340689293" duration="10672000" />
-      <workItem from="1649400362220" duration="4069000" />
-      <workItem from="1649405831012" duration="4483000" />
-      <workItem from="1649428414649" duration="13362000" />
-      <workItem from="1649485032591" duration="2241000" />
-      <workItem from="1649508104156" duration="884000" />
-      <workItem from="1649517085615" duration="4717000" />
-      <workItem from="1649574084602" duration="5928000" />
-      <workItem from="1649599526409" duration="8335000" />
-      <workItem from="1649609325290" duration="2464000" />
-      <workItem from="1649772160096" duration="447000" />
-      <workItem from="1649869449367" duration="35000" />
-      <workItem from="1649869770140" duration="281000" />
+      <updated>1650041322847</updated>
+      <workItem from="1650041326595" duration="2347000" />
+      <workItem from="1650043996064" duration="247000" />
+      <workItem from="1650119332357" duration="705000" />
+      <workItem from="1650290566072" duration="5999000" />
     </task>
     <servers />
   </component>
@@ -184,40 +149,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.RuntimeException" package="java.lang" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

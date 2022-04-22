@@ -1,23 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ou.librarymanagement;
 
-import com.ou.pojo.Department;
-import com.ou.services.DepartmentService;
+import com.ou.pojo.PublishingCompany;
+import com.ou.services.PublishingCompanyService;
 import com.ou.utils.Utils;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class DepartmentController implements Initializable {
-    private static final DepartmentService s = new DepartmentService();
+/**
+ *
+ * @author Linh
+ */
+public class PublishingCompanyController implements Initializable{
+    private static final PublishingCompanyService s = new PublishingCompanyService();
     @FXML
     private TextField txtKeyword;
     @FXML
@@ -25,7 +36,7 @@ public class DepartmentController implements Initializable {
     @FXML
     private TextField txtName;
     @FXML
-    private TableView<Department> tbDepartment;
+    private TableView<PublishingCompany> tbPublishingCompany;
     @FXML
     private Button btnUpdate;
     @FXML
@@ -41,8 +52,7 @@ public class DepartmentController implements Initializable {
 
         //Ẩn button sửa
         this.btnUpdate.setVisible(false);
-
-        //Ẩn button xóa
+        
         this.btnDelete.setVisible(false);
 
         //Tìm kiếm đối tượng theo tên đối tượng
@@ -51,22 +61,22 @@ public class DepartmentController implements Initializable {
         });
 
         //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
-        this.tbDepartment.setRowFactory(et ->{
+        this.tbPublishingCompany.setRowFactory(et ->{
             TableRow row = new TableRow();
             row.setOnMouseClicked(r ->{
                 this.btnUpdate.setVisible(true);
                 this.btnDelete.setVisible(true);
                 this.btnInsert.setVisible(false);
-                Department d = (Department) this.tbDepartment.getSelectionModel().getSelectedItem();
-                this.txtId.setText(String.valueOf(d.getId()));
-                this.txtName.setText(d.getName());
+                PublishingCompany p = (PublishingCompany) this.tbPublishingCompany.getSelectionModel().getSelectedItem();
+                this.txtId.setText(String.valueOf(p.getId()));
+                this.txtName.setText(p.getName());
             });
             return row;
         });
     }
     private void loadData(String kw){
         try {
-            this.tbDepartment.setItems(FXCollections.observableList(s.getDepartments(kw)));
+            this.tbPublishingCompany.setItems(FXCollections.observableList(s.getPublishingCompanys(kw)));
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -77,10 +87,10 @@ public class DepartmentController implements Initializable {
         col1.setCellValueFactory(new PropertyValueFactory("id"));
         col1.setPrefWidth(300);
 
-        TableColumn col2 = new TableColumn(("Tên bộ phận"));
+        TableColumn col2 = new TableColumn(("Tên nhà xuất bản"));
         col2.setCellValueFactory(new PropertyValueFactory("name"));
         col2.setPrefWidth(300);
-        this.tbDepartment.getColumns().addAll(col1, col2);
+        this.tbPublishingCompany.getColumns().addAll(col1, col2);
     }
 
     public void reset() {
@@ -89,17 +99,17 @@ public class DepartmentController implements Initializable {
         this.btnUpdate.setVisible(false);
         this.btnDelete.setVisible(false);
         this.btnInsert.setVisible(true);
-        this.tbDepartment.getSelectionModel().select(null);
+        this.tbPublishingCompany.getSelectionModel().select(null);
     }
 
     public void resetHandler(ActionEvent evt){
         reset();
     }
 
-    public void addDepartment(ActionEvent evt) throws SQLException{
-        Department d = new Department();
-        d.setName(txtName.getText());
-        if (s.addDepartment(d) == true){
+    public void addPublishingCompany(ActionEvent evt) throws SQLException{
+        PublishingCompany p = new PublishingCompany();
+        p.setName(txtName.getText());
+        if (s.addPublishingCompany(p) == true){
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
             this.loadData(null);
@@ -108,7 +118,7 @@ public class DepartmentController implements Initializable {
             Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
     }
 
-    public void updateDepartment(ActionEvent evt) throws SQLException{
+    public void updatePublishingCompany(ActionEvent evt) throws SQLException{
         try {
             if (s.updateDepartment(this.txtId.getText(), this.txtName.getText()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
@@ -120,10 +130,10 @@ public class DepartmentController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public void deleteDepartment(ActionEvent evt) throws SQLException{
+    
+    public void deletePublishingCompany(ActionEvent evt) throws SQLException{
         try{
-            if (s.deleteDepartment(this.txtId.getText()) == true){
+            if (s.deletePublishingCompany(this.txtId.getText()) == true){
                 Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
                 reset();
                 this.loadData(null);

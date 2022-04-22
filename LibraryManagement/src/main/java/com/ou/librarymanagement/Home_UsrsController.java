@@ -44,6 +44,8 @@ public class Home_UsrsController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
         Stage window = (Stage) btn1.getScene().getWindow();
         window.setScene(new Scene(root, 1080, 802));
+        
+        window.setUserData(root);
     }
     
     public void switch2(ActionEvent evt) throws IOException{

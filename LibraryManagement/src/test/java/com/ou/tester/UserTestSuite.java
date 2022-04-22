@@ -151,4 +151,5 @@ public class UserTestSuite {
         users.forEach(r -> Assertions.assertNotNull(r.getDepartmentId()));
         users.forEach(r -> Assertions.assertNotNull(r.getCreatedDate()));        
     }
+
 }
