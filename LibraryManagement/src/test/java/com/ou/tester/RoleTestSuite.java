@@ -90,7 +90,7 @@ public class RoleTestSuite {
 
     @Test
     public void deleteFail() throws SQLException {
-        String id = "999999999";
+        int id = 999999999;
         Assertions.assertFalse(s.deleteRole(id));
     }
 
@@ -100,9 +100,9 @@ public class RoleTestSuite {
         Role role = new Role();
         role.setName("Test");
         s.addRole(role);
-        String id = String.valueOf(s.getRoles("Test").get(0).getId());
+        int id = s.getRoles("Test").get(0).getId();
         System.out.println(id);
-        Assertions.assertTrue(s.deleteRole(String.valueOf(id)));
+        Assertions.assertTrue(s.deleteRole(id));
         Assertions.assertNull(s.getRoleById(id));
     }
 
@@ -127,13 +127,13 @@ public class RoleTestSuite {
 
     @Test
     public void testUpdateSuccess() throws SQLException{
-        Role role = s.getRoleById("8");
+        Role role = s.getRoleById(8);
         String name = role.getName();
         System.out.println(name);
         //Gán cho role có id là 8 trong db một tên chưa từng tồn tại
-        Assertions.assertTrue(s.updateRole("8", "TestUpdate4"));
+        Assertions.assertTrue(s.updateRole(8, "TestUpdate4"));
         //Lấy ra tên của role sau update
-        String nameAfter = s.getRoleById("8").getName();
+        String nameAfter = s.getRoleById(8).getName();
         System.out.println(nameAfter);
         //Kiểm tra tên của role đã thay đổi khác với tên ban đầu
         Assertions.assertNotEquals(name, nameAfter);
@@ -143,8 +143,8 @@ public class RoleTestSuite {
     public void testUpdateFailWithExist() throws  SQLException{
         List<Role> roles = s.getRoles(null);
         //Gán cho role thứ 1 trong danh sách bằng tên của role thứ 2 trong danh sách
-        Assertions.assertFalse(s.updateRole(String.valueOf(roles.get(0).getId()), roles.get(1).getName()));
+        Assertions.assertFalse(s.updateRole(roles.get(0).getId(), roles.get(1).getName()));
         //Sửa thông tin một role có id không tồn tại
-        Assertions.assertFalse(s.updateRole("111111", "ddddddddddd"));
+        Assertions.assertFalse(s.updateRole(111111, "ddddddddddd"));
     }
 }

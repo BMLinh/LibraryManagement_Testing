@@ -26,20 +26,20 @@ public class RoleService {
         }
     }
 
-    public boolean deleteRole(String roleId) throws  SQLException{
+    public boolean deleteRole(int roleId) throws  SQLException{
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("DELETE FROM role WHERE id=?");
-            stm.setString(1, roleId);
+            stm.setInt(1, roleId);
 
             return stm.executeUpdate() > 0;
         }
     }
 
     //Để đây chưa biết dùng cho việt gì không
-    public  Role getRoleById(String roleId) throws  SQLException{
+    public  Role getRoleById(int roleId) throws  SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM role WHERE id=?");
-            stm.setString(1, roleId);
+            stm.setInt(1, roleId);
 
             ResultSet rs = stm.executeQuery();
             Role r = null;
@@ -63,11 +63,11 @@ public class RoleService {
         }
     }
 
-    public boolean updateRole(String roleId, String roleName) throws SQLException{
+    public boolean updateRole(int roleId, String roleName) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("UPDATE role SET name=? WHERE id=?");
             stm.setString(1, roleName);
-            stm.setString(2, roleId);
+            stm.setInt(2, roleId);
             return stm.executeUpdate() > 0;
         } catch (SQLException ex){
             ex.printStackTrace();

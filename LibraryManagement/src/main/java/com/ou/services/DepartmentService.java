@@ -25,19 +25,19 @@ public class DepartmentService {
         }
     }
 
-    public boolean deleteDepartment(String departmentId) throws SQLException{
+    public boolean deleteDepartment(int departmentId) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("DELETE FROM department WHERE id=?");
-            stm.setString(1, departmentId);
+            stm.setInt(1, departmentId);
 
             return stm.executeUpdate() > 0;
         }
     }
 
-    public Department getDepartmentById(String departmentId) throws SQLException{
+    public Department getDepartmentById(int departmentId) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM department WHERE id=?");
-            stm.setString(1, departmentId);
+            stm.setInt(1, departmentId);
 
             ResultSet rs = stm.executeQuery();
             Department d = null;
@@ -62,11 +62,11 @@ public class DepartmentService {
         }
     }
 
-    public boolean updateDepartment(String departmentId, String departName) throws SQLException{
+    public boolean updateDepartment(int departmentId, String departName) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("UPDATE department SET name=? WHERE id=?");
             stm.setString(1, departName);
-            stm.setString(2, departmentId);
+            stm.setInt(2, departmentId);
             return stm.executeUpdate() > 0;
         } catch (SQLException ex){
             ex.printStackTrace();
