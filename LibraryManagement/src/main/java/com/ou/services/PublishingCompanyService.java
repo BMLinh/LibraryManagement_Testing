@@ -36,18 +36,18 @@ public class PublishingCompanyService {
         }
     }
     
-    public boolean deletePublishingCompany(String publishingCompanyId) throws SQLException{
+    public boolean deletePublishingCompany(int publishingCompanyId) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("DELETE FROM publishingcompany WHERE id=?");
-            stm.setString(1, publishingCompanyId);
+            stm.setInt(1, publishingCompanyId);
             return stm.executeUpdate() > 0;
         }
     }
 
-    public PublishingCompany getPublishingCompanyById(String publishingCompanyId) throws SQLException{
+    public PublishingCompany getPublishingCompanyById(int publishingCompanyId) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM publishingcompany WHERE id=?");
-            stm.setString(1, publishingCompanyId);
+            stm.setInt(1, publishingCompanyId);
             ResultSet rs = stm.executeQuery();
             PublishingCompany p = null;
             if (rs.next()){
@@ -71,11 +71,11 @@ public class PublishingCompanyService {
         }
     }
 
-    public boolean updateDepartment(String publishingcompanyId, String publishingcompanyName) throws SQLException{
+    public boolean updateDepartment(int publishingcompanyId, String publishingcompanyName) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("UPDATE publishingcompany SET name=? WHERE id=?");
             stm.setString(1, publishingcompanyName);
-            stm.setString(2, publishingcompanyId);
+            stm.setInt(2, publishingcompanyId);
             return stm.executeUpdate() > 0;
         } catch (SQLException ex){
             ex.printStackTrace();
