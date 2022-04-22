@@ -10,31 +10,33 @@ import java.util.Date;
 public class Book {
     private int id;
     private String name;
-    private String descriptions;
+    private String description;
     private int amount;
     private Date publishingYear;
     private int categoryId;
     private int publishingCompanyId;
+    private int authorId;
     private Date dateOfEntering;
 
     public Book() {
     }
 
     public Book(int id, String name, String description, int amount, Date publishingYear,
-                int publishingCompanyId, int categoryId, Date dateOfEntering) {
+                int publishingCompanyId, int categoryId, int authorId, Date dateOfEntering) {
         this.id = id;
         this.name = name;
-        this.descriptions = description;
+        this.description = description;
         this.amount = amount;
         this.publishingYear = publishingYear;
         this.publishingCompanyId = publishingCompanyId;
+        this.authorId = authorId;
         this.categoryId = categoryId;
         this.dateOfEntering = dateOfEntering;
     }
 
     @Override
     public String toString() {
-        return String.format("%d %s %s", id, name, descriptions);
+        return String.format("%d %s %s", id, name, description);
     }
 
     public int getId() {
@@ -53,12 +55,12 @@ public class Book {
         this.name = name;
     }
 
-    public String getDescriptions() {
-        return descriptions;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getAmount() {
@@ -99,5 +101,19 @@ public class Book {
 
     public void setDateOfEntering(Date dateOfEntering) {
         this.dateOfEntering = dateOfEntering;
+    }
+
+    /**
+     * @return the authorId
+     */
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    /**
+     * @param authorId the authorId to set
+     */
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 }

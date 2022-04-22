@@ -40,10 +40,11 @@ public class BookService {
                 Date publishingYear = rs.getDate("publishing_year");
                 int publishingCompanyId = rs.getInt("publishing_company_id");
                 int categoryId = rs.getInt("category_id");
+                int authorId = rs.getInt("author_id");
                 Date dateOfEntering = rs.getDate("date_of_entering");
 
                 books.add(new Book(id, name, descriptions, amount, publishingYear,
-                        publishingCompanyId, categoryId, dateOfEntering));
+                        publishingCompanyId, categoryId, authorId, dateOfEntering));
             }
 
             return books;
@@ -66,10 +67,11 @@ public class BookService {
                 Date publishingYear = rs.getDate("publishing_year");
                 int publishingCompanyId = rs.getInt("publishing_company_id");
                 int categoryId = rs.getInt("category_id");
+                int authorId = rs.getInt("author_id");
                 Date dateOfEntering = rs.getDate("date_of_entering");
 
                 book = new Book(id, name, descriptions, amount, publishingYear,
-                        publishingCompanyId, categoryId, dateOfEntering);
+                        publishingCompanyId, categoryId, authorId, dateOfEntering);
             }
 
             return book;
@@ -79,15 +81,16 @@ public class BookService {
     public boolean addBook(Book book) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("INSERT INTO book(name, descriptions, amount, publishing_year, " +
-                    "category_id, publishing_company_id, date_of_entering) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "category_id, publishing_company_id, author_id, date_of_entering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             stm.setString(1, book.getName());
-            stm.setString(2, book.getDescriptions());
+            stm.setString(2, book.getDescription());
             stm.setInt(3, book.getAmount());
             stm.setDate(4, (java.sql.Date) book.getPublishingYear());
             stm.setInt(5, book.getCategoryId());
             stm.setInt(6, book.getPublishingCompanyId());
-            stm.setDate(7, (java.sql.Date) book.getDateOfEntering());
+            stm.setInt(7, book.getAuthorId());
+            stm.setDate(8, (java.sql.Date) book.getDateOfEntering());
 
             return stm.executeUpdate() > 0;
         } catch (SQLException ex) {
@@ -102,16 +105,17 @@ public class BookService {
             try (Connection conn = JdbcUtils.getConn()) {
 
                 PreparedStatement stm = conn.prepareStatement("UPDATE book" +
-                        " SET name=?, descriptions=?, amount=?, publishing_year=?, category_id=?, publishing_company_id=?, date_of_entering=?" +
+                        " SET name=?, descriptions=?, amount=?, publishing_year=?, category_id=?, publishing_company_id=?, author_id=?, date_of_entering=?" +
                         " WHERE id=?");
 
                 stm.setString(1, currrentBook.getName());
-                stm.setString(2, currrentBook.getDescriptions());
+                stm.setString(2, currrentBook.getDescription());
                 stm.setInt(3, currrentBook.getAmount());
                 stm.setDate(4, (java.sql.Date) currrentBook.getPublishingYear());
                 stm.setInt(5, currrentBook.getCategoryId());
                 stm.setInt(6, currrentBook.getPublishingCompanyId());
-                stm.setDate(7, (java.sql.Date) currrentBook.getDateOfEntering());
+                stm.setInt(7, currrentBook.getAuthorId());
+                stm.setDate(8, (java.sql.Date) currrentBook.getDateOfEntering());
 
                 if (param != null) {
                     if (param.containsKey("name")){
@@ -132,8 +136,11 @@ public class BookService {
                     if (param.containsKey("publishingCompanyId")){
                         stm.setInt(6, Integer.parseInt(param.get("publishing_company_id")));
                     }
+                    if (param.containsKey("authorId")){
+                        stm.setInt(7, Integer.parseInt(param.get("authorId")));
+                    }
                     if (param.containsKey("dateOfEntering")){
-                        stm.setDate(7, java.sql.Date.valueOf(param.get("date_of_entering")));
+                        stm.setDate(8, java.sql.Date.valueOf(param.get("date_of_entering")));
                     }
                 }
                 stm.setInt(8, bookId);
