@@ -110,7 +110,7 @@ public class DepartmentController implements Initializable {
 
     public void updateDepartment(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateDepartment(this.txtId.getText(), this.txtName.getText()) == true){
+            if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }
@@ -123,7 +123,7 @@ public class DepartmentController implements Initializable {
 
     public void deleteDepartment(ActionEvent evt) throws SQLException{
         try{
-            if (s.deleteDepartment(this.txtId.getText()) == true){
+            if (s.deleteDepartment(Integer.parseInt(this.txtId.getText())) == true){
                 Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
                 reset();
                 this.loadData(null);
