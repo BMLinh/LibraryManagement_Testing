@@ -9,18 +9,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
  * @author Admin
  */
 public class JdbcUtils {
-     static {
+    static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     public static Connection getConn() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost/librarymanagementdb", "root", "12345678");
     }
