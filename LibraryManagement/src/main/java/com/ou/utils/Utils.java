@@ -18,13 +18,11 @@ public class Utils {
     public static Alert setAlert(String message, Alert.AlertType alertType){
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
-        
         return alert;
     }
     
     public static final java.sql.Date convertUtilToSql(java.util.Date uDate) {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        
         return sDate;
     }
     

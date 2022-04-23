@@ -191,4 +191,31 @@ public class UserService {
             return users;
         }
     }
+    
+    public User getByUsername(String username) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE username = ?");
+
+            stm.setString(1, username);
+
+            ResultSet rs = stm.executeQuery();
+
+            User user = new User();
+            while (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setFullname(rs.getString("fullname"));
+                user.setGender(rs.getByte("gender"));
+                user.setBirth(rs.getDate("dob"));
+                user.setFullname(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setPhone(rs.getString("phone"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setDepartmentId(rs.getInt("department_id"));
+            }
+
+            return user;
+        }
+    }
 }

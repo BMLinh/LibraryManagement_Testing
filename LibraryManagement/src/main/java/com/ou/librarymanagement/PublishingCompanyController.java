@@ -120,7 +120,7 @@ public class PublishingCompanyController implements Initializable{
 
     public void updatePublishingCompany(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateDepartment(this.txtId.getText(), this.txtName.getText()) == true){
+            if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }
@@ -133,7 +133,7 @@ public class PublishingCompanyController implements Initializable{
     
     public void deletePublishingCompany(ActionEvent evt) throws SQLException{
         try{
-            if (s.deletePublishingCompany(this.txtId.getText()) == true){
+            if (s.deletePublishingCompany(Integer.parseInt(this.txtId.getText())) == true){
                 Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
                 reset();
                 this.loadData(null);
