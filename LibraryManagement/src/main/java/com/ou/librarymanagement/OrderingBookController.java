@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -51,6 +52,8 @@ public class OrderingBookController implements Initializable {
     private static final PublishingCompanyService publishingCompanyService = new PublishingCompanyService();
     private static final AuthorService authorService = new AuthorService();
     private static final OrderingBookService orderingBookService = new OrderingBookService();
+    //Để ở đây test tí
+    private static final ReaderCardService readerCardService = new ReaderCardService();
     /**
      * Initializes the controller class.
      */
@@ -59,7 +62,12 @@ public class OrderingBookController implements Initializable {
         // TODO
         loadTableView();
         loadData(null);
-
+        //Để ở đây test tí
+        try {
+            currentCard = readerCardService.findReaderCardById(1).get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         this.tbBook.setRowFactory(et ->{
             TableRow row = new TableRow();
             row.setOnMouseClicked(r ->{
@@ -148,7 +156,7 @@ public class OrderingBookController implements Initializable {
         else if (Integer.parseInt(this.txtAmount.getText()) == 0){
             Utils.setAlert("Sách đã được mượn hết!", Alert.AlertType.ERROR).show();
         }
-        else if (Utils.convertDateToString(currentDate).compareTo(Utils.convertDateToString(getCurrentCard().getEndDate())) > 0){
+        else if (currentCard.getEndDate().before(currentDate)){
             Utils.setAlert("Thẻ độc giả đã hết hạn!", Alert.AlertType.ERROR).show();
         }
         else if (getCurrentCard().getAmount() != 0){
@@ -169,6 +177,7 @@ public class OrderingBookController implements Initializable {
                 Utils.setAlert("Bạn không được mướn hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
             }
             else {
+//                LocalDateTime localDateTime = LocalDateTime.now();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentDate);
                 calendar.roll(Calendar.DATE, 2);
@@ -192,7 +201,6 @@ public class OrderingBookController implements Initializable {
             }
 
         }
-
     }
 
     /**
