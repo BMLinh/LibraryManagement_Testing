@@ -37,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java Programming/Project/JobSearchingSpringMVC/JobSearchingSpringMVC" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
@@ -157,6 +157,7 @@
       <workItem from="1650698087789" duration="3765000" />
       <workItem from="1650701951081" duration="47000" />
       <workItem from="1650702242225" duration="21000" />
+      <workItem from="1650702506684" duration="16000" />
     </task>
     <servers />
   </component>
