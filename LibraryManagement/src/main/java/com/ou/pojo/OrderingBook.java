@@ -1,5 +1,6 @@
 package com.ou.pojo;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class OrderingBook {
@@ -7,14 +8,14 @@ public class OrderingBook {
     private int bookId;
     private int readerCardId;
     private int amount;
-    private Date createdDate;
-    private Date expiredDate;
+    private String createdDate;
+    private String expiredDate;
     private boolean active;
 
     public OrderingBook() {
     }
 
-    public OrderingBook(int id, int bookId, int readerCardId, int amount, Date createdDate, Date expiredDate, boolean active) {
+    public OrderingBook(int id, int bookId, int readerCardId, int amount, String createdDate, String expiredDate, boolean active) {
         this.id = id;
         this.bookId = bookId;
         this.readerCardId = readerCardId;
@@ -83,28 +84,28 @@ public class OrderingBook {
     /**
      * @return the createdDate
      */
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
     /**
      * @param createdDate the createdDate to set
      */
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
     /**
      * @return the expiredDate
      */
-    public Date getExpiredDate() {
+    public String getExpiredDate() {
         return expiredDate;
     }
 
     /**
      * @param expiredDate the expiredDate to set
      */
-    public void setExpiredDate(Date expiredDate) {
+    public void setExpiredDate(String expiredDate) {
         this.expiredDate = expiredDate;
     }
 

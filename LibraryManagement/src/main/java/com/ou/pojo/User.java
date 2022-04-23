@@ -7,6 +7,7 @@ package com.ou.pojo;
 import java.util.Date;
 
 /**
+ * update
  *
  * @author Admin
  */

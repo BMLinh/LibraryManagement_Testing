@@ -18,8 +18,8 @@ public class OrderingBookService {
             stm.setInt(1, order.getBookId());
             stm.setInt(2,order.getReaderCardId());
             stm.setInt(3, order.getAmount());
-//            stm.setDate(4, Utils.convertUtilToSql(order.getCreatedDate()));
-            stm.setDate(5, Utils.convertUtilToSql(order.getExpiredDate()));
+            stm.setString(4, order.getCreatedDate());
+            stm.setString(5, order.getExpiredDate());
             return stm.executeUpdate() > 0;
         }
         catch (SQLException e){

@@ -15,11 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,12 +58,14 @@ public class OrderingBookController implements Initializable {
         // TODO
         loadTableView();
         loadData(null);
+
         //Để ở đây test tí
         try {
             currentCard = readerCardService.findReaderCardById(1).get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         this.tbBook.setRowFactory(et ->{
             TableRow row = new TableRow();
             row.setOnMouseClicked(r ->{
@@ -156,12 +154,13 @@ public class OrderingBookController implements Initializable {
         else if (Integer.parseInt(this.txtAmount.getText()) == 0){
             Utils.setAlert("Sách đã được mượn hết!", Alert.AlertType.ERROR).show();
         }
-        else if (currentCard.getEndDate().before(currentDate)){
+        else if (currentCard.getEndDate().before(currentDate) ){
             Utils.setAlert("Thẻ độc giả đã hết hạn!", Alert.AlertType.ERROR).show();
         }
-        else if (getCurrentCard().getAmount() != 0){
-            Utils.setAlert("Người dùng chưa trả hết sách. Vui lòng trả hết sách trước khi đặt!", Alert.AlertType.ERROR).show();
-        }
+        // Khi nào cần bật lên
+//        else if (getCurrentCard().getAmount() != 0){
+//            Utils.setAlert("Người dùng chưa trả hết sách. Vui lòng trả hết sách trước khi đặt!", Alert.AlertType.ERROR).show();
+//        }
         else {
             TextInputDialog inp = new TextInputDialog();
             inp.setHeaderText("Nhập số lượng sách cần đặt");
@@ -173,11 +172,19 @@ public class OrderingBookController implements Initializable {
                     Utils.setAlert("Sai định dạng. Mời bạn nhập số!", Alert.AlertType.ERROR).show();
                 }
             }
-            if (amountOfBook > 5){
+            if (amountOfBook < 0){
+                Utils.setAlert("Số lượng sách đặt phải lớn hơn 0!", Alert.AlertType.ERROR).show();
+            }
+            else if (amountOfBook > 5){
                 Utils.setAlert("Bạn không được mướn hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
             }
+            else if(amountOfBook >Integer.parseInt(txtAmount.getText()) ){
+                Utils.setAlert("Không được đặt quá số lượng sách hiện tại!",Alert.AlertType.ERROR).show();
+            }
+            else if(amountOfBook == 0){
+                Utils.setAlert("Đã hủy bỏ đặt sách!", Alert.AlertType.INFORMATION).show();
+            }
             else {
-//                LocalDateTime localDateTime = LocalDateTime.now();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(currentDate);
                 calendar.roll(Calendar.DATE, 2);
@@ -186,11 +193,16 @@ public class OrderingBookController implements Initializable {
                 oderBook.setBookId(Integer.parseInt(txtBookId.getText()));
                 oderBook.setReaderCardId(this.getCurrentCard().getId());
                 oderBook.setAmount(amountOfBook);
-                oderBook.setCreatedDate(currentDate);
-                oderBook.setExpiredDate(expiredDate);
+                oderBook.setCreatedDate(Utils.convertDateTimeToString(currentDate));
+                oderBook.setExpiredDate(Utils.convertDateTimeToString(expiredDate));
                 try {
                     if (orderingBookService.addOrderBook(oderBook) == true){
+                        Map<String, String> param = new HashMap<>();
+                        int amountOfBookAffter = Integer.parseInt(txtAmount.getText()) - amountOfBook;
+                        param.put("amount", String.valueOf(amountOfBookAffter));
+                        bookService.updateBook(Integer.parseInt(txtBookId.getText()), param);
                         Utils.setAlert("Đặt sách thành công!", Alert.AlertType.INFORMATION).show();
+                        reset();
                     }
                     else
                         Utils.setAlert("Đặt sách thất bại!", Alert.AlertType.ERROR).show();
@@ -199,7 +211,6 @@ public class OrderingBookController implements Initializable {
                     ex.printStackTrace();
                 }
             }
-
         }
     }
 
