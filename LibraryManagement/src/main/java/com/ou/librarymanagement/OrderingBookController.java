@@ -65,7 +65,7 @@ public class OrderingBookController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         this.tbBook.setRowFactory(et ->{
             TableRow row = new TableRow();
             row.setOnMouseClicked(r ->{
