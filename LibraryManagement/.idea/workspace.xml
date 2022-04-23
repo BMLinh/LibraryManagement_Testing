@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginSuccessfulController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/BookAuthor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLLogin.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/loginSuccessful.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/secondary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/secondary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/UserTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/UserTestSuite.java" afterDir="false" />
-    </list>
+    <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -174,6 +156,7 @@
       <workItem from="1650693940855" duration="4076000" />
       <workItem from="1650698087789" duration="3765000" />
       <workItem from="1650701951081" duration="47000" />
+      <workItem from="1650702242225" duration="21000" />
     </task>
     <servers />
   </component>
