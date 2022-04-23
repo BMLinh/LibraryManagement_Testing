@@ -50,15 +50,18 @@ DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `descriptions` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `amount` int NOT NULL DEFAULT '0',
+  `descriptions` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `publishing_year` date DEFAULT NULL,
+  `date_of_entering` datetime DEFAULT NULL,
   `category_id` int NOT NULL,
   `publishing_company_id` int NOT NULL,
-  `date_of_entering` datetime DEFAULT NULL,
+  `author_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_book_category_idx` (`category_id`),
   KEY `fk_book_publishing_company_idx` (`publishing_company_id`),
+  KEY `fk_book_author_idx` (`author_id`),
+  CONSTRAINT `fk_book_author` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`),
   CONSTRAINT `fk_book_category` FOREIGN KEY (`category_id`) REFERENCES `bookcategory` (`id`),
   CONSTRAINT `fk_book_publishing_company` FOREIGN KEY (`publishing_company_id`) REFERENCES `publishingcompany` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -74,32 +77,6 @@ LOCK TABLES `book` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bookauthor`
---
-
-DROP TABLE IF EXISTS `bookauthor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bookauthor` (
-  `book_id` int NOT NULL,
-  `author_id` int NOT NULL,
-  KEY `fk_bookauthor_book_idx` (`book_id`),
-  KEY `fk_bookauthor_author_idx` (`author_id`),
-  CONSTRAINT `fk_bookauthor_author` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`),
-  CONSTRAINT `fk_bookauthor_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bookauthor`
---
-
-LOCK TABLES `bookauthor` WRITE;
-/*!40000 ALTER TABLE `bookauthor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bookauthor` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `bookcategory`
 --
 
@@ -111,7 +88,7 @@ CREATE TABLE `bookcategory` (
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `position` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,6 +97,7 @@ CREATE TABLE `bookcategory` (
 
 LOCK TABLES `bookcategory` WRITE;
 /*!40000 ALTER TABLE `bookcategory` DISABLE KEYS */;
+INSERT INTO `bookcategory` VALUES (5,'Viễn tưởng','Dãy B'),(6,'Anime','Dãy D'),(7,'Manga','Dãy E'),(8,'Khoa học','Dãy D');
 /*!40000 ALTER TABLE `bookcategory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,12 +109,16 @@ DROP TABLE IF EXISTS `borrowingbook`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `borrowingbook` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `staff_id` int NOT NULL,
   `book_id` int NOT NULL,
   `reader_card_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `amount` int NOT NULL DEFAULT '1',
-  `created_date` datetime NOT NULL,
-  `return_date` datetime NOT NULL,
+  `created_date` date NOT NULL,
+  `return_date` date DEFAULT NULL,
+  `active` bit(1) DEFAULT b'0',
+  `fine` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `fk_borrowingbook_reader_card_idx` (`reader_card_id`),
   KEY `fk_borrowingbook_user` (`staff_id`),
   KEY `fk_borrowingbook_book` (`book_id`),
@@ -167,7 +149,7 @@ CREATE TABLE `department` (
   `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,6 +158,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT INTO `department` VALUES (1,'Linh');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,11 +170,14 @@ DROP TABLE IF EXISTS `orderingbook`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orderingbook` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `book_id` int NOT NULL,
   `reader_card_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `amount` int NOT NULL DEFAULT '1',
   `created_date` datetime NOT NULL,
   `expired_date` datetime NOT NULL,
+  `active` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`id`),
   KEY `fk_orderingbook_reader_card_idx` (`reader_card_id`),
   KEY `fk_orderingbook_book_idx` (`book_id`),
   CONSTRAINT `fk_orderingbook_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`),
@@ -220,7 +206,7 @@ CREATE TABLE `publishingcompany` (
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,6 +215,7 @@ CREATE TABLE `publishingcompany` (
 
 LOCK TABLES `publishingcompany` WRITE;
 /*!40000 ALTER TABLE `publishingcompany` DISABLE KEYS */;
+INSERT INTO `publishingcompany` VALUES (5,'BM Linh'),(2,'Kim Đồng'),(3,'Long Phụng'),(1,'Thăng Long');
 /*!40000 ALTER TABLE `publishingcompany` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,10 +228,9 @@ DROP TABLE IF EXISTS `readercard`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `readercard` (
   `id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
-  `amount` int DEFAULT '5',
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `amount` int unsigned DEFAULT '5',
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_reader_card_user_idx` (`user_id`),
@@ -333,4 +319,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-13 21:35:19
+-- Dump completed on 2022-04-22 21:55:35

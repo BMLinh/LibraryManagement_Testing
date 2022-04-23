@@ -115,8 +115,8 @@ public class UserController implements Initializable {
                 this.phoneTxtFld.setText(user.getPhone());
                 this.createdDateTxtFld.setText(Utils.convertDateToString(user.getCreatedDate()));
                 try {
-                    this.roleCb.getSelectionModel().select(this.roleService.getRoleById(String.valueOf(user.getRoleId())));
-                    this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(String.valueOf(user.getDepartmentId())));
+                    this.roleCb.getSelectionModel().select(this.roleService.getRoleById(user.getRoleId()));
+                    this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(user.getDepartmentId()));
                 } catch (SQLException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -251,7 +251,7 @@ public class UserController implements Initializable {
     
     public void addUser(ActionEvent evt) throws SQLException{
         User user = this.getUserFromFx();
-        if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(user.getUsername()).isEmpty()){
+        if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(this.usernameTxtFld.getText()).isEmpty()){
             if(this.userService.addUser(this.getUserFromFx())){
                 Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData();

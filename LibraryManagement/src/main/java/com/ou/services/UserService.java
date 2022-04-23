@@ -164,7 +164,7 @@ public class UserService {
     }
     
     public List<User> findUserByUsername(String userUsername) throws SQLException{
-    try(Connection conn = JdbcUtils.getConn()){
+        try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM user WHERE username = ?");
             
             stm.setString(1, userUsername);
@@ -190,6 +190,5 @@ public class UserService {
             
             return users;
         }
-
     }
 }
