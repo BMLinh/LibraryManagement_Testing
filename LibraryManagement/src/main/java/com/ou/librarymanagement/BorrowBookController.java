@@ -33,6 +33,8 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -65,10 +67,8 @@ public class BorrowBookController implements Initializable {
     private TextField userIdTxtFld;
     @FXML
     private Button submitBtn;
-    
-    private User staff;
-    private User user;
-    private ReaderCard readerCard;
+    @FXML
+    private Pane pane;
      
     private static final BookService bookService = new BookService();
     private static final BookCategoryService bookCategoryService = new BookCategoryService();
@@ -106,13 +106,12 @@ public class BorrowBookController implements Initializable {
     private void loadData(String kw){
         try {
             this.bookTableView.setItems(FXCollections.observableList(this.bookService.getBooks(kw)));
-            this.userNameTxtFld.setText(user.getFullname());
         } catch (SQLException ex) {
             Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void loadTableView(){
+    public void loadTableView(){
         TableColumn t1 = new TableColumn("ID");
         t1.setCellValueFactory(new PropertyValueFactory("id"));
         t1.setPrefWidth(40);
@@ -142,6 +141,12 @@ public class BorrowBookController implements Initializable {
         t7.setPrefWidth(100);
         
         this.bookTableView.getColumns().addAll(t1,t2,t3,t4,t5,t6,t7);
+        
+    }
+    
+    public void display(int userId, int readerCardId){
+        this.userIdTxtFld.setText(String.valueOf(userId));
+        this.userNameTxtFld.setText(String.valueOf(readerCardId));
     }
     
     public void reset(){
@@ -169,47 +174,5 @@ public class BorrowBookController implements Initializable {
         else{            
             
         }
-    }
-
-    /**
-     * @return the staff
-     */
-    public User getStaff() {
-        return staff;
-    }
-
-    /**
-     * @param staff the staff to set
-     */
-    public void setStaff(User staff) {
-        this.staff = staff;
-    }
-
-    /**
-     * @return the user
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    /**
-     * @return the readerCard
-     */
-    public ReaderCard getReaderCard() {
-        return readerCard;
-    }
-
-    /**
-     * @param readerCard the readerCard to set
-     */
-    public void setReaderCard(ReaderCard readerCard) {
-        this.readerCard = readerCard;
     }
 }

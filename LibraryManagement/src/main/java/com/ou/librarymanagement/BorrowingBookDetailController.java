@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -63,20 +64,20 @@ public class BorrowingBookDetailController implements Initializable {
 
     public void checkUser(ActionEvent evt) throws SQLException {
         if(this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).size() > 0){
-            setReaderCard(this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
-            setUser(this.userService.findUserById(getReaderCard().getUserId()));
-            this.nameTxtFld.setText(getUser().getFullname());
-            this.amountTxtFld.setText(String.valueOf(getReaderCard().getAmount()));
-            this.departmentTxtFld.setText(this.departmentService.getDepartmentById(getUser().getDepartmentId()).getName());
+            readerCard = (this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
+            user = (this.userService.findUserById(readerCard.getUserId()));
+            this.nameTxtFld.setText(user.getFullname());
+            this.amountTxtFld.setText(String.valueOf(readerCard.getAmount()));
+            this.departmentTxtFld.setText(this.departmentService.getDepartmentById(user.getDepartmentId()).getName());
         }
         else Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
     }
     
-    public void borrowBook(ActionEvent evt) throws IOException{
-        if(getReaderCard().getEndDate().before(new Date())){
+    public void borrowBook(ActionEvent event) throws IOException{
+        if(readerCard.getEndDate().before(new Date())){
             Utils.setAlert("Thẻ hết hạn!!!", Alert.AlertType.ERROR).show();
         }
-        else if(getReaderCard().getAmount() > 0)
+        else if(readerCard.getAmount() > 0)
             Utils.setAlert("Chưa trả hết sách!!!", Alert.AlertType.ERROR).show();
             
         else{   
@@ -84,54 +85,11 @@ public class BorrowingBookDetailController implements Initializable {
             Parent root = loader.load();
             
             BorrowBookController controller = loader.getController();
-            controller.setUser(user);
+            controller.display(user.getId(), readerCard.getId());
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
         }       
     }
-
-    /**
-     * @return the readerCard
-     */
-    public ReaderCard getReaderCard() {
-        return readerCard;
-    }
-
-    /**
-     * @param readerCard the readerCard to set
-     */
-    public void setReaderCard(ReaderCard readerCard) {
-        this.readerCard = readerCard;
-    }
-
-    /**
-     * @return the user
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    /**
-     * @return the staff
-     */
-    public User getStaff() {
-        return staff;
-    }
-
-    /**
-     * @param staff the staff to set
-     */
-    public void setStaff(User staff) {
-        this.staff = staff;
-    }
-
 }
