@@ -66,8 +66,8 @@ public class OrderingBookController implements Initializable {
                 this.txtBookDescription.setText(book.getDescription());
                 this.txtAmount.setText(String.valueOf(book.getAmount()));
                 try {
-                    this.txtBookCate.setText(this.bookCategoryService.getBookCategoryById(String.valueOf(book.getCategoryId())).getName());
-                    this.txtBookPublisher.setText(this.publishingCompanyService.getPublishingCompanyById(String.valueOf(book.getPublishingCompanyId())).getName());
+                    this.txtBookCate.setText(this.bookCategoryService.getBookCategoryById(book.getCategoryId()).getName());
+                    this.txtBookPublisher.setText(this.publishingCompanyService.getPublishingCompanyById(book.getPublishingCompanyId()).getName());
                     this.txtBookAuthor.setText(this.authorService.getById(book.getAuthorId()).getName());
                 } catch (SQLException ex) {
                     Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
