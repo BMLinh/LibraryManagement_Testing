@@ -62,7 +62,7 @@ public class LoginController implements Initializable {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
-        user = userService.getByUsernamme(username);
+        user = userService.getByUsername(username);
 
         System.out.println("txtUsername = " + username);
         System.out.println("User username = " + user.getUsername());
