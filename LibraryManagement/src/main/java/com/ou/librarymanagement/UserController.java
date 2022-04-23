@@ -41,7 +41,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * 
  * FXML Controller class
  *
  * @author Admin
