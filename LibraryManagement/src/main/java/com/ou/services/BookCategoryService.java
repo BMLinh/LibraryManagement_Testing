@@ -37,18 +37,18 @@ public class BookCategoryService {
             }
         }
 
-        public boolean deleteBookCategory(String bookCategoryId) throws SQLException{
+        public boolean deleteBookCategory(int bookCategoryId) throws SQLException{
             try (Connection conn = JdbcUtils.getConn()){
                 PreparedStatement stm = conn.prepareStatement("DELETE FROM bookcategory WHERE id=?");
-                stm.setString(1, bookCategoryId);
+                stm.setInt(1, bookCategoryId);
                 return stm.executeUpdate() > 0;
             }
         }
 
-        public BookCategory getBookCategoryById(String bookCategoryId) throws SQLException{
+        public BookCategory getBookCategoryById(int bookCategoryId) throws SQLException{
             try (Connection conn = JdbcUtils.getConn()){
                 PreparedStatement stm = conn.prepareStatement("SELECT * FROM bookcategory WHERE id=?");
-                stm.setString(1, bookCategoryId);
+                stm.setInt(1, bookCategoryId);
                 ResultSet rs = stm.executeQuery();
                 BookCategory b = null;
                 if (rs.next()){
@@ -74,12 +74,12 @@ public class BookCategoryService {
             }
         }
 
-        public boolean updateBookCategory(String BookCategoryId, String BookCategoryName, String BookPosition) throws SQLException{
+        public boolean updateBookCategory(int BookCategoryId, String BookCategoryName, String BookPosition) throws SQLException{
             try (Connection conn = JdbcUtils.getConn()) {
                 PreparedStatement stm = conn.prepareStatement("UPDATE bookcategory SET name=?, position=? WHERE id=?");
                 stm.setString(1, BookCategoryName);
                 stm.setString(2, BookPosition);
-                stm.setString(3, BookCategoryId);
+                stm.setInt(3, BookCategoryId);
                 return stm.executeUpdate() > 0;
             } catch (SQLException ex){
                 ex.printStackTrace();

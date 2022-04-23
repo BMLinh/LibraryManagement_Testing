@@ -53,7 +53,7 @@ CREATE TABLE `book` (
   `amount` int NOT NULL DEFAULT '0',
   `descriptions` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `publishing_year` date DEFAULT NULL,
-  `date_of_entering` datetime DEFAULT NULL,
+  `date_of_entering` date DEFAULT NULL,
   `category_id` int NOT NULL,
   `publishing_company_id` int NOT NULL,
   `author_id` int NOT NULL,
@@ -285,14 +285,13 @@ CREATE TABLE `user` (
   `fullname` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `gender` bit(1) NOT NULL DEFAULT b'0',
   `dob` date DEFAULT NULL,
-  `email` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `address` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `phone` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `role_id` int NOT NULL,
   `department_id` int NOT NULL,
+  `created_date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `phone_UNIQUE` (`phone`),
   KEY `fk_user_role_idx` (`role_id`),
   KEY `fk_user_departmeny_idx` (`department_id`),
@@ -319,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-22 21:55:35
+-- Dump completed on 2022-04-23 15:41:04
