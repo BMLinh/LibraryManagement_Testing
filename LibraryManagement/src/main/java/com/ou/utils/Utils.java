@@ -18,19 +18,16 @@ public class Utils {
     public static Alert setAlert(String message, Alert.AlertType alertType){
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
-        
         return alert;
     }
     
     public static final java.sql.Date convertUtilToSql(java.util.Date uDate) {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        
         return sDate;
     }
     
     public static final String convertDateToString(Date date){
-        SimpleDateFormat F = new SimpleDateFormat("MM/dd/yyyy");
-        
+        SimpleDateFormat F = new SimpleDateFormat("dd/MM/yyyy");
         return F.format(date);
     }
     

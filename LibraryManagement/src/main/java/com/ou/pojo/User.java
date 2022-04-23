@@ -16,29 +16,32 @@ public class User {
     private String password;
     private String fullname;
     private int gender;
-    private Date birth;
+    private Date dob;
+    private String email;
     private String address;
     private String phone;
     private int roleId;
     private int departmentId;
-    private Date createdDate;
 
     public User() {}
-    
-    public User(int id, String username, String password, String fullname, int gender, Date birth, String address, String phone, int role_id, int department_id, Date createdDate) {
+
+    public User(int id, String username, String password, String fullname, int gender, Date dob, String email, String address, String phone, int roleId, int departmentId) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
         this.gender = gender;
-        this.birth = birth;
+        this.dob = dob;
+        this.email = email;
         this.address = address;
         this.phone = phone;
-        this.roleId = role_id;
-        this.departmentId = department_id;
-        this.createdDate = createdDate;
+        this.roleId = roleId;
+        this.departmentId = departmentId;
     }
-    
+
+    public User(int id, String username, String password, String fullname, int gender, Date dob, int departmentId, String email, String address, String phone, int roleId) {
+    }
+
     /**
      * @return the id
      */
@@ -109,18 +112,20 @@ public class User {
         this.gender = gender;
     }
 
-    /**
-     * @return the birth
-     */
-    public Date getBirth() {
-        return birth;
+    public Date getDob() {
+        return dob;
     }
 
-    /**
-     * @param birth the birth to set
-     */
-    public void setBirth(Date birth) {
-        this.birth = birth;
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -177,20 +182,6 @@ public class User {
      */
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
-    }
-
-    /**
-     * @return the createdDate
-     */
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    /**
-     * @param createdDate the createdDate to set
-     */
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
     }
 
 }
