@@ -28,6 +28,7 @@ public class Utils {
     
     public static final String convertDateToString(Date date){
         SimpleDateFormat F = new SimpleDateFormat("dd/MM/yyyy");
+        
         return F.format(date);
     }
     
