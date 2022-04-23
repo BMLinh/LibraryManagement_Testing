@@ -78,8 +78,8 @@ public class BorrowBookController implements Initializable {
                 this.bookDescriptionTxtFld.setText(book.getDescription());
                 this.bookPublishedDateTxtFld.setText(Utils.convertDateToString(book.getPublishingYear()));
                 try {
-                    this.bookCateTxtFld.setText(this.bookCategoryService.getBookCategoryById(String.valueOf(book.getCategoryId())).getName());
-                    this.bookPublisherTxtFld.setText(this.publishingCompanyService.getPublishingCompanyById(String.valueOf(book.getPublishingCompanyId())).getName());
+                    this.bookCateTxtFld.setText(this.bookCategoryService.getBookCategoryById(book.getCategoryId()).getName());
+                    this.bookPublisherTxtFld.setText(this.publishingCompanyService.getPublishingCompanyById(book.getPublishingCompanyId()).getName());
                     this.bookAuthorTxtFld.setText(this.authorService.getById(book.getAuthorId()).getName());
                 } catch (SQLException ex) {
                     Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);

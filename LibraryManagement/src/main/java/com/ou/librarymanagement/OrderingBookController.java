@@ -1,10 +1,10 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.Book;
-import com.ou.services.AuthorService;
-import com.ou.services.BookCategoryService;
-import com.ou.services.BookService;
-import com.ou.services.PublishingCompanyService;
+import com.ou.pojo.OrderingBook;
+import com.ou.pojo.ReaderCard;
+import com.ou.pojo.User;
+import com.ou.services.*;
 import com.ou.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -13,9 +13,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,14 +42,15 @@ public class OrderingBookController implements Initializable {
     @FXML
     private TextField txtSearchContent;
 
-    private static int userId;
-    private static int cardId;
+    private static User currentUser;
+    private static ReaderCard currentCard;
 
 
     private static final BookService bookService = new BookService();
     private static final BookCategoryService bookCategoryService = new BookCategoryService();
     private static final PublishingCompanyService publishingCompanyService = new PublishingCompanyService();
     private static final AuthorService authorService = new AuthorService();
+    private static final OrderingBookService orderingBookService = new OrderingBookService();
     /**
      * Initializes the controller class.
      */
@@ -136,7 +139,87 @@ public class OrderingBookController implements Initializable {
         else Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
     }
 
-    public void orderBook(ActionEvent evt) throws IOException {
-        int i = Integer.parseInt(this.txtBookId.getText());
+    public void orderBook(ActionEvent evt) throws SQLException {
+        int amountOfBook = 0;
+        Date currentDate = new Date();
+        if (getCurrentCard() == null){
+            Utils.setAlert("Bạn chưa có thẻ độc giả. Vui lòng làm thẻ để có thể đặt sách!", Alert.AlertType.ERROR).show();
+        }
+        else if (Integer.parseInt(this.txtAmount.getText()) == 0){
+            Utils.setAlert("Sách đã được mượn hết!", Alert.AlertType.ERROR).show();
+        }
+        else if (Utils.convertDateToString(currentDate).compareTo(Utils.convertDateToString(getCurrentCard().getEndDate())) > 0){
+            Utils.setAlert("Thẻ độc giả đã hết hạn!", Alert.AlertType.ERROR).show();
+        }
+        else if (getCurrentCard().getAmount() != 0){
+            Utils.setAlert("Người dùng chưa trả hết sách. Vui lòng trả hết sách trước khi đặt!", Alert.AlertType.ERROR).show();
+        }
+        else {
+            TextInputDialog inp = new TextInputDialog();
+            inp.setHeaderText("Nhập số lượng sách cần đặt");
+            Optional<String> num = inp.showAndWait();
+            if (num.isPresent()){
+                try{
+                    amountOfBook = Integer.parseInt(num.get());
+                } catch (Exception ex){
+                    Utils.setAlert("Sai định dạng. Mời bạn nhập số!", Alert.AlertType.ERROR).show();
+                }
+            }
+            if (amountOfBook > 5){
+                Utils.setAlert("Bạn không được mướn hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
+            }
+            else {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                calendar.roll(Calendar.DATE, 2);
+                Date expiredDate = calendar.getTime();
+                OrderingBook oderBook = new OrderingBook();
+                oderBook.setBookId(Integer.parseInt(txtBookId.getText()));
+                oderBook.setReaderCardId(this.getCurrentCard().getId());
+                oderBook.setAmount(amountOfBook);
+                oderBook.setCreatedDate(currentDate);
+                oderBook.setExpiredDate(expiredDate);
+                try {
+                    if (orderingBookService.addOrderBook(oderBook) == true){
+                        Utils.setAlert("Đặt sách thành công!", Alert.AlertType.INFORMATION).show();
+                    }
+                    else
+                        Utils.setAlert("Đặt sách thất bại!", Alert.AlertType.ERROR).show();
+                }
+                catch (SQLException ex){
+                    ex.printStackTrace();
+                }
+            }
+
+        }
+
+    }
+
+    /**
+     * @return the currentUser
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
+     * @param aCurrentUser the currentUser to set
+     */
+    public static void setCurrentUser(User aCurrentUser) {
+        currentUser = aCurrentUser;
+    }
+
+    /**
+     * @return the currentCard
+     */
+    public static ReaderCard getCurrentCard() {
+        return currentCard;
+    }
+
+    /**
+     * @param aCurrentCard the currentCard to set
+     */
+    public static void setCurrentCard(ReaderCard aCurrentCard) {
+        currentCard = aCurrentCard;
     }
 }
