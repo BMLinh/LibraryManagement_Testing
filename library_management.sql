@@ -289,7 +289,7 @@ CREATE TABLE `user` (
   `phone` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `role_id` int NOT NULL,
   `department_id` int NOT NULL,
-  `createddate` date DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `phone_UNIQUE` (`phone`),
@@ -318,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-23 15:26:17
+-- Dump completed on 2022-04-23 15:41:04
