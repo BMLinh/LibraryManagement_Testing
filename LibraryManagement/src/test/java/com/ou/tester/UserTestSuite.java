@@ -9,6 +9,7 @@ import com.ou.pojo.User;
 import com.ou.utils.JdbcUtils;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,7 +53,7 @@ public class UserTestSuite {
     
     @Test
     public void addSuccess() throws SQLException{
-        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "a@gmail.com", "Nguyễn Hiền", "0988888888", 1, 1);
+        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
         
         Assertions.assertTrue(u.addUser(user));
     }
@@ -60,7 +61,7 @@ public class UserTestSuite {
     @Test
     public void updateSuccess() throws SQLException{
         List<User> users = u.getUser();
-        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "a@gmail.com", "Nguyễn Hiền", "0988888888", 1, 1);
+        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
         
         Assertions.assertTrue(u.updateUser(users.get(0).getId(),user));
     }
@@ -72,7 +73,7 @@ public class UserTestSuite {
     
     @Test
     public void addFailed() throws SQLException{
-        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "a@gmail.com", "Nguyễn Hiền", "093333333333", 1, 1);
+        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "093333333333", 1, 1, new Date(2022, 5, 12));
         
         Assertions.assertFalse(u.addUser(user));
     }
@@ -145,10 +146,10 @@ public class UserTestSuite {
         users.forEach(r -> Assertions.assertNotNull(r.getPassword()));
         users.forEach(r -> Assertions.assertNotNull(r.getFullname()));
         users.forEach(r -> Assertions.assertNotNull(r.getGender()));
-        users.forEach(r -> Assertions.assertNotNull(r.getEmail()));
         users.forEach(r -> Assertions.assertNotNull(r.getPhone()));
         users.forEach(r -> Assertions.assertNotNull(r.getRoleId()));
         users.forEach(r -> Assertions.assertNotNull(r.getDepartmentId()));
+        users.forEach(r -> Assertions.assertNotNull(r.getCreatedDate()));        
     }
 
 }
