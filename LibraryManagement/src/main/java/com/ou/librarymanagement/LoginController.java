@@ -4,14 +4,17 @@ import com.ou.pojo.ReaderCard;
 import com.ou.pojo.User;
 import com.ou.services.ReaderCardService;
 import com.ou.services.RoleService;
+import com.ou.services.ReaderCardService;
 import com.ou.services.UserService;
-import com.ou.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -65,12 +68,14 @@ public class LoginController implements Initializable {
             login();
     }
 
-    private void redirect(int userRoleId) throws IOException {
+    private void redirect(int userRoleId) throws IOException, SQLException {
         String fxml = "";
+        RoleService roleService = new RoleService();
+        String roleName = roleService.getRoleById(userRoleId).getName();
 
-        if (userRoleId == 1) {
+        if (roleName.trim().compareToIgnoreCase("admin") == 0) {
             fxml = "FXMLLoginSuccessful.fxml";
-        } else if (userRoleId == 2) {
+        } else if (roleName.trim().compareToIgnoreCase("staff") == 0) {
             fxml = "FXMLHome-Ems.fxml";
         } else {
             fxml = "FXMLHome-Usrs.fxml";
@@ -100,26 +105,21 @@ public class LoginController implements Initializable {
 
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
         primaryStage.setScene(mainScene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
-    public void checkLogin() throws SQLException, IOException, InterruptedException {
+    public void checkLogin() throws SQLException, IOException {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
         user = userService.getByUsername(username);
 
-        System.out.println("txtUsername = " + username);
-        System.out.println("User username = " + user.getUsername());
-
-        System.out.println("txtPassword = " + password);
-        System.out.println("User password = " + user.getPassword());
-
         lbNotification.setVisible(true);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(305);
 
-        if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+        if (username.equalsIgnoreCase(user.getUsername()) && password.equals(user.getPassword())) {
             redirect(user.getRoleId());
         } else {
             lbNotification.setTextFill(Color.RED);

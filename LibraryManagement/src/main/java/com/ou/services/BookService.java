@@ -83,6 +83,11 @@ public class BookService {
     }
 
     public boolean add(Book book) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        books = getBooks(book.getName());
+        if (books.size() > 0)
+            return false;
+
         try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("INSERT INTO book(name, descriptions, amount, publishing_year, " +
                     "category_id, publishing_company_id, author_id, date_of_entering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");

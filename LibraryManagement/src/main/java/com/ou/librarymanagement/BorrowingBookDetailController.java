@@ -46,9 +46,9 @@ public class BorrowingBookDetailController implements Initializable {
     @FXML
     private TextField amountTxtFld;
     
-    private  ReaderCard readerCard = null;
-    private  User user = null;
-    private  User staff;
+    private static ReaderCard currentCard;
+    private static User currentUser;
+    private static User currentStaff;
     
     
     private static final ReaderCardService readerCardService = new ReaderCardService();
@@ -69,11 +69,11 @@ public class BorrowingBookDetailController implements Initializable {
                 Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
             }
             else {
-                this.setReaderCard(readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
-                this.setUser(userService.findUserById(getReaderCard().getUserId()));
-                this.nameTxtFld.setText(getUser().getFullname());
-                this.amountTxtFld.setText(String.valueOf(getReaderCard().getAmount()));
-                this.departmentTxtFld.setText(this.departmentService.getDepartmentById(getUser().getDepartmentId()).getName());
+                this.setCurrentCard(readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
+                this.setCurrentUser(userService.findUserById(getCurrentCard().getUserId()));
+                this.nameTxtFld.setText(getCurrentUser().getFullname());
+                this.amountTxtFld.setText(String.valueOf(getCurrentCard().getAmount()));
+                this.departmentTxtFld.setText(this.departmentService.getDepartmentById(getCurrentUser().getDepartmentId()).getName());
             }
         } catch (SQLException ex){
             ex.printStackTrace();
@@ -82,17 +82,19 @@ public class BorrowingBookDetailController implements Initializable {
     }
     
     public void borrowBook(ActionEvent event) throws IOException{
-        System.out.println(getUser().getId());
-        if(getReaderCard().getEndDate().before(new Date())){
+        System.out.println(getCurrentUser().getId());
+        if(getCurrentCard().getEndDate().before(new Date())){
             Utils.setAlert("Thẻ hết hạn!!!", Alert.AlertType.ERROR).show();
         }
-        else if(getReaderCard().getAmount() > 0)
+        else if(getCurrentCard().getAmount() > 0)
             Utils.setAlert("Chưa trả hết sách!!!", Alert.AlertType.ERROR).show();
             
         else{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLBorrowBook.fxml"));
             BorrowBookController controller = fxmlLoader.getController();
-            controller.setCurrentUser(this.getUser());
+            controller.setCurrentUser(this.getCurrentUser());
+            controller.setCurrentCard(this.getCurrentCard());
+            controller.setCurrentStaff(this.getCurrentStaff());
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -102,44 +104,45 @@ public class BorrowingBookDetailController implements Initializable {
     }
 
     /**
-     * @return the readerCard
+     * @return the currentCard
      */
-    public ReaderCard getReaderCard() {
-        return readerCard;
+    public static ReaderCard getCurrentCard() {
+        return currentCard;
     }
 
     /**
-     * @param readerCard the readerCard to set
+     * @param aCurrentCard the currentCard to set
      */
-    public void setReaderCard(ReaderCard readerCard) {
-        this.readerCard = readerCard;
+    public static void setCurrentCard(ReaderCard aCurrentCard) {
+        currentCard = aCurrentCard;
     }
 
     /**
-     * @return the user
+     * @return the currentUser
      */
-    public User getUser() {
-        return user;
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
     /**
-     * @param user the user to set
+     * @param aCurrentUser the currentUser to set
      */
-    public void setUser(User user) {
-        this.user = user;
+    public static void setCurrentUser(User aCurrentUser) {
+        currentUser = aCurrentUser;
     }
 
     /**
-     * @return the staff
+     * @return the currentStaff
      */
-    public User getStaff() {
-        return staff;
+    public static User getCurrentStaff() {
+        return currentStaff;
     }
 
     /**
-     * @param staff the staff to set
+     * @param aCurrentStaff the currentStaff to set
      */
-    public void setStaff(User staff) {
-        this.staff = staff;
+    public static void setCurrentStaff(User aCurrentStaff) {
+        currentStaff = aCurrentStaff;
     }
+
 }
