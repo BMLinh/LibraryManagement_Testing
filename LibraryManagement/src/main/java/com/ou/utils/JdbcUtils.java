@@ -21,6 +21,6 @@ public class JdbcUtils {
     }
 
     public static Connection getConn() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost/librarymanagementdb", "root", "HoangNam32");
+        return DriverManager.getConnection("jdbc:mysql://localhost/librarymanagementdb", "root", "12346578");
     }
 }
