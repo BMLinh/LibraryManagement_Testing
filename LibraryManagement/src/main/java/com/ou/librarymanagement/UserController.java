@@ -252,8 +252,8 @@ public class UserController implements Initializable {
 
     public void addUser(ActionEvent evt) throws SQLException {
         User user = this.getUserFromFx();
-        if (userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(user.getUsername()).isEmpty()) {
-            if (userService.addUser(this.getUserFromFx())) {
+        if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(this.usernameTxtFld.getText()).isEmpty()){
+            if(this.userService.addUser(this.getUserFromFx())){
                 Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData();
                 reset();

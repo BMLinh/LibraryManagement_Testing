@@ -5,33 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BookController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginSuccessfulController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/BookAuthor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLLogin.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/loginSuccessful.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/library_login.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/logo-png.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginSuccessfulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginSuccessfulController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/ReaderCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/ReaderCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/OrderingBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/OrderingBookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Author.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/BookCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/BookCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/OrderingBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/OrderingBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/ReaderCardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/ReaderCardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/OrderingBookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/OrderingBookService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Ems.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Ems.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/loginSuccessful.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLLoginSuccessful.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/BookTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/BookTestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/UserTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/UserTestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../library_management.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../library_management.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/secondary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/secondary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +66,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Asus\OneDrive\Desktop\BTLonKT\LibraryManagement_Testing\LibraryManagement\src\main\resources\com\ou\librarymanagement" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -175,10 +174,11 @@
       <workItem from="1650119332357" duration="705000" />
       <workItem from="1650290566072" duration="6328000" />
       <workItem from="1650614948371" duration="1571000" />
-      <workItem from="1650617725657" duration="943000" />
-      <workItem from="1650735285982" duration="3635000" />
-      <workItem from="1650767720599" duration="4181000" />
-      <workItem from="1650775903129" duration="9601000" />
+      <workItem from="1650617725657" duration="3597000" />
+      <workItem from="1650639254880" duration="8043000" />
+      <workItem from="1650695453285" duration="7728000" />
+      <workItem from="1650716694365" duration="13937000" />
+      <workItem from="1650734744199" duration="10817000" />
     </task>
     <servers />
   </component>

@@ -26,6 +26,12 @@ public class Utils {
     
     public static final String dateToString(Date date){
         SimpleDateFormat F = new SimpleDateFormat("dd/MM/yyyy");
+        
+        return F.format(date);
+    }
+
+    public static final String convertDateTimeToString(Date date){
+        SimpleDateFormat F = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return F.format(date);
     }
 

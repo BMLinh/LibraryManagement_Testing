@@ -5,6 +5,8 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.Book;
+import com.ou.pojo.ReaderCard;
+import com.ou.pojo.User;
 import com.ou.services.AuthorService;
 import com.ou.services.BookCategoryService;
 import com.ou.services.BookService;
@@ -20,12 +22,19 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,7 +43,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class BorrowBookController implements Initializable {
     @FXML
-    private TableView bookTableView;
+    private TableView<Book> bookTableView;
     @FXML
     private TextField bookIdTxtFld;
     @FXML
@@ -51,8 +60,15 @@ public class BorrowBookController implements Initializable {
     private TextField bookAuthorTxtFld;
     @FXML
     private TextField searchContentTxtFld;
-    
-    
+    @FXML
+    private TextField userNameTxtFld;
+    @FXML
+    private TextField userIdTxtFld;
+    @FXML
+    private Button submitBtn;
+    @FXML
+    private Pane pane;
+     
     private static final BookService bookService = new BookService();
     private static final BookCategoryService bookCategoryService = new BookCategoryService();
     private static final PublishingCompanyService publishingCompanyService = new PublishingCompanyService();
@@ -94,22 +110,22 @@ public class BorrowBookController implements Initializable {
         }
     }
     
-    private void loadTableView(){
+    public void loadTableView(){
         TableColumn t1 = new TableColumn("ID");
         t1.setCellValueFactory(new PropertyValueFactory("id"));
         t1.setPrefWidth(40);
         
         TableColumn t2 = new TableColumn("Tên sách");
         t2.setCellValueFactory(new PropertyValueFactory("name"));
-        t2.setPrefWidth(200);
+        t2.setPrefWidth(400);
         
-        TableColumn t3 = new TableColumn("Mô tả");
-        t3.setCellValueFactory(new PropertyValueFactory("description"));
-        t3.setPrefWidth(350);
+        TableColumn t3 = new TableColumn("Số lượng");
+        t3.setCellValueFactory(new PropertyValueFactory("amount"));
+        t3.setPrefWidth(100);
         
         TableColumn t4 = new TableColumn("Năm xuất bản");
         t4.setCellValueFactory(new PropertyValueFactory("publishingYear"));
-        t4.setPrefWidth(100);
+        t4.setPrefWidth(200);
         
         TableColumn t5 = new TableColumn("Nhà xuất bản");
         t5.setCellValueFactory(new PropertyValueFactory("publishingCompanyId"));
@@ -124,6 +140,12 @@ public class BorrowBookController implements Initializable {
         t7.setPrefWidth(100);
         
         this.bookTableView.getColumns().addAll(t1,t2,t3,t4,t5,t6,t7);
+        
+    }
+    
+    public void display(int userId, int readerCardId){
+        this.userIdTxtFld.setText(String.valueOf(userId));
+        this.userNameTxtFld.setText(String.valueOf(readerCardId));
     }
     
     public void reset(){
@@ -146,6 +168,10 @@ public class BorrowBookController implements Initializable {
     }
     
     public void borrowBook(ActionEvent evt) throws IOException {
-        int i = Integer.parseInt(this.bookIdTxtFld.getText());
+        if(0 == this.bookTableView.getSelectionModel().getSelectedItem().getAmount())
+            Utils.setAlert("Hết sách!!!", Alert.AlertType.ERROR).show();
+        else{            
+            
+        }
     }
 }
