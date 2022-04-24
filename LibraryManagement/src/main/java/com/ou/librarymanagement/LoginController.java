@@ -101,12 +101,6 @@ public class LoginController implements Initializable {
 
         user = userService.getByUsername(username);
 
-        System.out.println("txtUsername = " + username);
-        System.out.println("User username = " + user.getUsername());
-
-        System.out.println("txtPassword = " + password);
-        System.out.println("User password = " + user.getPassword());
-
         lbNotification.setVisible(true);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(305);
