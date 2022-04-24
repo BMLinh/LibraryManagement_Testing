@@ -1,6 +1,7 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.User;
+import com.ou.services.RoleService;
 import com.ou.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,12 +61,14 @@ public class LoginController implements Initializable {
             login();
     }
 
-    private void redirect(int userRoleId) throws IOException {
+    private void redirect(int userRoleId) throws IOException, SQLException {
         String fxml = "";
+        RoleService roleService = new RoleService();
+        String roleName = roleService.getRoleById(userRoleId).getName();
 
-        if (userRoleId == 1) {
+        if (roleName.trim().compareToIgnoreCase("admin") == 0) {
             fxml = "FXMLLoginSuccessful.fxml";
-        } else if (userRoleId == 2) {
+        } else if (roleName.trim().compareToIgnoreCase("staff") == 0) {
             fxml = "FXMLHome-Ems.fxml";
         } else {
             fxml = "FXMLHome-Usrs.fxml";
