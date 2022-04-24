@@ -62,7 +62,7 @@ public class BookController implements Initializable {
             // TODO
             this.init();
         } catch (SQLException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookController.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.loadTableView();
         this.loadData();
@@ -228,22 +228,25 @@ public class BookController implements Initializable {
 
     @FXML
     void add(ActionEvent event) throws SQLException, ParseException {
-        Book book = this.getBookFromForm();
-        System.out.println(txtBookName.getText());
-        if (checkValidForm()) {
-            if (bookService.add(book)) {
-                reloadWindow();
-            } else
-                Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
-        } else {
-            Utils.setAlert("Thông tin sách không hợp lệ!!!", Alert.AlertType.ERROR).show();
+        if (bookTabView.getSelectionModel().getSelectedItem() != null) {
+            Book book = this.getBookFromForm();
+            if (checkValidForm()) {
+                if (bookService.add(book)) {
+                    reloadWindow();
+                } else
+                    Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+            } else {
+                Utils.setAlert("Thông tin sách không hợp lệ!!!", Alert.AlertType.ERROR).show();
+            }
         }
     }
 
     @FXML
     void delete(ActionEvent event) throws SQLException {
-        bookService.delete(this.bookTabView.getSelectionModel().getSelectedItem().getId());
-        reloadWindow();
+        if (bookTabView.getSelectionModel().getSelectedItem() != null) {
+            bookService.delete(this.bookTabView.getSelectionModel().getSelectedItem().getId());
+            reloadWindow();
+        }
     }
 
     @FXML
@@ -261,7 +264,8 @@ public class BookController implements Initializable {
 
     @FXML
     void update(ActionEvent event) throws ParseException, SQLException {
-        if (bookService.update(bookTabView.getSelectionModel().getSelectedItem().getId(), this.getBookFromForm())) {
+        if (bookTabView.getSelectionModel().getSelectedItem() != null) {
+            bookService.update(bookTabView.getSelectionModel().getSelectedItem().getId(), this.getBookFromForm());
             reloadWindow();
         }
     }
