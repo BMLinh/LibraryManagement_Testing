@@ -44,11 +44,6 @@ public class Home_UsrsController implements Initializable {
     private User currentUser = null;
     
 
-    //Để ở đây test tí
-    private static final ReaderCardService readerCardService = new ReaderCardService();
-    //Để ở đây test tí
-    private static final UserService userService = new UserService();
-
     /**
      * Initializes the controller class.
      */
