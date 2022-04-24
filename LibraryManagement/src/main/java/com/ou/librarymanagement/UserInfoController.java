@@ -5,10 +5,13 @@ import com.ou.pojo.User;
 import com.ou.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class UserInfoController implements Initializable {
@@ -43,6 +46,8 @@ public class UserInfoController implements Initializable {
     private Text lblAmount;
     @FXML
     private TextField txtAmount;
+    @FXML
+    private Label lbNotification;
 
     private static User currentUser = null;
     private static ReaderCard currentCard = null;
@@ -85,6 +90,7 @@ public class UserInfoController implements Initializable {
             this.txtStartDate.setVisible(false);
             this.txtEndDate.setVisible(false);
             this.txtAmount.setVisible(false);
+            this.lbNotification.setVisible(false);
         }
         else {
             this.txtIsCreatedCard.setText("Đã tạo thẻ");
@@ -92,6 +98,14 @@ public class UserInfoController implements Initializable {
             this.txtStartDate.setText(Utils.convertDateToString(currentCard.getStartDate()));
             this.txtEndDate.setText(Utils.convertDateToString(currentCard.getEndDate()));
             this.txtAmount.setText(String.valueOf(currentCard.getAmount()));
+            if (currentCard.getEndDate().before(new Date())){
+                this.lbNotification.setTextFill(Color.RED);
+                this.lbNotification.setText("Thẻ độc giả đã hết hạn! Mời bạn gia hạn.");
+            }
+            else {
+                this.lbNotification.setTextFill(Color.GREEN);
+                this.lbNotification.setText("Thẻ độc giả còn hạn sử dụng!");
+            }
         }
     }
 
