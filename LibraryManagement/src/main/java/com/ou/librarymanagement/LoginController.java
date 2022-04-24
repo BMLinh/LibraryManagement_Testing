@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
             loginSuccessfulController.sendData(user);
         } else if (userRoleId == 2) {
             Home_EmsController home_emsController = loader.getController();
-            home_emsController.sendData(user);
+            home_emsController.setCurrentStaff(user);
         } else {
             Home_UsrsController home_usrsController = loader.getController();
             home_usrsController.setCurrentUser(user);
