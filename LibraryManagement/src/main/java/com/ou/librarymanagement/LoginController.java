@@ -92,26 +92,21 @@ public class LoginController implements Initializable {
 
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
         primaryStage.setScene(mainScene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
-    public void checkLogin() throws SQLException, IOException, InterruptedException {
+    public void checkLogin() throws SQLException, IOException {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
         user = userService.getByUsername(username);
 
-        System.out.println("txtUsername = " + username);
-        System.out.println("User username = " + user.getUsername());
-
-        System.out.println("txtPassword = " + password);
-        System.out.println("User password = " + user.getPassword());
-
         lbNotification.setVisible(true);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(305);
 
-        if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+        if (username.equalsIgnoreCase(user.getUsername()) && password.equals(user.getPassword())) {
             redirect(user.getRoleId());
         } else {
             lbNotification.setTextFill(Color.RED);
