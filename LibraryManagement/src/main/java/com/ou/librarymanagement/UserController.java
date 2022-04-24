@@ -111,10 +111,10 @@ public class UserController implements Initializable {
                 if (1 == user.getGender())
                     this.genderCb.getSelectionModel().select(1);
                 else this.genderCb.getSelectionModel().select(0);
-                this.birthTxtFld.setValue(Utils.convertDateUtilToSql(user.getDob()).toLocalDate());
+                this.birthTxtFld.setValue(Utils.convertUtilToSql(user.getBirth()).toLocalDate());
                 this.addressTxtFld.setText(user.getAddress());
                 this.phoneTxtFld.setText(user.getPhone());
-                this.createdDateTxtFld.setText(Utils.dateToString(user.getCreatedDate()));
+                this.createdDateTxtFld.setText(Utils.convertDateToString(user.getCreatedDate()));
                 try {
                     this.roleCb.getSelectionModel().select(this.roleService.getRoleById(user.getRoleId()));
                     this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(user.getDepartmentId()));
@@ -300,7 +300,7 @@ public class UserController implements Initializable {
         u.setUsername(this.usernameTxtFld.getText());
         u.setPassword(this.passwordTxtFld.getText());
         u.setFullname(this.fullnameTxtFld.getText());
-        u.setDob(Utils.convertDateUtilToSql(Date.from(this.birthTxtFld.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
+        u.setBirth(Utils.convertUtilToSql(Date.from(this.birthTxtFld.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
         if (1 == this.genderCb.getSelectionModel().getSelectedIndex())
             u.setGender(1);
         else u.setGender(0);

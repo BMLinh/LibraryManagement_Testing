@@ -5,8 +5,6 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.Book;
-import com.ou.pojo.ReaderCard;
-import com.ou.pojo.User;
 import com.ou.services.AuthorService;
 import com.ou.services.BookCategoryService;
 import com.ou.services.BookService;
@@ -22,9 +20,6 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -32,9 +27,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -89,7 +82,7 @@ public class BorrowBookController implements Initializable {
                 this.bookIdTxtFld.setText(String.valueOf(book.getId()));
                 this.bookNameTxtFld.setText(book.getName());
                 this.bookDescriptionTxtFld.setText(book.getDescription());
-                this.bookPublishedDateTxtFld.setText(Utils.dateToString(book.getPublishingYear()));
+                this.bookPublishedDateTxtFld.setText(Utils.convertDateToString(book.getPublishingYear()));
                 try {
                     this.bookCateTxtFld.setText(this.bookCategoryService.getBookCategoryById(book.getCategoryId()).getName());
                     this.bookPublisherTxtFld.setText(this.publishingCompanyService.getPublishingCompanyById(book.getPublishingCompanyId()).getName());

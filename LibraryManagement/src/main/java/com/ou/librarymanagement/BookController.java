@@ -81,7 +81,7 @@ public class BookController implements Initializable {
                     int year = calendar.get(Calendar.YEAR);
                     int month = calendar.get(Calendar.MONTH);
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    this.datepickerPublishingYear.setValue(LocalDate.of(year, month, day));
+                    this.datepickerPublishingYear.setValue(LocalDate.of(year, month + 1, day));
                 }
 
                 if (book.getDateOfEntering() != null) {

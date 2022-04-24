@@ -156,7 +156,7 @@ public class BookService {
                         stm.setDate(8, java.sql.Date.valueOf(param.get("date_of_entering")));
                     }
                 }
-                stm.setInt(9, bookId);
+                stm.setInt(8, bookId);
                 return stm.executeUpdate() > 0;
             } catch (SQLException ex) {
                 ex.printStackTrace();

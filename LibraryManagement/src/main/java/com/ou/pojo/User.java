@@ -17,7 +17,7 @@ public class User {
     private String password;
     private String fullname;
     private int gender;
-    private Date dob;
+    private Date birth;
     private String address;
     private String phone;
     private int roleId;
@@ -26,13 +26,13 @@ public class User {
 
     public User() {}
     
-    public User(int id, String username, String password, String fullname, int gender, Date dob, String address, String phone, int role_id, int department_id, Date createdDate) {
+    public User(int id, String username, String password, String fullname, int gender, Date birth, String address, String phone, int role_id, int department_id, Date createdDate) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
         this.gender = gender;
-        this.dob = dob;
+        this.birth = birth;
         this.address = address;
         this.phone = phone;
         this.roleId = role_id;
@@ -113,15 +113,15 @@ public class User {
     /**
      * @return the birth
      */
-    public Date getDob() {
-        return dob;
+    public Date getBirth() {
+        return birth;
     }
 
     /**
-     * @param dob the birth to set
+     * @param birth the birth to set
      */
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setBirth(Date birth) {
+        this.birth = birth;
     }
 
     /**

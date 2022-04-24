@@ -179,6 +179,5 @@
                 </Text>
             </children>
         </GridPane>
-        <Button layoutX="828.0" layoutY="417.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm" />
     </children>
 </AnchorPane>
