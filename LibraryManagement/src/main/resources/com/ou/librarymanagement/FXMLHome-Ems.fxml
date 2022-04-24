@@ -23,7 +23,7 @@
       </HBox>
       <VBox alignment="TOP_CENTER" layoutY="100.0" prefHeight="300.0" prefWidth="172.0" style="-fx-border-color: black;">
          <children>
-            <ImageView fitHeight="165.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="165.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../imgs/book.png" />
                </image>
@@ -31,7 +31,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btn1" mnemonicParsing="false" onAction="#switch1" prefHeight="0.0" prefWidth="155.0" text="Mượn sách">
+            <Button fx:id="btn1" mnemonicParsing="false" onAction="#switch1" prefHeight="50.0" prefWidth="160.0" text="Mượn sách">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
@@ -43,7 +43,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="172.0" layoutY="100.0" prefHeight="300.0" prefWidth="172.0" style="-fx-border-color: black;">
          <children>
-            <ImageView fitHeight="166.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="165.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../imgs/return_book.png" />
                </image>
@@ -51,19 +51,19 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btn2" mnemonicParsing="false" onAction="#switch2" prefHeight="0.0" prefWidth="126.0" text="Trả sách">
+            <Button fx:id="btn2" mnemonicParsing="false" onAction="#switch2" prefHeight="50.0" prefWidth="160.0" text="Trả sách">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
                <VBox.margin>
-                  <Insets top="27.5" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </Button>
          </children>
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="344.0" layoutY="100.0" prefHeight="300.0" prefWidth="172.0" style="-fx-border-color: black;">
          <children>
-            <ImageView fitHeight="160.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="165.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../imgs/avatar.png" />
                </image>
@@ -71,7 +71,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btn3" mnemonicParsing="false" onAction="#switch3" prefHeight="71.0" prefWidth="152.0" text="Đăng ký thẻ độc giả" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btn3" mnemonicParsing="false" onAction="#switch3" prefHeight="80.0" prefWidth="150.0" text="Kiểm đặt sách" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
@@ -91,7 +91,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btn4" mnemonicParsing="false" onAction="#switch4" text="Thống kê">
+            <Button fx:id="btn4" mnemonicParsing="false" onAction="#switch4" prefHeight="50.0" prefWidth="150.0" text="Thống kê">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>
