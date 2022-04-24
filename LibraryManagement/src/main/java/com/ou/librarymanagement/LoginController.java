@@ -1,6 +1,8 @@
 package com.ou.librarymanagement;
 
+import com.ou.pojo.ReaderCard;
 import com.ou.pojo.User;
+import com.ou.services.ReaderCardService;
 import com.ou.services.RoleService;
 import com.ou.services.UserService;
 import com.ou.utils.Utils;
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
+
     private App app = new App();
 
     @FXML
@@ -37,8 +40,10 @@ public class LoginController implements Initializable {
     private Label lbNotification;
 
     UserService userService = new UserService();
+    ReaderCardService readerCardService = new ReaderCardService();
 
     private User user;
+    private ReaderCard currentCard;
 
     public User getUser() {
         return user;
@@ -48,10 +53,10 @@ public class LoginController implements Initializable {
         this.user = user;
     }
 
+
     @FXML
     private void login() throws SQLException, IOException, InterruptedException {
         checkLogin();
-        redirect(user.getRoleId());
     }
 
     @FXML
@@ -83,8 +88,14 @@ public class LoginController implements Initializable {
             Home_EmsController home_emsController = loader.getController();
             home_emsController.sendData(user);
         } else {
+            try {
+                setCurrentCard(readerCardService.findReaderCardsByUserId(user.getId()).get(0));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             Home_UsrsController home_usrsController = loader.getController();
             home_usrsController.setCurrentUser(user);
+            home_usrsController.setCurrentCard(currentCard);
         }
 
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
@@ -121,5 +132,19 @@ public class LoginController implements Initializable {
         lbNotification.setVisible(false);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(295);
+    }
+
+    /**
+     * @return the currentCard
+     */
+    public ReaderCard getCurrentCard() {
+        return currentCard;
+    }
+
+    /**
+     * @param currentCard the currentCard to set
+     */
+    public void setCurrentCard(ReaderCard currentCard) {
+        this.currentCard = currentCard;
     }
 }
