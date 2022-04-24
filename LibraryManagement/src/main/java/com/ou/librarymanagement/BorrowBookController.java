@@ -43,6 +43,7 @@ import javafx.stage.Stage;
  * @author Admin
  */
 public class BorrowBookController implements Initializable {
+
     @FXML
     private TableView<Book> bookTableView;
     @FXML
@@ -69,11 +70,16 @@ public class BorrowBookController implements Initializable {
     private Button submitBtn;
     @FXML
     private Pane pane;
-     
+
+    private static User currentUser;
+    private static ReaderCard currentCard;
+    private static User currentStaff;
+
     private static final BookService bookService = new BookService();
     private static final BookCategoryService bookCategoryService = new BookCategoryService();
     private static final PublishingCompanyService publishingCompanyService = new PublishingCompanyService();
     private static final AuthorService authorService = new AuthorService();
+
     /**
      * Initializes the controller class.
      */
@@ -82,11 +88,12 @@ public class BorrowBookController implements Initializable {
         // TODO
         loadTableView();
         loadData(null);
-        
-        this.bookTableView.setRowFactory(et ->{
+        this.userIdTxtFld.setText(currentUser.getFullname());
+
+        this.bookTableView.setRowFactory(et -> {
             TableRow row = new TableRow();
-            row.setOnMouseClicked(r ->{
-                Book book = (Book)this.bookTableView.getSelectionModel().getSelectedItem();
+            row.setOnMouseClicked(r -> {
+                Book book = (Book) this.bookTableView.getSelectionModel().getSelectedItem();
                 this.bookIdTxtFld.setText(String.valueOf(book.getId()));
                 this.bookNameTxtFld.setText(book.getName());
                 this.bookDescriptionTxtFld.setText(book.getDescription());
@@ -101,55 +108,51 @@ public class BorrowBookController implements Initializable {
             });
             return row;
         });
-    }    
-    
-    private void loadData(String kw){
+    }
+
+    private void loadData(String kw) {
         try {
             this.bookTableView.setItems(FXCollections.observableList(this.bookService.getBooks(kw)));
         } catch (SQLException ex) {
             Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void loadTableView(){
+
+    public void loadTableView() {
         TableColumn t1 = new TableColumn("ID");
         t1.setCellValueFactory(new PropertyValueFactory("id"));
         t1.setPrefWidth(40);
-        
+
         TableColumn t2 = new TableColumn("Tên sách");
         t2.setCellValueFactory(new PropertyValueFactory("name"));
         t2.setPrefWidth(400);
-        
+
         TableColumn t3 = new TableColumn("Số lượng");
         t3.setCellValueFactory(new PropertyValueFactory("amount"));
         t3.setPrefWidth(100);
-        
+
         TableColumn t4 = new TableColumn("Năm xuất bản");
         t4.setCellValueFactory(new PropertyValueFactory("publishingYear"));
         t4.setPrefWidth(200);
-        
+
         TableColumn t5 = new TableColumn("Nhà xuất bản");
         t5.setCellValueFactory(new PropertyValueFactory("publishingCompanyId"));
         t5.setPrefWidth(100);
-        
+
         TableColumn t6 = new TableColumn("Tác giả");
         t6.setCellValueFactory(new PropertyValueFactory("authorId"));
         t6.setPrefWidth(100);
-        
+
         TableColumn t7 = new TableColumn("Danh mục");
         t7.setCellValueFactory(new PropertyValueFactory("categoryId"));
         t7.setPrefWidth(100);
-        
-        this.bookTableView.getColumns().addAll(t1,t2,t3,t4,t5,t6,t7);
-        
+
+        this.bookTableView.getColumns().addAll(t1, t2, t3, t4, t5, t6, t7);
+
     }
-    
-    public void display(int userId, int readerCardId){
-        this.userIdTxtFld.setText(String.valueOf(userId));
-        this.userNameTxtFld.setText(String.valueOf(readerCardId));
-    }
-    
-    public void reset(){
+
+
+    public void reset() {
         this.bookIdTxtFld.clear();
         this.bookNameTxtFld.clear();
         this.bookDescriptionTxtFld.clear();
@@ -159,20 +162,64 @@ public class BorrowBookController implements Initializable {
         this.bookAuthorTxtFld.clear();
         loadData(null);
     }
-    
-    public void findBook(ActionEvent evt) throws SQLException{
-        if(this.bookService.getBooks(this.searchContentTxtFld.getText()).size() > 0){
+
+    public void findBook(ActionEvent evt) throws SQLException {
+        if (this.bookService.getBooks(this.searchContentTxtFld.getText()).size() > 0) {
             reset();
             loadData(this.searchContentTxtFld.getText());
+        } else {
+            Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
         }
-        else Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
     }
-    
+
     public void borrowBook(ActionEvent evt) throws IOException {
-        if(0 == this.bookTableView.getSelectionModel().getSelectedItem().getAmount())
+        if (0 == this.bookTableView.getSelectionModel().getSelectedItem().getAmount()) {
             Utils.setAlert("Hết sách!!!", Alert.AlertType.ERROR).show();
-        else{            
-            
+        } else {
+
         }
     }
+
+    /**
+     * @return the currentUser
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
+     * @param aCurrentUser the currentUser to set
+     */
+    public static void setCurrentUser(User aCurrentUser) {
+        currentUser = aCurrentUser;
+    }
+
+    /**
+     * @return the currentCard
+     */
+    public static ReaderCard getCurrentCard() {
+        return currentCard;
+    }
+
+    /**
+     * @param aCurrentCard the currentCard to set
+     */
+    public static void setCurrentCard(ReaderCard aCurrentCard) {
+        currentCard = aCurrentCard;
+    }
+
+    /**
+     * @return the currentStaff
+     */
+    public static User getCurrentStaff() {
+        return currentStaff;
+    }
+
+    /**
+     * @param aCurrentStaff the currentStaff to set
+     */
+    public static void setCurrentStaff(User aCurrentStaff) {
+        currentStaff = aCurrentStaff;
+    }
+
 }
