@@ -37,14 +37,9 @@ public class Home_UsrsController implements Initializable {
     @FXML
     private Button btn4;
 
-<<<<<< hoangnam1909
     @FXML
     private Button btnLogout;
-
-    private User currentUser;
-
     private LoginController loginController = new LoginController();
-======
     private ReaderCard currentCard = null;
     private User currentUser = null;
     
@@ -53,7 +48,6 @@ public class Home_UsrsController implements Initializable {
     private static final ReaderCardService readerCardService = new ReaderCardService();
     //Để ở đây test tí
     private static final UserService userService = new UserService();
->>>>>> main
 
     /**
      * Initializes the controller class.
@@ -61,9 +55,6 @@ public class Home_UsrsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-<<<<<< hoangnam1909
-    }
-======
         try {
             //Để ở đây test tí
             setCurrentUser(userService.findUserById(1));
@@ -75,8 +66,7 @@ public class Home_UsrsController implements Initializable {
         }
 
 
-    }    
->>>>>> main
+    }
     
     public void switch1(ActionEvent evt) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLOrderBook.fxml"));
@@ -139,10 +129,6 @@ public class Home_UsrsController implements Initializable {
      */
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
-    }
-
-    public void sendData(User user) {
-        this.currentUser = user;
     }
 
     @FXML

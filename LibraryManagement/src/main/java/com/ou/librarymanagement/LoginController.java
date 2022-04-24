@@ -37,7 +37,6 @@ public class LoginController implements Initializable {
     private Label lbNotification;
 
     UserService userService = new UserService();
-    RoleService roleService = new RoleService();
 
     private User user;
 
@@ -52,6 +51,7 @@ public class LoginController implements Initializable {
     @FXML
     private void login() throws SQLException, IOException, InterruptedException {
         checkLogin();
+        redirect(user.getRoleId());
     }
 
     @FXML
@@ -84,7 +84,7 @@ public class LoginController implements Initializable {
             home_emsController.sendData(user);
         } else {
             Home_UsrsController home_usrsController = loader.getController();
-            home_usrsController.sendData(user);
+            home_usrsController.setCurrentUser(user);
         }
 
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
@@ -108,29 +108,9 @@ public class LoginController implements Initializable {
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(305);
 
-<<<<<< hoangnam1909
         if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
             redirect(user.getRoleId());
         } else {
-======
-        if (user == null){
-            lbNotification.setTextFill(Color.RED);
-            lbNotification.setText("Username không tồn tại!");
-        }
-        else if(user.getPassword().equals(password)){
-            if (roleService.getRoleById(user.getRoleId()).getName().equals("User")){
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLHome-Usrs.fxml"));
-                Home_UsrsController controller = fxmlLoader.getController();
-                controller.setCurrentUser(this.getUser());
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.setTitle("Home User");
-                stage.show();
-            }
-        }
-        else {
->>>>>> main
             lbNotification.setTextFill(Color.RED);
             lbNotification.setText("Đăng nhập thất bại");
         }
