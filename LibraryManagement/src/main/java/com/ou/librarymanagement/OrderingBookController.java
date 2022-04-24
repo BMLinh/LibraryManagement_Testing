@@ -39,6 +39,9 @@ public class OrderingBookController implements Initializable {
     @FXML
     private TextField txtSearchContent;
 
+    @FXML
+    private Button btnOrder;
+
     private static User currentUser;
     private static ReaderCard currentCard;
 
@@ -48,8 +51,6 @@ public class OrderingBookController implements Initializable {
     private static final PublishingCompanyService publishingCompanyService = new PublishingCompanyService();
     private static final AuthorService authorService = new AuthorService();
     private static final OrderingBookService orderingBookService = new OrderingBookService();
-    //Để ở đây test tí
-    private static final ReaderCardService readerCardService = new ReaderCardService();
     /**
      * Initializes the controller class.
      */
@@ -59,16 +60,14 @@ public class OrderingBookController implements Initializable {
         loadTableView();
         loadData(null);
 
-        //Để ở đây test tí
-        try {
-            currentCard = readerCardService.findReaderCardById(1).get(0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //Ẩn button đặt sách khi chưa chọn sách
+        this.btnOrder.setVisible(false);
+
 
         this.tbBook.setRowFactory(et ->{
             TableRow row = new TableRow();
             row.setOnMouseClicked(r ->{
+                this.btnOrder.setVisible(true);
                 Book book = (Book)this.tbBook.getSelectionModel().getSelectedItem();
                 this.txtBookId.setText(String.valueOf(book.getId()));
                 this.txtBookName.setText(book.getName());
@@ -134,6 +133,7 @@ public class OrderingBookController implements Initializable {
         this.txtBookCate.clear();
         this.txtBookPublisher.clear();
         this.txtBookAuthor.clear();
+        this.btnOrder.setVisible(false);
         loadData(null);
     }
 
@@ -154,7 +154,7 @@ public class OrderingBookController implements Initializable {
         else if (Integer.parseInt(this.txtAmount.getText()) == 0){
             Utils.setAlert("Sách đã được mượn hết!", Alert.AlertType.ERROR).show();
         }
-        else if (currentCard.getEndDate().before(currentDate) ){
+        else if (getCurrentCard().getEndDate().before(currentDate) ){
             Utils.setAlert("Thẻ độc giả đã hết hạn!", Alert.AlertType.ERROR).show();
         }
         // Khi nào cần bật lên
@@ -176,7 +176,7 @@ public class OrderingBookController implements Initializable {
                 Utils.setAlert("Số lượng sách đặt phải lớn hơn 0!", Alert.AlertType.ERROR).show();
             }
             else if (amountOfBook > 5){
-                Utils.setAlert("Bạn không được mướn hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
+                Utils.setAlert("Bạn không được đặt hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
             }
             else if(amountOfBook >Integer.parseInt(txtAmount.getText()) ){
                 Utils.setAlert("Không được đặt quá số lượng sách hiện tại!",Alert.AlertType.ERROR).show();
