@@ -7,7 +7,6 @@ import com.ou.utils.Utils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 public class OrderingBookService {
     public boolean addOrderBook(OrderingBook order) throws SQLException {

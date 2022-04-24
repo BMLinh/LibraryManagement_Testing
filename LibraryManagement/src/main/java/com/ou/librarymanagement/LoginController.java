@@ -1,16 +1,15 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.User;
+import com.ou.services.RoleService;
 import com.ou.services.UserService;
+import com.ou.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -36,6 +35,7 @@ public class LoginController implements Initializable {
     private Label lbNotification;
 
     UserService userService = new UserService();
+    RoleService roleService = new RoleService();
 
     private User user;
 
@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
             login();
     }
 
-    public void checkLogin() throws SQLException, IOException, InterruptedException {
+    public void checkLogin() throws SQLException, IOException{
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
@@ -74,19 +74,23 @@ public class LoginController implements Initializable {
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(305);
 
-        if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("loginSuccessful.fxml"));
-            Parent root = loader.load();
-            Scene mainScene = new Scene(root);
-
-            LoginSuccessfulController loginSuccessfulController = loader.getController();
-            loginSuccessfulController.displayData(user);
-
-            Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
-            primaryStage.setScene(mainScene);
-            primaryStage.show();
-        } else {
+        if (user == null){
+            lbNotification.setTextFill(Color.RED);
+            lbNotification.setText("Username không tồn tại!");
+        }
+        else if(user.getPassword().equals(password)){
+            if (roleService.getRoleById(user.getRoleId()).getName().equals("User")){
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLHome-Usrs.fxml"));
+                Home_UsrsController controller = fxmlLoader.getController();
+                controller.setCurrentUser(this.getUser());
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Home User");
+                stage.show();
+            }
+        }
+        else {
             lbNotification.setTextFill(Color.RED);
             lbNotification.setText("Đăng nhập thất bại");
         }

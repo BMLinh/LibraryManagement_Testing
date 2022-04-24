@@ -36,6 +36,7 @@ import javafx.stage.Stage;
  * @author Admin
  */
 public class BorrowingBookDetailController implements Initializable {
+
     @FXML
     private TextField readerCardIdTxtFld;
     @FXML
@@ -45,9 +46,9 @@ public class BorrowingBookDetailController implements Initializable {
     @FXML
     private TextField amountTxtFld;
     
-    private ReaderCard readerCard;
-    private User user;
-    private User staff;
+    private  ReaderCard readerCard = null;
+    private  User user = null;
+    private  User staff;
     
     
     private static final ReaderCardService readerCardService = new ReaderCardService();
@@ -63,33 +64,90 @@ public class BorrowingBookDetailController implements Initializable {
     }    
 
     public void checkUser(ActionEvent evt) throws SQLException {
-        if(this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).size() > 0){
-            readerCard = (this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
-            user = (this.userService.findUserById(readerCard.getUserId()));
-            this.nameTxtFld.setText(user.getFullname());
-            this.amountTxtFld.setText(String.valueOf(readerCard.getAmount()));
-            this.departmentTxtFld.setText(this.departmentService.getDepartmentById(user.getDepartmentId()).getName());
+//        if(this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).size() > 0){
+//            readerCard = (this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
+//            user = (this.userService.findUserById(readerCard.getUserId()));
+//            this.nameTxtFld.setText(user.getFullname());
+//            this.amountTxtFld.setText(String.valueOf(readerCard.getAmount()));
+//            this.departmentTxtFld.setText(this.departmentService.getDepartmentById(user.getDepartmentId()).getName());
+//        }
+//        else Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
+        try{
+            if (readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).isEmpty()){
+                Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
+            }
+            else {
+                this.setReaderCard(readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
+                this.setUser(userService.findUserById(getReaderCard().getUserId()));
+                this.nameTxtFld.setText(getUser().getFullname());
+                this.amountTxtFld.setText(String.valueOf(getReaderCard().getAmount()));
+                this.departmentTxtFld.setText(this.departmentService.getDepartmentById(getUser().getDepartmentId()).getName());
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
         }
-        else Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
+
     }
     
     public void borrowBook(ActionEvent event) throws IOException{
-        if(readerCard.getEndDate().before(new Date())){
+        System.out.println(getUser().getId());
+        if(getReaderCard().getEndDate().before(new Date())){
             Utils.setAlert("Thẻ hết hạn!!!", Alert.AlertType.ERROR).show();
         }
-        else if(readerCard.getAmount() > 0)
+        else if(getReaderCard().getAmount() > 0)
             Utils.setAlert("Chưa trả hết sách!!!", Alert.AlertType.ERROR).show();
             
-        else{   
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBorrowBook.fxml"));
-            Parent root = loader.load();
-            
-            BorrowBookController controller = loader.getController();
-            controller.display(user.getId(), readerCard.getId());
-            
+        else{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLBorrowBook.fxml"));
+            BorrowBookController controller = fxmlLoader.getController();
+            controller.setCurrentUser(this.getUser());
+            Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
+            stage.setTitle("tesst sách");
             stage.show();
         }       
+    }
+
+    /**
+     * @return the readerCard
+     */
+    public ReaderCard getReaderCard() {
+        return readerCard;
+    }
+
+    /**
+     * @param readerCard the readerCard to set
+     */
+    public void setReaderCard(ReaderCard readerCard) {
+        this.readerCard = readerCard;
+    }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the staff
+     */
+    public User getStaff() {
+        return staff;
+    }
+
+    /**
+     * @param staff the staff to set
+     */
+    public void setStaff(User staff) {
+        this.staff = staff;
     }
 }
