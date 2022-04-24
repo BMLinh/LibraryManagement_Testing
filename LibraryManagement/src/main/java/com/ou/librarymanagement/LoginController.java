@@ -1,17 +1,17 @@
 package com.ou.librarymanagement;
 
-import com.ou.pojo.ReaderCard;
 import com.ou.pojo.User;
-import com.ou.services.ReaderCardService;
 import com.ou.services.RoleService;
 import com.ou.services.UserService;
-import com.ou.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-
 
     private App app = new App();
 
@@ -40,10 +39,8 @@ public class LoginController implements Initializable {
     private Label lbNotification;
 
     UserService userService = new UserService();
-    ReaderCardService readerCardService = new ReaderCardService();
 
     private User user;
-    private ReaderCard currentCard;
 
     public User getUser() {
         return user;
@@ -52,7 +49,6 @@ public class LoginController implements Initializable {
     public void setUser(User user) {
         this.user = user;
     }
-
 
     @FXML
     private void login() throws SQLException, IOException, InterruptedException {
@@ -83,21 +79,15 @@ public class LoginController implements Initializable {
         Parent root = loader.load();
         Scene mainScene = new Scene(root);
 
-        if (roleName.trim().compareToIgnoreCase("admin") == 0) {
+        if (userRoleId == 1) {
             LoginSuccessfulController loginSuccessfulController = loader.getController();
             loginSuccessfulController.sendData(user);
-        } else if (roleName.trim().compareToIgnoreCase("staff") == 0) {
+        } else if (userRoleId == 2) {
             Home_EmsController home_emsController = loader.getController();
             home_emsController.sendData(user);
         } else {
-            try {
-                setCurrentCard(readerCardService.findReaderCardsByUserId(user.getId()).get(0));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
             Home_UsrsController home_usrsController = loader.getController();
             home_usrsController.setCurrentUser(user);
-            home_usrsController.setCurrentCard(currentCard);
         }
 
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
@@ -110,6 +100,12 @@ public class LoginController implements Initializable {
         String password = txtPassword.getText();
 
         user = userService.getByUsername(username);
+
+        System.out.println("txtUsername = " + username);
+        System.out.println("User username = " + user.getUsername());
+
+        System.out.println("txtPassword = " + password);
+        System.out.println("User password = " + user.getPassword());
 
         lbNotification.setVisible(true);
         btnLogin.setLayoutX(78);
@@ -128,19 +124,5 @@ public class LoginController implements Initializable {
         lbNotification.setVisible(false);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(295);
-    }
-
-    /**
-     * @return the currentCard
-     */
-    public ReaderCard getCurrentCard() {
-        return currentCard;
-    }
-
-    /**
-     * @param currentCard the currentCard to set
-     */
-    public void setCurrentCard(ReaderCard currentCard) {
-        this.currentCard = currentCard;
     }
 }
