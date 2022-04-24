@@ -1,6 +1,8 @@
 package com.ou.librarymanagement;
 
+import com.ou.pojo.ReaderCard;
 import com.ou.pojo.User;
+import com.ou.services.ReaderCardService;
 import com.ou.services.RoleService;
 import com.ou.services.UserService;
 import com.ou.utils.Utils;
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
+
     private App app = new App();
 
     @FXML
@@ -37,9 +40,10 @@ public class LoginController implements Initializable {
     private Label lbNotification;
 
     UserService userService = new UserService();
-    RoleService roleService = new RoleService();
+    ReaderCardService readerCardService = new ReaderCardService();
 
     private User user;
+    private ReaderCard currentCard;
 
     public User getUser() {
         return user;
@@ -48,6 +52,7 @@ public class LoginController implements Initializable {
     public void setUser(User user) {
         this.user = user;
     }
+
 
     @FXML
     private void login() throws SQLException, IOException, InterruptedException {
@@ -85,8 +90,14 @@ public class LoginController implements Initializable {
             Home_EmsController home_emsController = loader.getController();
             home_emsController.sendData(user);
         } else {
+            try {
+                setCurrentCard(readerCardService.findReaderCardsByUserId(user.getId()).get(0));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             Home_UsrsController home_usrsController = loader.getController();
-            home_usrsController.sendData(user);
+            home_usrsController.setCurrentUser(user);
+            home_usrsController.setCurrentCard(currentCard);
         }
 
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
@@ -104,29 +115,9 @@ public class LoginController implements Initializable {
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(305);
 
-<<<<<< hoangnam1909
         if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
             redirect(user.getRoleId());
         } else {
-======
-        if (user == null){
-            lbNotification.setTextFill(Color.RED);
-            lbNotification.setText("Username không tồn tại!");
-        }
-        else if(user.getPassword().equals(password)){
-            if (roleService.getRoleById(user.getRoleId()).getName().equals("User")){
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLHome-Usrs.fxml"));
-                Home_UsrsController controller = fxmlLoader.getController();
-                controller.setCurrentUser(this.getUser());
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.setTitle("Home User");
-                stage.show();
-            }
-        }
-        else {
->>>>>> main
             lbNotification.setTextFill(Color.RED);
             lbNotification.setText("Đăng nhập thất bại");
         }
@@ -137,5 +128,19 @@ public class LoginController implements Initializable {
         lbNotification.setVisible(false);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(295);
+    }
+
+    /**
+     * @return the currentCard
+     */
+    public ReaderCard getCurrentCard() {
+        return currentCard;
+    }
+
+    /**
+     * @param currentCard the currentCard to set
+     */
+    public void setCurrentCard(ReaderCard currentCard) {
+        this.currentCard = currentCard;
     }
 }

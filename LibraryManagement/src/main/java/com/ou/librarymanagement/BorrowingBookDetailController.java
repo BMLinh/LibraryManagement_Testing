@@ -64,14 +64,6 @@ public class BorrowingBookDetailController implements Initializable {
     }    
 
     public void checkUser(ActionEvent evt) throws SQLException {
-//        if(this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).size() > 0){
-//            readerCard = (this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
-//            user = (this.userService.findUserById(readerCard.getUserId()));
-//            this.nameTxtFld.setText(user.getFullname());
-//            this.amountTxtFld.setText(String.valueOf(readerCard.getAmount()));
-//            this.departmentTxtFld.setText(this.departmentService.getDepartmentById(user.getDepartmentId()).getName());
-//        }
-//        else Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
         try{
             if (readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).isEmpty()){
                 Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
