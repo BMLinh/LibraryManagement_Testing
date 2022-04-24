@@ -115,7 +115,7 @@
             <TextField fx:id="txtBookAuthor" GridPane.columnIndex="3" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button layoutX="284.0" layoutY="434.0" mnemonicParsing="false" onAction="#orderBook" text="Đặt sách">
+      <Button fx:id="btnOrder" layoutX="284.0" layoutY="434.0" mnemonicParsing="false" onAction="#orderBook" text="Đặt sách">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
