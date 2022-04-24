@@ -55,15 +55,6 @@ public class Home_UsrsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try {
-            //Để ở đây test tí
-            setCurrentUser(userService.findUserById(1));
-            if (readerCardService.findReaderCardsByUserId(getCurrentUser().getId()).isEmpty())
-                currentCard = null;
-            else setCurrentCard(readerCardService.findReaderCardsByUserId(getCurrentUser().getId()).get(0));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
 
     }
