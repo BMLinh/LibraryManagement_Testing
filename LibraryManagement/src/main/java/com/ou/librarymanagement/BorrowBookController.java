@@ -5,6 +5,8 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.Book;
+import com.ou.pojo.ReaderCard;
+import com.ou.pojo.User;
 import com.ou.services.AuthorService;
 import com.ou.services.BookCategoryService;
 import com.ou.services.BookService;
