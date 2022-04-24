@@ -208,5 +208,18 @@ public class BookService {
             return stm.executeUpdate() > 0;
         }
     }
+    
+    public boolean updateAmount(int amount, int bookId) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
 
+            PreparedStatement stm = conn.prepareStatement("UPDATE book SET amount=? WHERE id=?");
+            stm.setInt(1, amount);
+            stm.setInt(2, bookId);
+            return stm.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }
+    
