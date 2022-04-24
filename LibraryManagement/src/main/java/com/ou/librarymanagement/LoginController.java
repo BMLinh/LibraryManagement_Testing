@@ -79,10 +79,10 @@ public class LoginController implements Initializable {
         Parent root = loader.load();
         Scene mainScene = new Scene(root);
 
-        if (userRoleId == 1) {
+        if (roleName.trim().compareToIgnoreCase("admin") == 0) {
             LoginSuccessfulController loginSuccessfulController = loader.getController();
             loginSuccessfulController.sendData(user);
-        } else if (userRoleId == 2) {
+        } else if (roleName.trim().compareToIgnoreCase("staff") == 0) {
             Home_EmsController home_emsController = loader.getController();
             home_emsController.sendData(user);
         } else {
