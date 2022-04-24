@@ -13,8 +13,8 @@ public class Book {
     private String description;
     private int amount;
     private Date publishingYear;
-    private int categoryId;
     private int publishingCompanyId;
+    private int categoryId;
     private int authorId;
     private Date dateOfEntering;
 

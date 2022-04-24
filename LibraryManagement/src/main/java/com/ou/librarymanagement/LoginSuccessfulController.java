@@ -25,7 +25,7 @@ public class LoginSuccessfulController {
     @FXML
     private Button btnLogout;
 
-    public void displayData(User user) {
+    public void sendData(User user) {
         lbUserId.setText(String.valueOf(user.getId()));
         lbUsername.setText(user.getUsername());
     }

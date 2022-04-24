@@ -100,5 +100,14 @@
                </VBox.margin>
             </Button>
          </children></VBox>
+      <HBox alignment="CENTER" layoutY="400.0" prefHeight="70.0" prefWidth="690.0">
+         <children>
+            <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#logout" text="ĐĂNG XUẤT">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

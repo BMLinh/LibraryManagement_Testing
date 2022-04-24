@@ -200,7 +200,7 @@ public class OrderingBookController implements Initializable {
                         Map<String, String> param = new HashMap<>();
                         int amountOfBookAffter = Integer.parseInt(txtAmount.getText()) - amountOfBook;
                         param.put("amount", String.valueOf(amountOfBookAffter));
-                        bookService.updateBook(Integer.parseInt(txtBookId.getText()), param);
+                        bookService.update(Integer.parseInt(txtBookId.getText()), param);
                         Utils.setAlert("Đặt sách thành công!", Alert.AlertType.INFORMATION).show();
                         reset();
                     }

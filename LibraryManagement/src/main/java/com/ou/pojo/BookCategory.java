@@ -23,7 +23,12 @@ public class BookCategory {
         this.name = name;
         this.position = position;
     }
-    
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     /**
      * @return the id
      */

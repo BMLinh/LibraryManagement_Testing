@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
+    private App app = new App();
+
     @FXML
     private Button btnLogin;
 
@@ -58,7 +60,39 @@ public class LoginController implements Initializable {
             login();
     }
 
-    public void checkLogin() throws SQLException, IOException{
+    private void redirect(int userRoleId) throws IOException {
+        String fxml = "";
+
+        if (userRoleId == 1) {
+            fxml = "FXMLLoginSuccessful.fxml";
+        } else if (userRoleId == 2) {
+            fxml = "FXMLHome-Ems.fxml";
+        } else {
+            fxml = "FXMLHome-Usrs.fxml";
+        }
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(fxml));
+        Parent root = loader.load();
+        Scene mainScene = new Scene(root);
+
+        if (userRoleId == 1) {
+            LoginSuccessfulController loginSuccessfulController = loader.getController();
+            loginSuccessfulController.sendData(user);
+        } else if (userRoleId == 2) {
+            Home_EmsController home_emsController = loader.getController();
+            home_emsController.sendData(user);
+        } else {
+            Home_UsrsController home_usrsController = loader.getController();
+            home_usrsController.sendData(user);
+        }
+
+        Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
+        primaryStage.setScene(mainScene);
+        primaryStage.show();
+    }
+
+    public void checkLogin() throws SQLException, IOException, InterruptedException {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
@@ -74,6 +108,11 @@ public class LoginController implements Initializable {
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(305);
 
+<<<<<< hoangnam1909
+        if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+            redirect(user.getRoleId());
+        } else {
+======
         if (user == null){
             lbNotification.setTextFill(Color.RED);
             lbNotification.setText("Username không tồn tại!");
@@ -91,6 +130,7 @@ public class LoginController implements Initializable {
             }
         }
         else {
+>>>>>> main
             lbNotification.setTextFill(Color.RED);
             lbNotification.setText("Đăng nhập thất bại");
         }
