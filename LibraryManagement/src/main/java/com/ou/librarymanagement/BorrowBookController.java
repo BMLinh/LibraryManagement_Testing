@@ -5,16 +5,25 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.Book;
+import com.ou.pojo.BorrowingBook;
 import com.ou.pojo.ReaderCard;
 import com.ou.pojo.User;
 import com.ou.services.AuthorService;
 import com.ou.services.BookCategoryService;
 import com.ou.services.BookService;
+import com.ou.services.BorrowingBookService;
 import com.ou.services.PublishingCompanyService;
+import com.ou.services.ReaderCardService;
+import com.ou.services.UserService;
 import com.ou.utils.Utils;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +41,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -43,6 +53,20 @@ import javafx.stage.Stage;
  * @author Admin
  */
 public class BorrowBookController implements Initializable {
+
+    /**
+     * @return the user
+     */
+    public static User getUser() {
+        return user;
+    }
+
+    /**
+     * @param aUser the user to set
+     */
+    public static void setUser(User aUser) {
+        user = aUser;
+    }
     @FXML
     private TableView<Book> bookTableView;
     @FXML
@@ -62,18 +86,25 @@ public class BorrowBookController implements Initializable {
     @FXML
     private TextField searchContentTxtFld;
     @FXML
-    private TextField userNameTxtFld;
+    private TextField readerCardIdTxtFld;
     @FXML
     private TextField userIdTxtFld;
     @FXML
     private Button submitBtn;
     @FXML
     private Pane pane;
+    
+    private int amount;
+    
+    private static User user = null;
      
     private static final BookService bookService = new BookService();
+    private static final UserService userService = new UserService();
+    private static final ReaderCardService readerCardService = new ReaderCardService();
     private static final BookCategoryService bookCategoryService = new BookCategoryService();
     private static final PublishingCompanyService publishingCompanyService = new PublishingCompanyService();
     private static final AuthorService authorService = new AuthorService();
+    private static final BorrowingBookService borrowingBookService = new BorrowingBookService();
     /**
      * Initializes the controller class.
      */
@@ -146,7 +177,7 @@ public class BorrowBookController implements Initializable {
     
     public void display(int userId, int readerCardId){
         this.userIdTxtFld.setText(String.valueOf(userId));
-        this.userNameTxtFld.setText(String.valueOf(readerCardId));
+        this.readerCardIdTxtFld.setText(String.valueOf(readerCardId));
     }
     
     public void reset(){
@@ -171,8 +202,34 @@ public class BorrowBookController implements Initializable {
     public void borrowBook(ActionEvent evt) throws IOException {
         if(0 == this.bookTableView.getSelectionModel().getSelectedItem().getAmount())
             Utils.setAlert("Hết sách!!!", Alert.AlertType.ERROR).show();
-        else{            
-            
+        else{
+            TextInputDialog inp = new TextInputDialog();
+            inp.setHeaderText("Số lượng sách");
+            Optional<String> num = inp.showAndWait();
+            int tmp = amount + Integer.parseInt(num.get());
+            if(num.isPresent() && Integer.parseInt(num.get()) < 6 && tmp < 6){
+                try {
+                    amount += Integer.parseInt(num.get());
+                    Map<String, String> param = new HashMap<>();
+                    Book book = this.bookTableView.getSelectionModel().getSelectedItem();
+                    ReaderCard readerCard = this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0);
+                    readerCard.setAmount(amount);
+                    
+                    BorrowingBook bw = new BorrowingBook(0, 1, book.getId(),
+                            1, Integer.parseInt(num.get()), new Date(), null, 0, null);
+                    this.borrowingBookService.addBorrowingBook(bw);
+                    
+                    param.put("amount", String.valueOf(book.getAmount() - Integer.parseInt(num.get())));
+                    this.bookService.updateBook(this.bookTableView.getSelectionModel().getSelectedItem().getId(), param);
+                    
+                    this.readerCardService.updateReaderCard(readerCard.getId(), readerCard);
+                } catch (SQLException ex) {
+                    Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Utils.setAlert("Đặt thành công!!!", Alert.AlertType.CONFIRMATION).show();
+            }
+            else
+                Utils.setAlert("Số lượng có thể quá số lượng sách đang có hoặc dữ liệu không hợp lệ hoặc số lượng sách đã mượn lớn hơn 5!!!", Alert.AlertType.ERROR).show();
         }
     }
 }

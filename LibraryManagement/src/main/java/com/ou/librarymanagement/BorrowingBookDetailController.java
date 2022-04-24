@@ -85,7 +85,7 @@ public class BorrowingBookDetailController implements Initializable {
             Parent root = loader.load();
             
             BorrowBookController controller = loader.getController();
-            controller.display(user.getId(), readerCard.getId());
+            controller.display(this.user.getId(), this.readerCard.getId());
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
