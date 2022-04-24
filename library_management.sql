@@ -28,7 +28,7 @@ CREATE TABLE `author` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `author` (
 
 LOCK TABLES `author` WRITE;
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
+INSERT INTO `author` VALUES (1,'Tô Hoài'),(2,'Nguyễn Tất Thành'),(3,'Nguyễn Du'),(4,'Vũ Trọng Phụng');
 /*!40000 ALTER TABLE `author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +65,7 @@ CREATE TABLE `book` (
   CONSTRAINT `fk_book_author` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`),
   CONSTRAINT `fk_book_category` FOREIGN KEY (`category_id`) REFERENCES `bookcategory` (`id`),
   CONSTRAINT `fk_book_publishing_company` FOREIGN KEY (`publishing_company_id`) REFERENCES `publishingcompany` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,6 +74,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
+INSERT INTO `book` VALUES (1,'Xuân tóc đỏ',3,'Câu chuyện về cậu bé may mắn thời kỳ bị đô hộ','1995-08-25','2008-10-12',7,3,4),(2,'Truyện Kiều',10,'Chuyện kể về cuộ đời Thúy Kiều','1890-07-20','2005-05-23',7,1,3),(3,'Dế mèn phiêu lưu ký',5,'Cuộc phiêu lưu của dế mèn','1992-07-20','2001-10-20',7,2,1);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +99,7 @@ CREATE TABLE `bookcategory` (
 
 LOCK TABLES `bookcategory` WRITE;
 /*!40000 ALTER TABLE `bookcategory` DISABLE KEYS */;
-INSERT INTO `bookcategory` VALUES (5,'Viễn tưởng','Dãy B'),(6,'Anime','Dãy D'),(7,'Manga','Dãy E'),(8,'Khoa học','Dãy D');
+INSERT INTO `bookcategory` VALUES (5,'Viễn tưởng','Dãy B'),(6,'Tiểu thuyết','Dãy D'),(7,'Văn học','Dãy E'),(8,'Khoa học','Dãy D');
 /*!40000 ALTER TABLE `bookcategory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,20 +114,20 @@ CREATE TABLE `borrowingbook` (
   `id` int NOT NULL AUTO_INCREMENT,
   `staff_id` int NOT NULL,
   `book_id` int NOT NULL,
-  `reader_card_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `reader_card_id` int NOT NULL,
   `amount` int NOT NULL DEFAULT '1',
   `created_date` date NOT NULL,
   `return_date` date DEFAULT NULL,
   `active` bit(1) DEFAULT b'0',
   `fine` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_borrowingbook_reader_card_idx` (`reader_card_id`),
   KEY `fk_borrowingbook_user` (`staff_id`),
   KEY `fk_borrowingbook_book` (`book_id`),
+  KEY `fk_borrowingbook_reader_card_idx` (`reader_card_id`),
   CONSTRAINT `fk_borrowingbook_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`),
   CONSTRAINT `fk_borrowingbook_reader_card` FOREIGN KEY (`reader_card_id`) REFERENCES `readercard` (`id`),
   CONSTRAINT `fk_borrowingbook_user` FOREIGN KEY (`staff_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,6 +136,7 @@ CREATE TABLE `borrowingbook` (
 
 LOCK TABLES `borrowingbook` WRITE;
 /*!40000 ALTER TABLE `borrowingbook` DISABLE KEYS */;
+INSERT INTO `borrowingbook` VALUES (1,2,2,1,2,'2022-04-24','2022-05-24',_binary '\0',NULL);
 /*!40000 ALTER TABLE `borrowingbook` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +152,7 @@ CREATE TABLE `department` (
   `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +161,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'Linh');
+INSERT INTO `department` VALUES (5,' '),(1,'Công nghệ thông tin'),(6,'Khoa Học Máy Tính'),(7,'Kinh tế');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,16 +175,16 @@ DROP TABLE IF EXISTS `orderingbook`;
 CREATE TABLE `orderingbook` (
   `id` int NOT NULL AUTO_INCREMENT,
   `book_id` int NOT NULL,
-  `reader_card_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `reader_card_id` int NOT NULL,
   `amount` int NOT NULL DEFAULT '1',
   `created_date` datetime NOT NULL,
   `expired_date` datetime NOT NULL,
   `active` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`),
-  KEY `fk_orderingbook_reader_card_idx` (`reader_card_id`),
   KEY `fk_orderingbook_book_idx` (`book_id`),
+  KEY `kf_orderingbook_reader_card_idx` (`reader_card_id`),
   CONSTRAINT `fk_orderingbook_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`),
-  CONSTRAINT `fk_orderingbook_reader_card` FOREIGN KEY (`reader_card_id`) REFERENCES `readercard` (`id`)
+  CONSTRAINT `kf_orderingbook_reader_card` FOREIGN KEY (`reader_card_id`) REFERENCES `orderingbook` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -227,15 +230,15 @@ DROP TABLE IF EXISTS `readercard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `readercard` (
-  `id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `amount` int unsigned DEFAULT '5',
+  `amount` int unsigned DEFAULT '0',
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_reader_card_user_idx` (`user_id`),
   CONSTRAINT `fk_reader_card_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,6 +247,7 @@ CREATE TABLE `readercard` (
 
 LOCK TABLES `readercard` WRITE;
 /*!40000 ALTER TABLE `readercard` DISABLE KEYS */;
+INSERT INTO `readercard` VALUES (1,'2022-04-24','2024-04-24',0,3),(2,'2020-04-25','2022-04-25',0,4);
 /*!40000 ALTER TABLE `readercard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +263,7 @@ CREATE TABLE `role` (
   `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,6 +272,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'Admin'),(2,'Staff'),(3,'User');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +302,7 @@ CREATE TABLE `user` (
   KEY `fk_user_departmeny_idx` (`department_id`),
   CONSTRAINT `fk_user_departmeny` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`),
   CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,6 +311,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'BML','123','Bùi Mạnh Linh',_binary '\0','1995-08-25','TP Hồ Chí Minh','0123456789',1,5,'2022-04-24'),(2,'NMH','123','Nguyễn Minh Hiếu',_binary '\0','2001-12-27','TP Hồ Chí Minh','1234567890',2,1,'2022-04-23'),(3,'LHM','123','Lươn Hoàng Nam',_binary '','2001-11-01','TP Hồ Chí Minh','2345678901',3,7,'2022-04-22'),(4,'NHN','123','Nguyễn Hoàng Nam',_binary '\0','2001-02-25','TP Hồ Chí Minh','3456789012',3,1,'2022-03-11');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -318,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-23 15:41:04
+-- Dump completed on 2022-04-24 14:55:37
