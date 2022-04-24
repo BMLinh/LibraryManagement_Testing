@@ -5,8 +5,6 @@
 package com.ou.utils;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import javafx.scene.control.Alert;
 
@@ -34,6 +32,11 @@ public class Utils {
 
     public static final String convertDateTimeToString(Date date){
         SimpleDateFormat F = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return F.format(date);
+    }
+
+    public static final String convertDateToString(Date date, String pattern){
+        SimpleDateFormat F = new SimpleDateFormat(pattern);
         return F.format(date);
     }
     

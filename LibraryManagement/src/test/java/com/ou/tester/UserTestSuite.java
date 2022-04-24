@@ -55,7 +55,7 @@ public class UserTestSuite {
     @Test
     public void addSuccess() throws SQLException{
         User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
-        
+
         Assertions.assertTrue(u.addUser(user));
     }
     
@@ -63,7 +63,7 @@ public class UserTestSuite {
     public void updateSuccess() throws SQLException{
         List<User> users = u.getUser();
         User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
-        
+
         Assertions.assertTrue(u.updateUser(users.get(0).getId(),user));
     }
     
@@ -75,7 +75,7 @@ public class UserTestSuite {
     @Test
     public void addFailed() throws SQLException{
         User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "093333333333", 1, 1, new Date(2022, 5, 12));
-        
+
         Assertions.assertFalse(u.addUser(user));
     }
     

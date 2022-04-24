@@ -36,6 +36,7 @@ import javafx.stage.Stage;
  * @author Admin
  */
 public class BorrowingBookDetailController implements Initializable {
+
     @FXML
     private TextField readerCardIdTxtFld;
     @FXML
@@ -45,9 +46,9 @@ public class BorrowingBookDetailController implements Initializable {
     @FXML
     private TextField amountTxtFld;
     
-    private ReaderCard readerCard;
-    private User user;
-    private User staff;
+    private static ReaderCard currentCard;
+    private static User currentUser;
+    private static User currentStaff;
     
     
     private static final ReaderCardService readerCardService = new ReaderCardService();
@@ -63,33 +64,85 @@ public class BorrowingBookDetailController implements Initializable {
     }    
 
     public void checkUser(ActionEvent evt) throws SQLException {
-        if(this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).size() > 0){
-            readerCard = (this.readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
-            user = (this.userService.findUserById(readerCard.getUserId()));
-            this.nameTxtFld.setText(user.getFullname());
-            this.amountTxtFld.setText(String.valueOf(readerCard.getAmount()));
-            this.departmentTxtFld.setText(this.departmentService.getDepartmentById(user.getDepartmentId()).getName());
+        try{
+            if (readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).isEmpty()){
+                Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
+            }
+            else {
+                this.setCurrentCard(readerCardService.findReaderCardById(Integer.parseInt(this.readerCardIdTxtFld.getText())).get(0));
+                this.setCurrentUser(userService.findUserById(getCurrentCard().getUserId()));
+                this.nameTxtFld.setText(getCurrentUser().getFullname());
+                this.amountTxtFld.setText(String.valueOf(getCurrentCard().getAmount()));
+                this.departmentTxtFld.setText(this.departmentService.getDepartmentById(getCurrentUser().getDepartmentId()).getName());
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
         }
-        else Utils.setAlert("Không có thẻ độc giả!!!", Alert.AlertType.ERROR).show();
+
     }
     
     public void borrowBook(ActionEvent event) throws IOException{
-        if(readerCard.getEndDate().before(new Date())){
+        System.out.println(getCurrentUser().getId());
+        if(getCurrentCard().getEndDate().before(new Date())){
             Utils.setAlert("Thẻ hết hạn!!!", Alert.AlertType.ERROR).show();
         }
-        else if(readerCard.getAmount() > 0)
+        else if(getCurrentCard().getAmount() > 0)
             Utils.setAlert("Chưa trả hết sách!!!", Alert.AlertType.ERROR).show();
             
-        else{   
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBorrowBook.fxml"));
-            Parent root = loader.load();
-            
-            BorrowBookController controller = loader.getController();
-            controller.display(this.user.getId(), this.readerCard.getId());
-            
+        else{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLBorrowBook.fxml"));
+            BorrowBookController controller = fxmlLoader.getController();
+            controller.setCurrentUser(this.getCurrentUser());
+            controller.setCurrentCard(this.getCurrentCard());
+            controller.setCurrentStaff(this.getCurrentStaff());
+            Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
+            stage.setTitle("tesst sách");
             stage.show();
         }       
     }
+
+    /**
+     * @return the currentCard
+     */
+    public static ReaderCard getCurrentCard() {
+        return currentCard;
+    }
+
+    /**
+     * @param aCurrentCard the currentCard to set
+     */
+    public static void setCurrentCard(ReaderCard aCurrentCard) {
+        currentCard = aCurrentCard;
+    }
+
+    /**
+     * @return the currentUser
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
+     * @param aCurrentUser the currentUser to set
+     */
+    public static void setCurrentUser(User aCurrentUser) {
+        currentUser = aCurrentUser;
+    }
+
+    /**
+     * @return the currentStaff
+     */
+    public static User getCurrentStaff() {
+        return currentStaff;
+    }
+
+    /**
+     * @param aCurrentStaff the currentStaff to set
+     */
+    public static void setCurrentStaff(User aCurrentStaff) {
+        currentStaff = aCurrentStaff;
+    }
+
 }
