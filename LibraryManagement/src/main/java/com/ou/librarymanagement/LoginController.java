@@ -1,7 +1,8 @@
 package com.ou.librarymanagement;
 
-import com.ou.pojo.User;
 import com.ou.pojo.ReaderCard;
+import com.ou.pojo.User;
+import com.ou.services.ReaderCardService;
 import com.ou.services.RoleService;
 import com.ou.services.ReaderCardService;
 import com.ou.services.UserService;
@@ -25,6 +26,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+
 
     private App app = new App();
 
@@ -53,6 +55,7 @@ public class LoginController implements Initializable {
     public void setUser(User user) {
         this.user = user;
     }
+
 
     @FXML
     private void login() throws SQLException, IOException, InterruptedException {
@@ -130,7 +133,7 @@ public class LoginController implements Initializable {
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(295);
     }
-    
+
     /**
      * @return the currentCard
      */
