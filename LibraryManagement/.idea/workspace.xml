@@ -5,44 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BookCategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/PublishingCompanyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/ReaderCardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/BookCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/PublishingCompany.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/ReaderCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/BookCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/PublishingCompanyService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/ReaderCardService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLBookCategory.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLPublishingcompany.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLReaderCard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/AuthorTestSuite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/BookTestSuite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/ReaderCardTestSuite.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLBook.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginSuccessfulController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginSuccessfulController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/ReaderCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/ReaderCardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/BookCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/BookCategory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/pojo/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/AuthorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/AuthorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/DepartmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/ReaderCardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/ReaderCardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/DepartmentTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/DepartmentTestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/RoleTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/RoleTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Ems.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Ems.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/loginSuccessful.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLLoginSuccessful.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/BookTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/BookTestSuite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/ou/tester/UserTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/UserTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../library_management.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../library_management.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -163,6 +176,9 @@
       <workItem from="1650290566072" duration="6328000" />
       <workItem from="1650614948371" duration="1571000" />
       <workItem from="1650617725657" duration="943000" />
+      <workItem from="1650735285982" duration="3635000" />
+      <workItem from="1650767720599" duration="4181000" />
+      <workItem from="1650775903129" duration="9601000" />
     </task>
     <servers />
   </component>

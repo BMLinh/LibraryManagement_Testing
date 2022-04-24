@@ -5,8 +5,6 @@
 package com.ou.utils;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import javafx.scene.control.Alert;
 
@@ -21,13 +19,18 @@ public class Utils {
         return alert;
     }
     
-    public static final java.sql.Date convertUtilToSql(java.util.Date uDate) {
+    public static final java.sql.Date convertDateUtilToSql(java.util.Date uDate) {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
         return sDate;
     }
     
-    public static final String convertDateToString(Date date){
+    public static final String dateToString(Date date){
         SimpleDateFormat F = new SimpleDateFormat("dd/MM/yyyy");
+        return F.format(date);
+    }
+
+    public static final String dateToString(Date date, String pattern){
+        SimpleDateFormat F = new SimpleDateFormat(pattern);
         return F.format(date);
     }
     

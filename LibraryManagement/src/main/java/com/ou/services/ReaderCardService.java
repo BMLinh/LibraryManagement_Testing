@@ -46,8 +46,8 @@ public class ReaderCardService {
                                                     + "readercard(start_date,end_date,amount,user_id) "
                                                     + "VALUES (?,?,?,?)");
             
-            stm.setDate(1, Utils.convertUtilToSql(readerCard.getStartDate()));
-            stm.setDate(2, Utils.convertUtilToSql(readerCard.getEndDate()));
+            stm.setDate(1, Utils.convertDateUtilToSql(readerCard.getStartDate()));
+            stm.setDate(2, Utils.convertDateUtilToSql(readerCard.getEndDate()));
             stm.setInt(3, readerCard.getAmount());
             stm.setInt(4, readerCard.getUserId());
             
@@ -64,8 +64,8 @@ public class ReaderCardService {
             PreparedStatement stm = conn.prepareStatement("UPDATE readercard "
                                                     + "SET start_date=?, end_date=?, amount=?, user_id=? WHERE id=?");
             
-            stm.setDate(1, Utils.convertUtilToSql(readerCard.getStartDate()));
-            stm.setDate(2, Utils.convertUtilToSql(readerCard.getEndDate()));
+            stm.setDate(1, Utils.convertDateUtilToSql(readerCard.getStartDate()));
+            stm.setDate(2, Utils.convertDateUtilToSql(readerCard.getEndDate()));
             stm.setInt(3, readerCard.getAmount());
             stm.setInt(4, readerCard.getUserId());
             stm.setInt(5, id);

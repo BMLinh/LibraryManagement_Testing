@@ -12,9 +12,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +23,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -77,8 +74,8 @@ public class ReaderCardController implements Initializable {
                     ReaderCard readerCard = (ReaderCard)this.readerCardTabView.getSelectionModel().getSelectedItem();
                     this.readerCardIdTxtFld.setText(String.valueOf(readerCard.getId()));
                     this.userNameTxtFld.setText(this.userService.findUserById(readerCard.getUserId()).getFullname());
-                    this.startDateDP.setValue(Utils.convertUtilToSql(readerCard.getStartDate()).toLocalDate());
-                    this.endDateDP.setValue(Utils.convertUtilToSql(readerCard.getEndDate()).toLocalDate());
+                    this.startDateDP.setValue(Utils.convertDateUtilToSql(readerCard.getStartDate()).toLocalDate());
+                    this.endDateDP.setValue(Utils.convertDateUtilToSql(readerCard.getEndDate()).toLocalDate());
                     this.amountTxtFld.setText(String.valueOf(readerCard.getAmount()));
                     this.userIdTxtFld.setText(String.valueOf(readerCard.getUserId()));
                 } catch (SQLException ex) {
@@ -214,8 +211,8 @@ public class ReaderCardController implements Initializable {
     public ReaderCard getReaderCardFromFx(){
         ReaderCard readerCard = new ReaderCard();
         
-        readerCard.setStartDate(Utils.convertUtilToSql(Date.from(this.startDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
-        readerCard.setEndDate(Utils.convertUtilToSql(Date.from(this.endDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
+        readerCard.setStartDate(Utils.convertDateUtilToSql(Date.from(this.startDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
+        readerCard.setEndDate(Utils.convertDateUtilToSql(Date.from(this.endDateDP.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
         readerCard.setAmount(Integer.parseInt(this.amountTxtFld.getText()));
         readerCard.setUserId(Integer.parseInt(this.userIdTxtFld.getText()));
         

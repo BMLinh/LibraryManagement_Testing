@@ -55,7 +55,7 @@ public class UserService {
             stm.setString(2, u.getPassword());
             stm.setString(3, u.getFullname());
             stm.setInt(4, u.getGender());
-            stm.setDate(5, Utils.convertUtilToSql(u.getBirth()));
+            stm.setDate(5, Utils.convertDateUtilToSql(u.getDob()));
             stm.setString(6, u.getAddress());
             stm.setString(7, u.getPhone());
             stm.setInt(8, u.getRoleId());
@@ -79,12 +79,12 @@ public class UserService {
             stm.setString(2, user.getPassword());
             stm.setString(3, user.getFullname());
             stm.setInt(4, user.getGender());
-            stm.setDate(5, Utils.convertUtilToSql(user.getBirth()));
+            stm.setDate(5, Utils.convertDateUtilToSql(user.getDob()));
             stm.setString(6, user.getAddress());
             stm.setString(7, user.getPhone());
             stm.setInt(8, user.getRoleId());
             stm.setInt(9, user.getDepartmentId());
-            stm.setDate(10, Utils.convertUtilToSql(user.getCreatedDate()));
+            stm.setDate(10, Utils.convertDateUtilToSql(user.getCreatedDate()));
             
             return stm.executeUpdate() > 0;
         }
@@ -122,7 +122,7 @@ public class UserService {
                 user.setPassword(rs.getString("password"));
                 user.setFullname(rs.getString("fullname"));
                 user.setGender(rs.getByte("gender"));
-                user.setBirth(rs.getDate("dob"));
+                user.setDob(rs.getDate("dob"));
                 user.setAddress(rs.getString("address"));
                 user.setPhone(rs.getString("phone"));
                 user.setRoleId(rs.getInt("role_id"));
@@ -207,12 +207,12 @@ public class UserService {
                 user.setPassword(rs.getString("password"));
                 user.setFullname(rs.getString("fullname"));
                 user.setGender(rs.getByte("gender"));
-                user.setBirth(rs.getDate("dob"));
-                user.setFullname(rs.getString("email"));
+                user.setDob(rs.getDate("dob"));
                 user.setAddress(rs.getString("address"));
                 user.setPhone(rs.getString("phone"));
                 user.setRoleId(rs.getInt("role_id"));
                 user.setDepartmentId(rs.getInt("department_id"));
+                user.setCreatedDate(rs.getDate("created_date"));
             }
 
             return user;
