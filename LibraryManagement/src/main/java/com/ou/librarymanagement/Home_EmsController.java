@@ -36,7 +36,7 @@ public class Home_EmsController implements Initializable {
     @FXML
     private Button btnLogout;
 
-    private User currentUser;
+    private User currentStaff;
     private LoginController loginController = new LoginController();
 
     /**
@@ -48,9 +48,15 @@ public class Home_EmsController implements Initializable {
     }
 
     public void switch1(ActionEvent evt) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
-        Stage window = (Stage) btn1.getScene().getWindow();
-        window.setScene(new Scene(root, 1080, 802));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBorrowingBookDetail.fxml"));
+        Parent node = loader.load();
+        BorrowingBookDetailController controller = new BorrowingBookDetailController();
+        
+        controller.setCurrentStaff(this.currentStaff);
+        
+        Stage stage = new Stage();
+        stage.setScene(new Scene(node));
+        stage.show();
     }
 
     public void switch2() throws IOException {
@@ -60,20 +66,26 @@ public class Home_EmsController implements Initializable {
     }
 
     public void switch3() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
-        Stage window = (Stage) btn1.getScene().getWindow();
-        window.setScene(new Scene(root, 1080, 802));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCheckingUser.fxml"));
+        Parent node = loader.load();
+        BorrowingBookDetailController controller = new BorrowingBookDetailController();
+
+        controller.setCurrentStaff(this.currentStaff);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(node));
+        stage.show();
     }
 
     public void switch4() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
-        Stage window = (Stage) btn1.getScene().getWindow();
-        window.setScene(new Scene(root, 1080, 802));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLStat.fxml"));
+        Parent node = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(node));
+        stage.show();
     }
 
-    public void sendData(User user) {
-        this.currentUser = user;
-    }
+    
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
@@ -90,5 +102,19 @@ public class Home_EmsController implements Initializable {
         Stage primaryStage = (Stage) btnLogout.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.show();
+    }
+
+    /**
+     * @return the currentStaff
+     */
+    public User getCurrentStaff() {
+        return currentStaff;
+    }
+
+    /**
+     * @param currentStaff the currentStaff to set
+     */
+    public void setCurrentStaff(User currentStaff) {
+        this.currentStaff = currentStaff;
     }
 }

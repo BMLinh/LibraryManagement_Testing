@@ -127,7 +127,7 @@
                </font></TextField>
          </children>
       </GridPane>
-      <Button layoutX="287.0" layoutY="430.0" mnemonicParsing="false" text="Mượn sách">
+      <Button layoutX="287.0" layoutY="430.0" mnemonicParsing="false" onAction="#borrowBook" text="Mượn sách">
          <font>
             <Font size="24.0" />
          </font>
