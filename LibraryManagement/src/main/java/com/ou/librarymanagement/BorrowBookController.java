@@ -211,6 +211,8 @@ public class BorrowBookController implements Initializable {
                     Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 Utils.setAlert("Đặt thành công!!!", Alert.AlertType.CONFIRMATION).show();
+                loadData(null);
+
             }
             else
                 Utils.setAlert("Số lượng có thể quá số lượng sách đang có hoặc dữ liệu không hợp lệ hoặc số lượng sách đã mượn lớn hơn 5!!!", Alert.AlertType.ERROR).show();

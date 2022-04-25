@@ -69,18 +69,20 @@ public class Home_EmsController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCheckingUser.fxml"));
         Parent node = loader.load();
         BorrowingBookDetailController controller = new BorrowingBookDetailController();
-        
+
         controller.setCurrentStaff(this.currentStaff);
-        
+
         Stage stage = new Stage();
         stage.setScene(new Scene(node));
         stage.show();
     }
 
     public void switch4() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
-        Stage window = (Stage) btn1.getScene().getWindow();
-        window.setScene(new Scene(root, 1080, 802));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLStat.fxml"));
+        Parent node = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(node));
+        stage.show();
     }
 
     

@@ -189,3 +189,5 @@ public class CheckingUserController implements Initializable {
         currentStaff = aCurrentStaff;
     }
 }
+
+// Sửa lại logic xác nhận đặt sách
