@@ -75,7 +75,7 @@ public class BorrowBookController implements Initializable {
     private static ReaderCard currentCard;
     private static User currentStaff;
     
-    private static int amount;
+    private int amount;
 
     private static final BookService bookService = new BookService();
     private static final UserService userService = new UserService();
