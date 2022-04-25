@@ -8,6 +8,8 @@ import com.ou.pojo.ReaderCard;
 import com.ou.services.ReaderCardService;
 import com.ou.services.UserService;
 import com.ou.utils.Utils;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -21,15 +23,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -53,6 +53,8 @@ public class ReaderCardController implements Initializable {
     private TextField userIdTxtFld;
     @FXML
     private TextField searchContentTxtFld;
+    @FXML
+    private Button btnBack;
     
     private static final ReaderCardService readerCardService = new ReaderCardService();
     private static final UserService userService = new UserService();
@@ -227,4 +229,17 @@ public class ReaderCardController implements Initializable {
         
         this.searchContentTxtFld.clear();
     }
+
+    @FXML
+    void backToAdmin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("FXMLHome-Adm.fxml"));
+        Parent root = loader.load();
+        Scene mainScene = new Scene(root);
+        Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+        primaryStage.setScene(mainScene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
 }

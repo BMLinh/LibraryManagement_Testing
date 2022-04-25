@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_AdmController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Adm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" afterDir="false" />
@@ -54,11 +56,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../zip/LibraryManagement_Testing/LibraryManagement" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Asus\OneDrive\Desktop\BTLonKT\LibraryManagement_Testing\LibraryManagement\src\main\resources\com\ou\librarymanagement" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ou.librarymanagement" />
     </key>
   </component>
   <component name="RunManager" selected="Application.App">
