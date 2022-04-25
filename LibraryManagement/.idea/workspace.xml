@@ -5,29 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_AdmController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Adm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/AuthorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/AuthorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BookCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BookCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/PublishingCompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/PublishingCompanyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/ReaderCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/ReaderCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/JdbcUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLAuthor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLAuthor.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLBook.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLBook.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLBookCategory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLBookCategory.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLDepartment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLDepartment.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLPublishingcompany.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLPublishingcompany.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLReaderCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLReaderCard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLRole.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLUser.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Adm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Adm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/author.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/author.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +48,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../zip/LibraryManagement_Testing/LibraryManagement" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java Programming/Project/JobSearchingSpringMVC/JobSearchingSpringMVC" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -189,7 +169,8 @@
       <workItem from="1650814716413" duration="337000" />
       <workItem from="1650815623724" duration="1530000" />
       <workItem from="1650819001238" duration="4080000" />
-      <workItem from="1650862386167" duration="1742000" />
+      <workItem from="1650862386167" duration="3477000" />
+      <workItem from="1650867693367" duration="27000" />
     </task>
     <servers />
   </component>
