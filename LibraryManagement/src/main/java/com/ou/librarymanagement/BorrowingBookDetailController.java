@@ -60,8 +60,26 @@ public class BorrowingBookDetailController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        init();
         // TODO
     }    
+    
+    private void init(){
+        this.readerCardIdTxtFld.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if (!t1.matches("\\d*"))
+                    readerCardIdTxtFld.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+        
+        this.readerCardIdTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getText().equals(" ")) {
+                change.setText("");
+            }
+            return change;
+        }));
+    }
 
     public void checkUser(ActionEvent evt) throws SQLException {
         try{
