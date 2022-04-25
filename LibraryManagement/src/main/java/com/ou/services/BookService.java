@@ -161,7 +161,7 @@ public class BookService {
                         stm.setDate(8, java.sql.Date.valueOf(param.get("date_of_entering")));
                     }
                 }
-                stm.setInt(8, bookId);
+                stm.setInt(9, bookId);
                 return stm.executeUpdate() > 0;
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -213,5 +213,18 @@ public class BookService {
             return stm.executeUpdate() > 0;
         }
     }
+    
+    public boolean updateAmount(int amount, int bookId) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
 
+            PreparedStatement stm = conn.prepareStatement("UPDATE book SET amount=? WHERE id=?");
+            stm.setInt(1, amount);
+            stm.setInt(2, bookId);
+            return stm.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }
+    

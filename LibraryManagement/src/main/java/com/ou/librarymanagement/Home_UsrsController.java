@@ -44,11 +44,6 @@ public class Home_UsrsController implements Initializable {
     private User currentUser = null;
     
 
-    //Để ở đây test tí
-    private static final ReaderCardService readerCardService = new ReaderCardService();
-    //Để ở đây test tí
-    private static final UserService userService = new UserService();
-
     /**
      * Initializes the controller class.
      */
@@ -68,18 +63,6 @@ public class Home_UsrsController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Đặt sách");
         stage.show();
-    }
-    
-    public void switch2(ActionEvent evt) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
-        Stage window = (Stage) btn2.getScene().getWindow();
-        window.setScene(new Scene(root, 1080, 802));
-    }
-    
-    public void switch3(ActionEvent evt) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
-        Stage window = (Stage) btn3.getScene().getWindow();
-        window.setScene(new Scene(root, 1080, 802));
     }
     
     public void switch4(ActionEvent evt) throws IOException{
