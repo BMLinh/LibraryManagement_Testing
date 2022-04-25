@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -42,6 +40,36 @@ public class BorrowingBookService {
                 BigDecimal fine = rs.getBigDecimal("fine");
                 
                 list.add(new BorrowingBook(id, staffId, bookId, readerCardId, amount, createdDate, returnDate, active, fine));
+            }
+            
+            return list;
+        }
+    }
+    
+    public List<BorrowingBook> getBorrowingBooksByActive(boolean Active, String kw) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT br.id, u.fullname, b.name, br.reader_card_id, br.amount, br.created_date, br.return_date, br.active, br.fine, br.book_id FROM borrowingbook br, book b, user u, readercard rd WHERE active = ? and br.book_id=b.id and br.reader_card_id=rd.id and rd.user_id=u.id and u.fullname like concat('%', ?, '%')");
+            stm.setBoolean(1, Active);
+            if (kw == null)
+                kw ="";
+            stm.setString(2, kw);
+            ResultSet rs = stm.executeQuery();
+            
+            List<BorrowingBook> list = new ArrayList<>();
+            
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String userName = rs.getString("fullname");
+                String bookName = rs.getString("name");
+                int readerCardId = rs.getInt("reader_card_id");
+                int amount = rs.getInt("amount");
+                Date createdDate = rs.getDate("created_date");
+                Date returnDate = rs.getDate("return_date");
+                int active = rs.getInt("active");
+                BigDecimal fine = rs.getBigDecimal("fine");
+                int bookId = rs.getInt("book_id");
+                
+                list.add(new BorrowingBook(id, userName, bookName, readerCardId, amount, createdDate, returnDate, active, fine, bookId));
             }
             
             return list;
@@ -89,6 +117,22 @@ public class BorrowingBookService {
             PreparedStatement stm = conn.prepareStatement("UPDATE borrowingbook SET active=? WHERE id=?");
             stm.setInt(1, active);
             stm.setInt(2, id);
+            
+            return stm.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateReturnBook(int id, int active, int fine, Date returnDate){
+        try(Connection conn = JdbcUtils.getConn()){
+            System.out.println(returnDate);
+            PreparedStatement stm = conn.prepareStatement("UPDATE borrowingbook SET active=?, return_date=?, fine=? WHERE id=?");
+            stm.setInt(1, active);
+            stm.setDate(2, Utils.convertUtilToSql(returnDate));
+            stm.setInt(3, fine);            
+            stm.setInt(4, id);
             
             return stm.executeUpdate() > 0;
         } catch (SQLException ex) {
