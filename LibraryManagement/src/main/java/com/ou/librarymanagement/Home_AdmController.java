@@ -4,14 +4,17 @@ import com.ou.pojo.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Home_AdmController {
+public class Home_AdmController implements Initializable {
 
     @FXML
     private Button btnAuthorManagement;
@@ -39,13 +42,15 @@ public class Home_AdmController {
 
     @FXML
     private Button btnUserManagement;
+    
+    private static User currentUser; 
 
-    private User currentUser;
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
 
-    public void sendData(User user){
-        this.currentUser = user;
     }
-
+    private User currentUser;
+  
     private void changeScene(Button btn, String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxml));
@@ -110,6 +115,20 @@ public class Home_AdmController {
         Stage primaryStage = (Stage) btnLogout.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.show();
+    }
+
+    /**
+     * @return the currentUser
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
+     * @param aCurrentUser the currentUser to set
+     */
+    public static void setCurrentUser(User aCurrentUser) {
+        currentUser = aCurrentUser;
     }
 
 }

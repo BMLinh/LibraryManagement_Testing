@@ -14,29 +14,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="27qIjASnLAuDlCpQG2bVgo5OWqE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -72,7 +52,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DepartmentTestSuite.testAddSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StatTestSuite.getStatFail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibraryManagement" />
       <extension name="coverage">
         <pattern>
@@ -81,14 +61,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
-      <option name="METHOD_NAME" value="testAddSuccess" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.StatTestSuite" />
+      <option name="METHOD_NAME" value="getStatFail" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DepartmentTestSuite.testUpdateFailWithExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StatTestSuite.getStatSuccessful" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibraryManagement" />
       <extension name="coverage">
         <pattern>
@@ -97,40 +77,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
-      <option name="METHOD_NAME" value="testUpdateFailWithExist" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DepartmentTestSuite.testUpdateSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibraryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ou.tester.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
-      <option name="METHOD_NAME" value="testUpdateSuccess" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RoleTestSuite.testUpdateSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="LibraryManagement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ou.tester.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.RoleTestSuite" />
-      <option name="METHOD_NAME" value="testUpdateSuccess" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.StatTestSuite" />
+      <option name="METHOD_NAME" value="getStatSuccessful" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -139,14 +87,11 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.DepartmentTestSuite.testAddSuccess" />
-        <item itemvalue="JUnit.DepartmentTestSuite.testUpdateFailWithExist" />
-        <item itemvalue="JUnit.DepartmentTestSuite.testUpdateSuccess" />
-        <item itemvalue="JUnit.RoleTestSuite.testUpdateSuccess" />
+        <item itemvalue="JUnit.StatTestSuite.getStatSuccessful" />
+        <item itemvalue="JUnit.StatTestSuite.getStatFail" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="" />
@@ -173,23 +118,5 @@
       <workItem from="1650867693367" duration="27000" />
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
