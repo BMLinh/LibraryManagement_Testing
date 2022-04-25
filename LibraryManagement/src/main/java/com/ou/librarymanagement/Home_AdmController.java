@@ -49,6 +49,8 @@ public class Home_AdmController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
+    private User currentUser;
+  
     private void changeScene(Button btn, String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxml));

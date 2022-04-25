@@ -15,6 +15,8 @@ public class BorrowingBook {
     private int id;
     private int staffId;
     private int bookId;
+    private String bookName;
+    private String userName;
     private int readerCardId;
     private int amount;
     private Date createdDate;
@@ -34,6 +36,19 @@ public class BorrowingBook {
         this.returnDate = returnDate;
         this.active = active;
         this.fine = fine;
+    }
+    
+    public BorrowingBook(int id, String staffName, String bookName, int readerCardId, int amount, Date createdDate, Date returnDate, int active, BigDecimal fine, int bookId){
+        this.id = id;
+        this.userName = staffName;
+        this.bookName = bookName;
+        this.readerCardId = readerCardId;
+        this.amount = amount;
+        this.createdDate = createdDate;
+        this.returnDate = returnDate;
+        this.active = active;
+        this.fine = fine;
+        this.bookId = bookId;
     }
     
     /**
@@ -160,5 +175,33 @@ public class BorrowingBook {
      */
     public void setFine(BigDecimal fine) {
         this.fine = fine;
+    }
+
+    /**
+     * @return the bookName
+     */
+    public String getBookName() {
+        return bookName;
+    }
+
+    /**
+     * @param bookName the bookName to set
+     */
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

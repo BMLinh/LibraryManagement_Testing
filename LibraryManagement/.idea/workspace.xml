@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58c66fd9-42f7-4640-89f8-b2c969d26a2e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
+    <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Adm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Adm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/author.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/author.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +19,24 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java Programming/Project/JobSearchingSpringMVC/JobSearchingSpringMVC" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Asus\OneDrive\Desktop\BTLonKT\LibraryManagement_Testing\LibraryManagement\src\main\resources\com\ou\librarymanagement" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ou.librarymanagement" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -73,6 +93,30 @@
     </recent_temporary>
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="" />
+      <created>1650041322847</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650041322847</updated>
+      <workItem from="1650041326595" duration="2347000" />
+      <workItem from="1650043996064" duration="247000" />
+      <workItem from="1650119332357" duration="705000" />
+      <workItem from="1650290566072" duration="6328000" />
+      <workItem from="1650614948371" duration="1571000" />
+      <workItem from="1650617725657" duration="3597000" />
+      <workItem from="1650639254880" duration="8043000" />
+      <workItem from="1650695453285" duration="7728000" />
+      <workItem from="1650716694365" duration="13937000" />
+      <workItem from="1650734744199" duration="11842000" />
+      <workItem from="1650765109252" duration="28314000" />
+      <workItem from="1650800204346" duration="1772000" />
+      <workItem from="1650814716413" duration="337000" />
+      <workItem from="1650815623724" duration="1530000" />
+      <workItem from="1650819001238" duration="4080000" />
+      <workItem from="1650862386167" duration="3477000" />
+      <workItem from="1650867693367" duration="27000" />
+    </task>
     <servers />
   </component>
 </project>
