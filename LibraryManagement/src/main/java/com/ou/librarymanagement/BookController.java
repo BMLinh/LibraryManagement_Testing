@@ -65,6 +65,7 @@ public class BookController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtDescription.setWrapText(true);
         try {
             // TODO
             this.init();
@@ -128,7 +129,7 @@ public class BookController implements Initializable {
 
         TableColumn col4 = new TableColumn("Description");
         col4.setCellValueFactory(new PropertyValueFactory("description"));
-        col4.setPrefWidth(150);
+        col4.setPrefWidth(210);
 
         TableColumn col5 = new TableColumn("Ngày xuất bản");
         col5.setCellValueFactory(new PropertyValueFactory("publishingYear"));
@@ -137,7 +138,7 @@ public class BookController implements Initializable {
 
         TableColumn col6 = new TableColumn("Ngày nhập");
         col6.setCellValueFactory(new PropertyValueFactory("dateOfEntering"));
-        col6.setPrefWidth(130);
+        col6.setPrefWidth(100);
         col6.setStyle("-fx-alignment: CENTER;");
 
         TableColumn col7 = new TableColumn("Category Id");

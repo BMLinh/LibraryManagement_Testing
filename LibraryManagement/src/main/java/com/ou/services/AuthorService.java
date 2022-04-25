@@ -16,7 +16,7 @@ public class AuthorService {
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM author WHERE name like concat('%', ?, '%')");
             if (kw == null)
                 kw = "";
-            stm.setString(1, kw);
+            stm.setString(1, kw.trim());
             ResultSet rs = stm.executeQuery();
 
             List<Author> authors = new ArrayList<>();
