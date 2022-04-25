@@ -17,7 +17,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="802.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.ReaderCardController">
    <children>
-      <Pane layoutX="749.0" layoutY="211.0" prefHeight="149.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
+      <Pane layoutX="749.0" layoutY="234.0" prefHeight="149.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
       <Pane layoutX="61.0" layoutY="176.0" prefHeight="185.0" prefWidth="617.0" style="-fx-border-color: black; -fx-border-radius: 10;" />
       <HBox alignment="CENTER" prefHeight="110.0" prefWidth="1080.0" style="-fx-background-color: #333;">
          <children>
@@ -135,7 +135,7 @@
             </Button>
          </children>
       </GridPane>
-      <GridPane layoutX="765.0" layoutY="219.0" prefHeight="131.0" prefWidth="244.0">
+      <GridPane layoutX="765.0" layoutY="242.0" prefHeight="131.0" prefWidth="244.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -154,5 +154,10 @@
          </children>
       </GridPane>
       <Button layoutX="827.0" layoutY="404.0" mnemonicParsing="false" onAction="#searchReaderCard" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm" />
+      <Button fx:id="btnBack" layoutX="749.0" layoutY="167.0" mnemonicParsing="false" onAction="#backToAdmin" prefHeight="25.0" prefWidth="277.0" text="Back to Admin">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
         String roleName = roleService.getRoleById(userRoleId).getName();
 
         if (roleName.trim().compareToIgnoreCase("admin") == 0) {
-            fxml = "FXMLLoginSuccessful.fxml";
+            fxml = "FXMLHome-Adm.fxml";
         } else if (roleName.trim().compareToIgnoreCase("staff") == 0) {
             fxml = "FXMLHome-Ems.fxml";
         } else {
@@ -80,8 +80,6 @@ public class LoginController implements Initializable {
         Scene mainScene = new Scene(root);
 
         if (userRoleId == 1) {
-            LoginSuccessfulController loginSuccessfulController = loader.getController();
-            loginSuccessfulController.sendData(user);
         } else if (userRoleId == 2) {
             Home_EmsController home_emsController = loader.getController();
             home_emsController.sendData(user);
