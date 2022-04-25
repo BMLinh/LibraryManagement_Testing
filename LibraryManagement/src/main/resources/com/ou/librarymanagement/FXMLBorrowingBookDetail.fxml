@@ -109,10 +109,11 @@
             </TextField>
          </children>
       </GridPane>
-      <Button layoutX="233.0" layoutY="377.0" mnemonicParsing="false" onAction="#borrowBook" prefHeight="39.0" prefWidth="136.0" text="Mượn sách" textAlignment="CENTER">
+      <Button fx:id="submit" layoutX="233.0" layoutY="377.0" mnemonicParsing="false" onAction="#borrowBook" prefHeight="39.0" prefWidth="136.0" text="Mượn sách" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Button layoutX="509.0" layoutY="384.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
    </children>
 </AnchorPane>
