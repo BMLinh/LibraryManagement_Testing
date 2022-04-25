@@ -185,7 +185,7 @@ public class BorrowBookController implements Initializable {
             inp.setHeaderText("Số lượng sách");
             Optional<String> num = inp.showAndWait();
             int tmp = amount + Integer.parseInt(num.get());
-            if(num.isPresent() && Integer.parseInt(num.get()) < 6 && tmp < 6){
+            if(num.isPresent() && Integer.parseInt(num.get()) < 6 && Integer.parseInt(num.get()) > 0 && tmp < 6){
                 try {
                     Date currentDate = new Date();
                     Calendar cal = Calendar.getInstance();

@@ -6,6 +6,8 @@ package com.ou.tester;
 
 import com.ou.services.ReaderCardService;
 import com.ou.pojo.ReaderCard;
+import com.ou.pojo.User;
+import com.ou.services.UserService;
 import com.ou.utils.JdbcUtils;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,6 +31,7 @@ import org.junit.jupiter.api.Test;
 public class ReaderCardTestSuite {
     private static Connection conn;
     private static ReaderCardService rs;
+    private static UserService us;
     
     @BeforeAll
     public static void beforeAll() {
@@ -39,6 +42,7 @@ public class ReaderCardTestSuite {
         }
         
         rs = new ReaderCardService();
+        us = new UserService();
     }
     
     @AfterAll
@@ -53,21 +57,39 @@ public class ReaderCardTestSuite {
     
     @Test 
     public void addSuccess() throws SQLException{
-        ReaderCard rc = new ReaderCard(99, new Date(122,04,01), new Date(130,04,01), 5, 1);
+        User user = us.getByUsername("A");
+        ReaderCard rc = new ReaderCard(999, new Date(122,04,01), new Date(130,04,01), 0, user.getId());
         
         Assertions.assertTrue(rs.addReaderCard(rc));
+        
+        ReaderCard rc1 = rs.findReaderCardsByUserId(user.getId()).get(0);
+        
+        Assertions.assertNotNull(rc1.getId());
     }
     
     @Test
     public void deleteSuccess() throws SQLException{
-        Assertions.assertTrue(rs.deleteReaderCard(1));
+        User user = us.getByUsername("A");
+        ReaderCard rc = rs.findReaderCardsByUserId(user.getId()).get(0);
+        
+        Assertions.assertTrue(rs.deleteReaderCard(rc.getId()));
+        
+        List<ReaderCard> rc1 = rs.findReaderCardsByUserId(user.getId());
+        
+        Assertions.assertFalse(rc1.size() > 0);
     }
-    
+       
     @Test
     public void updateSuccess() throws SQLException{
-        ReaderCard rc = new ReaderCard(1, new Date(122,04,02), new Date(123,04,02), 52, 1);
+        User user = us.getByUsername("A");
+        ReaderCard rc = new ReaderCard(1, new Date(122,04,02), new Date(123,04,02), 52, user.getId());
+        ReaderCard rc1 = rs.findReaderCardsByUserId(user.getId()).get(0);
         
-        Assertions.assertTrue(rs.updateReaderCard(2, rc));
+        Assertions.assertTrue(rs.updateReaderCard(rc1.getId(), rc));
+        
+        ReaderCard reader = rs.findReaderCardsByUserId(user.getId()).get(0);
+        
+        Assertions.assertEquals(reader.getAmount(), 52);
     }
     
     @Test
