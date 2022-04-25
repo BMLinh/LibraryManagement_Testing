@@ -99,7 +99,7 @@ public class LoginController implements Initializable {
             try {
                 setCurrentCard(readerCardService.findReaderCardsByUserId(user.getId()).get(0));
                 home_usrsController.setCurrentCard(currentCard);
-            } catch (SQLException e) {
+            } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             } catch (IndexOutOfBoundsException ex){
                 ex.printStackTrace();
