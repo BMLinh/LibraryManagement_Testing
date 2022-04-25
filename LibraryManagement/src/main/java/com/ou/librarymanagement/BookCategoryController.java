@@ -68,7 +68,7 @@ public class BookCategoryController implements Initializable{
 
         //Tìm kiếm đối tượng theo tên đối tượng
         this.txtKeyword.textProperty().addListener((evt) ->{
-            this.loadData(this.txtKeyword.getText());
+            this.loadData(this.txtKeyword.getText().trim());
         });
 
         //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
@@ -127,7 +127,7 @@ public class BookCategoryController implements Initializable{
     public void addBookCategory(ActionEvent evt) throws SQLException{
         BookCategory b = new BookCategory();
         b.setName(txtName.getText());
-        b.setPosition(txtPosition.getText());
+        b.setPosition(txtPosition.getText().trim());
         if (s.addBookCategory(b) == true){
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
@@ -139,7 +139,7 @@ public class BookCategoryController implements Initializable{
 
     public void updateBookCategory(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateBookCategory(Integer.parseInt(this.txtId.getText()), this.txtName.getText(), this.txtPosition.getText()) == true){
+            if (s.updateBookCategory(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim(), this.txtPosition.getText().trim()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }
