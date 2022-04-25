@@ -1,5 +1,6 @@
 package com.ou.librarymanagement;
 
+import com.ou.pojo.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +39,12 @@ public class Home_AdmController {
 
     @FXML
     private Button btnUserManagement;
+
+    private User currentUser;
+
+    public void sendData(User user){
+        this.currentUser = user;
+    }
 
     private void changeScene(Button btn, String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader();
