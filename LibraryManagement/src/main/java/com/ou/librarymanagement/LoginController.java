@@ -101,6 +101,8 @@ public class LoginController implements Initializable {
                 home_usrsController.setCurrentCard(currentCard);
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
+            } catch (IndexOutOfBoundsException ex){
+                ex.printStackTrace();
             }
         }
 

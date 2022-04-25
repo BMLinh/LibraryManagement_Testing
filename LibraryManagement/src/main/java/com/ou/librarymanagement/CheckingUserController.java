@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +35,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
@@ -78,6 +81,21 @@ public class CheckingUserController implements Initializable {
                 Logger.getLogger(CheckingUserController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        this.readerCardIdTxtFld.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if (!t1.matches("\\d*"))
+                    readerCardIdTxtFld.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+        
+        this.readerCardIdTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getText().equals(" ")) {
+                change.setText("");
+            }
+            return change;
+        }));
     }
     
     public void loadData(){
