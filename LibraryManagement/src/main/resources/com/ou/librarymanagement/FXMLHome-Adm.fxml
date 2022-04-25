@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="786.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.Home_AdmController">
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="765.0" style="-fx-background-color: #333;">
+            <children>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TRANG CHỦ ADMIN QUẢN LÝ">
+                    <font>
+                        <Font name="Arial Bold" size="40.0" />
+                    </font>
+                </Text>
+            </children>
+        </HBox>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="108.0" prefHeight="304.0" prefWidth="737.0">
+         <children>
+              <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
+                  <children>
+                      <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../imgs/book.png" />
+                          </image>
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                      </ImageView>
+                      <Button fx:id="btnAuthorManagement" mnemonicParsing="false" onAction="#authorManagement" prefHeight="10.0" prefWidth="150.0" text="Tác giả">
+                          <font>
+                              <Font name="Arial" size="20.0" />
+                          </font>
+                          <VBox.margin>
+                              <Insets top="30.0" />
+                          </VBox.margin>
+                      </Button>
+                  </children>
+              </VBox>
+              <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
+                  <children>
+                      <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../imgs/summary.png" />
+                          </image>
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                      </ImageView>
+                      <Button fx:id="btnCategoryManagement" mnemonicParsing="false" onAction="#categoryManagement" prefHeight="10.0" prefWidth="150.0" text="Danh mục">
+                          <font>
+                              <Font name="Arial" size="20.0" />
+                          </font>
+                          <VBox.margin>
+                              <Insets top="30.0" />
+                          </VBox.margin>
+                      </Button>
+                  </children>
+            </VBox>
+              <VBox alignment="CENTER" prefHeight="304.0" prefWidth="200.0" style="-fx-border-color: black;">
+                  <children>
+                      <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../imgs/return_book.png" />
+                          </image>
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                      </ImageView>
+                      <Button fx:id="btnBookManagement" mnemonicParsing="false" onAction="#bookManagement" prefHeight="10.0" prefWidth="150.0" text="Sách">
+                          <font>
+                              <Font name="Arial" size="20.0" />
+                          </font>
+                          <VBox.margin>
+                              <Insets top="27.5" />
+                          </VBox.margin>
+                      </Button>
+                  </children>
+              </VBox>
+            <VBox alignment="CENTER" prefHeight="304.0" prefWidth="200.0" style="-fx-border-color: black;">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imgs/return_book.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button fx:id="btnDepartmentManagement" mnemonicParsing="false" onAction="#departmentManagement" prefHeight="10.0" prefWidth="150.0" text="Phòng ban">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="27.5" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+        <HBox alignment="CENTER" layoutX="14.0" layoutY="716.0" prefHeight="83.0" prefWidth="737.0">
+            <children>
+                <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#logout" text="ĐĂNG XUẤT">
+                    <font>
+                        <Font name="Calibri" size="24.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="412.0" prefHeight="304.0" prefWidth="737.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imgs/book.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button fx:id="btnPubComManagement" mnemonicParsing="false" onAction="#pubComManagement" prefHeight="10.0" prefWidth="150.0" text="Nhà xuất bản">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imgs/summary.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button fx:id="btnReaderCardManagement" mnemonicParsing="false" onAction="#readerCardManagement" prefHeight="10.0" prefWidth="150.0" text="Thẻ độc giả">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imgs/book.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button fx:id="btnRoleManagement" mnemonicParsing="false" onAction="#roleManagement" prefHeight="10.0" prefWidth="150.0" text="Phân quyền">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imgs/book.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button fx:id="btnUserManagement" mnemonicParsing="false" onAction="#userManagement" prefHeight="10.0" prefWidth="150.0" text="Tài khoản">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

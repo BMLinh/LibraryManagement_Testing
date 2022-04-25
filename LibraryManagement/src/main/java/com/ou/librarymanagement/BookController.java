@@ -12,11 +12,16 @@ import com.ou.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -48,6 +53,8 @@ public class BookController implements Initializable {
     private TextArea txtDescription;
     @FXML
     private DatePicker datepickerPublishingYear;
+    @FXML
+    private Button btnBack;
 
     private final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -268,6 +275,18 @@ public class BookController implements Initializable {
             bookService.update(bookTabView.getSelectionModel().getSelectedItem().getId(), this.getBookFromForm());
             reloadWindow();
         }
+    }
+
+    @FXML
+    void backToAdmin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("FXMLHome-Adm.fxml"));
+        Parent root = loader.load();
+        Scene mainScene = new Scene(root);
+        Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+        primaryStage.setScene(mainScene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
 }

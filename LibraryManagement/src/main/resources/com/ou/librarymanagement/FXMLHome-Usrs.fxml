@@ -21,7 +21,7 @@
             </Text>
          </children>
       </HBox>
-      <VBox alignment="TOP_CENTER" layoutY="100.0" prefHeight="300.0" prefWidth="172.0" style="-fx-border-color: black;">
+      <VBox alignment="TOP_CENTER" layoutY="100.0" prefHeight="300.0" prefWidth="327.0" style="-fx-border-color: black;">
          <children>
             <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -41,47 +41,7 @@
             </Button>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="172.0" layoutY="100.0" prefHeight="300.0" prefWidth="172.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../imgs/return_book.png" />
-               </image>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </ImageView>
-            <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" onAction="#switch2" prefHeight="80.0" prefWidth="136.0" text="Lịch sử mượn" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Arial" size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="344.0" layoutY="100.0" prefHeight="300.0" prefWidth="172.0" style="-fx-border-color: black;">
-         <children>
-            <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../imgs/preorder.png" />
-               </image>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </ImageView>
-            <Button fx:id="btn3" alignment="CENTER" mnemonicParsing="false" onAction="#switch3" prefHeight="80.0" prefWidth="136.0" text="Lịch sử đặt" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Arial" size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="516.0" layoutY="100.0" prefHeight="300.0" prefWidth="172.0" style="-fx-border-color: black;">
+      <VBox alignment="TOP_CENTER" layoutX="327.0" layoutY="100.0" prefHeight="300.0" prefWidth="361.0" style="-fx-border-color: black;">
          <children>
             <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <image>

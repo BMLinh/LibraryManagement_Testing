@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_AdmController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Adm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/CheckingUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/CheckingUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +56,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../zip/LibraryManagement_Testing/LibraryManagement" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Asus\OneDrive\Desktop\BTLonKT\LibraryManagement_Testing\LibraryManagement\src\main\resources\com\ou\librarymanagement" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ou.librarymanagement" />
     </key>
   </component>
   <component name="RunManager" selected="Application.App">
@@ -163,6 +174,7 @@
       <workItem from="1650734744199" duration="11842000" />
       <workItem from="1650765109252" duration="28314000" />
       <workItem from="1650800204346" duration="1772000" />
+      <workItem from="1650803489325" duration="23411000" />
     </task>
     <servers />
   </component>
