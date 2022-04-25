@@ -157,7 +157,7 @@ public class CheckingUserController implements Initializable {
                                     bookService.update(book.getId(), param);
                                 }
                                 else
-                                    Utils.setAlert("Thẻ độc giả hết hạn hoặc độc giả chưa trả hết sách!!!", Alert.AlertType.ERROR).show();
+                                    Utils.setAlert("Thẻ độc giả hết hạn!!!", Alert.AlertType.ERROR).show();
                             } catch (SQLException ex) {
                                 Logger.getLogger(CheckingUserController.class.getName()).log(Level.SEVERE, null, ex);
                             }
