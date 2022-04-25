@@ -25,9 +25,9 @@
          <children>
               <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
                   <children>
-                      <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                              <Image url="@../../../imgs/book.png" />
+                              <Image url="@../../../images/author.png" />
                           </image>
                           <VBox.margin>
                               <Insets top="10.0" />
@@ -45,9 +45,9 @@
               </VBox>
               <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
                   <children>
-                      <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                              <Image url="@../../../imgs/summary.png" />
+                              <Image url="@../../../images/category.png" />
                           </image>
                           <VBox.margin>
                               <Insets top="10.0" />
@@ -65,9 +65,9 @@
             </VBox>
               <VBox alignment="CENTER" prefHeight="304.0" prefWidth="200.0" style="-fx-border-color: black;">
                   <children>
-                      <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                              <Image url="@../../../imgs/return_book.png" />
+                              <Image url="@../../../images/book.png" />
                           </image>
                           <VBox.margin>
                               <Insets top="10.0" />
@@ -85,9 +85,9 @@
               </VBox>
             <VBox alignment="CENTER" prefHeight="304.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../imgs/return_book.png" />
+                        <Image url="@../../../images/departmentpng.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -118,9 +118,9 @@
          <children>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../imgs/book.png" />
+                        <Image url="@../../../images/publishing.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -138,9 +138,9 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../imgs/summary.png" />
+                        <Image url="@../../../images/card.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -158,9 +158,9 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../imgs/book.png" />
+                        <Image url="@../../../images/role.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
@@ -178,9 +178,9 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../imgs/book.png" />
+                        <Image url="@../../../images/userpng.png" />
                      </image>
                      <VBox.margin>
                         <Insets top="10.0" />
