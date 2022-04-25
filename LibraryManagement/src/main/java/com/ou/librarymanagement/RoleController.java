@@ -96,6 +96,7 @@ public class RoleController implements Initializable {
         this.btnInsert.setVisible(true);
         this.btnDelete.setVisible(false);
         this.tbRoles.getSelectionModel().select(null);
+        this.txtKeyword.setText("");
     }
     public void resetHandler(ActionEvent evt){
         reset();
@@ -117,7 +118,10 @@ public class RoleController implements Initializable {
 
     public void updateRole(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateRole(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim()) == true){
+            if(this.txtName.getText().trim() == ""){
+                Utils.setAlert("Mời nhập tên quyền!", Alert.AlertType.ERROR).show();
+            }
+            else if (s.updateRole(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }
