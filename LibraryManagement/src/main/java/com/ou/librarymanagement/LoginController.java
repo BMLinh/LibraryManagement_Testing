@@ -94,14 +94,14 @@ public class LoginController implements Initializable {
             Home_EmsController home_emsController = loader.getController();
             home_emsController.setCurrentStaff(user);
         } else {
-            try {
-                setCurrentCard(readerCardService.findReaderCardsByUserId(user.getId()).get(0));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
             Home_UsrsController home_usrsController = loader.getController();
             home_usrsController.setCurrentUser(user);
-            home_usrsController.setCurrentCard(currentCard);
+            try {
+                setCurrentCard(readerCardService.findReaderCardsByUserId(user.getId()).get(0));
+                home_usrsController.setCurrentCard(currentCard);
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
         }
 
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();

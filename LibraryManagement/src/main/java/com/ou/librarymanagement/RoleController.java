@@ -103,7 +103,10 @@ public class RoleController implements Initializable {
     public void addRole(ActionEvent evt) throws SQLException{
         Role r = new Role();
         r.setName(txtName.getText().trim());
-        if (s.addRole(r) == true){
+        if (txtName.getText().trim() == ""){
+            Utils.setAlert("Mời nhập tên quyền!", Alert.AlertType.ERROR).show();
+        }
+        else if (s.addRole(r) == true){
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
             this.loadData(null);

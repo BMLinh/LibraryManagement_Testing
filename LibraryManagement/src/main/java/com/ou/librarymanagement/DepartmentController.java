@@ -106,7 +106,10 @@ public class DepartmentController implements Initializable {
     public void addDepartment(ActionEvent evt) throws SQLException{
         Department d = new Department();
         d.setName(txtName.getText().trim());
-        if (s.addDepartment(d)){
+        if (txtName.getText().trim() == ""){
+            Utils.setAlert("Mời nhập tên phòng ban!", Alert.AlertType.ERROR).show();
+        }
+        else if (s.addDepartment(d)){
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
             this.loadData(null);
