@@ -6,11 +6,16 @@ import com.ou.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -21,6 +26,9 @@ public class AuthorController implements Initializable {
 
     @FXML
     private TableView<Author> authorTabView;
+
+    @FXML
+    private Button btnBack;
 
     @FXML
     private TextField searchKw;
@@ -138,6 +146,18 @@ public class AuthorController implements Initializable {
             authorService.update(authorTabView.getSelectionModel().getSelectedItem().getId(), this.txtName.getText());
             reloadWindow();
         }
+    }
+
+    @FXML
+    void backToAdmin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("FXMLHome-Adm.fxml"));
+        Parent root = loader.load();
+        Scene mainScene = new Scene(root);
+        Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+        primaryStage.setScene(mainScene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
 }

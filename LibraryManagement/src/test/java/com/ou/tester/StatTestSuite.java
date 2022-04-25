@@ -42,32 +42,23 @@ public class StatTestSuite {
 
     @Test
     public void getStatSuccessful() throws SQLException{
-        //Thống kê với quý có dữ liệu và quý thuộc 4 quý trong năm
-        Map<String, String> paramQuarter = new HashMap<>();
-        paramQuarter.put("quarter","4");
-        Assertions.assertTrue(s.getStat(paramQuarter).size() > 0);
-
-        //Thống kê với năm có dữ liệu
-        Map<String, String> paramYear = new HashMap<>();
-        paramYear.put("year","2022");
-        Assertions.assertTrue(s.getStat(paramYear).size() > 0);
+        //Thống kê với quý và năm có dữ liệu
+        Assertions.assertTrue(s.getStat(1, 2022).size() > 0);
     }
 
     @Test
     public void getStatFail() throws SQLException{
         //Quý không thuộc 4 quý trong năm
-        Map<String, String> paramQuarter = new HashMap<>();
-        paramQuarter.put("quarter","6");
-        Assertions.assertFalse(s.getStat(paramQuarter).size() > 0);
+        Assertions.assertFalse(s.getStat(6, 2022).size() > 0);
 
         //Thống kê với năm không có dữ liệu
-        Map<String, String> paramYear = new HashMap<>();
-        paramYear.put("year","20225");
-        Assertions.assertFalse(s.getStat(paramYear).size() > 0);
+        Assertions.assertFalse(s.getStat(1, 20225).size() > 0);
 
         //Thống kê với năm không chính xác
-        Map<String, String> paramYearErr = new HashMap<>();
-        paramYear.put("year","-1");
-        Assertions.assertFalse(s.getStat(paramYearErr).size() > 0);
+        Assertions.assertFalse(s.getStat(1, -1).size() > 0);
+
+        //Thống kê với quý và năm không chính xác
+        Assertions.assertFalse(s.getStat(-1, -1).size() > 0);
+
     }
 }

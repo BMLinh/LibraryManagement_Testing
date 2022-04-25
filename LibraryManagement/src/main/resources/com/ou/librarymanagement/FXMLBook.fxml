@@ -22,7 +22,7 @@
     <!--    </stylesheets>-->
     <children>
         <Pane layoutX="51.0" layoutY="137.0" prefHeight="265.0" prefWidth="617.0" style="-fx-border-color: black; -fx-border-radius: 10;" />
-        <Pane layoutX="749.0" layoutY="255.0" prefHeight="147.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
+        <Pane layoutX="744.0" layoutY="226.0" prefHeight="147.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
         <HBox layoutX="20.0" layoutY="488.0" prefHeight="300.0" prefWidth="1040.0">
             <children>
                 <TableView fx:id="bookTabView" prefHeight="300.0" prefWidth="1040.0" />
@@ -162,7 +162,7 @@
                 </Button>
             </children>
         </GridPane>
-        <GridPane layoutX="767.0" layoutY="262.0" prefHeight="131.0" prefWidth="244.0">
+        <GridPane layoutX="762.0" layoutY="233.0" prefHeight="131.0" prefWidth="244.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -179,5 +179,10 @@
                 </Text>
             </children>
         </GridPane>
+      <Button fx:id="btnBack" layoutX="744.0" layoutY="153.0" mnemonicParsing="false" onAction="#backToAdmin" prefHeight="25.0" prefWidth="277.0" text="Back to Admin">
+         <font>
+            <Font name="Calibri" size="24.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
