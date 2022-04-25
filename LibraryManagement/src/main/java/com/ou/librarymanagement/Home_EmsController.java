@@ -24,6 +24,7 @@ import javafx.stage.Stage;
  * @author Admin
  */
 public class Home_EmsController implements Initializable {
+
     @FXML
     private Button btn1;
     @FXML
@@ -38,6 +39,10 @@ public class Home_EmsController implements Initializable {
 
     private User currentStaff;
     private LoginController loginController = new LoginController();
+    private Stage stage1;
+    private Stage stage2;
+    private Stage stage3;
+    private Stage stage4;
 
     /**
      * Initializes the controller class.
@@ -48,44 +53,64 @@ public class Home_EmsController implements Initializable {
     }
 
     public void switch1(ActionEvent evt) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBorrowingBookDetail.fxml"));
-        Parent node = loader.load();
-        BorrowingBookDetailController controller = new BorrowingBookDetailController();
-        
-        controller.setCurrentStaff(this.currentStaff);
-        
-        Stage stage = new Stage();
-        stage.setScene(new Scene(node));
-        stage.show();
+        if (stage1 == null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBorrowingBookDetail.fxml"));
+            Parent node = loader.load();
+            BorrowingBookDetailController controller = new BorrowingBookDetailController();
+            controller.setCurrentStaff(this.currentStaff);
+            stage1 = new Stage();
+            stage1.setScene(new Scene(node));
+            stage1.show();
+        } else if (stage1.isShowing()) {
+            stage1.toFront();
+        } else {
+            stage1.show();
+        }
     }
 
     public void switch2() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLBorrowBook.fxml"));
-        Stage window = (Stage) btn1.getScene().getWindow();
-        window.setScene(new Scene(root, 1080, 802));
+        if (stage2 == null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLReturnBook.fxml"));
+            Parent node = loader.load();
+            stage2 = new Stage();
+            stage2.setScene(new Scene(node));
+            stage2.show();
+        } else if (stage2.isShowing()) {
+            stage2.toFront();
+        } else {
+            stage2.show();
+        }
     }
 
     public void switch3() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCheckingUser.fxml"));
-        Parent node = loader.load();
-        BorrowingBookDetailController controller = new BorrowingBookDetailController();
-
-        controller.setCurrentStaff(this.currentStaff);
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(node));
-        stage.show();
+        if (stage3 == null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCheckingUser.fxml"));
+            Parent node = loader.load();
+            BorrowingBookDetailController controller = new BorrowingBookDetailController();
+            controller.setCurrentStaff(this.currentStaff);
+            stage3 = new Stage();
+            stage3.setScene(new Scene(node));
+            stage3.show();
+        } else if (stage3.isShowing()) {
+            stage3.toFront();
+        } else {
+            stage3.show();
+        }
     }
 
     public void switch4() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLStat.fxml"));
-        Parent node = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(node));
-        stage.show();
+        if (stage4 == null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLStat.fxml"));
+            Parent node = loader.load();
+            stage4 = new Stage();
+            stage4.setScene(new Scene(node));
+            stage4.show();
+        } else if (stage4.isShowing()) {
+            stage4.toFront();
+        } else {
+            stage4.show();
+        }
     }
-
-    
 
     @FXML
     private void logout(ActionEvent event) throws IOException {

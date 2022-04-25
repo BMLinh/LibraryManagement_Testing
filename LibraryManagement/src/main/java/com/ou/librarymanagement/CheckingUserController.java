@@ -132,7 +132,7 @@ public class CheckingUserController implements Initializable {
                             try {
                                 ReaderCard reader = readerCardService.findReaderCardById(order.getReaderCardId()).get(0);
                                 Book book = bookService.getById(order.getBookId());
-                                if(reader.getEndDate().after(new Date()) && reader.getAmount() == 0){
+                                if(reader.getEndDate().after(new Date())){
                                     Map<String, String> param = new HashMap<>();
                                     param.put("amount", String.valueOf(book.getAmount() + reader.getAmount()));
                                     orderingBookService.updateActiveOrderBook(true, order.getId());

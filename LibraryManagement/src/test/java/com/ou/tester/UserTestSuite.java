@@ -55,21 +55,31 @@ public class UserTestSuite {
     @Test
     public void addSuccess() throws SQLException{
         User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
-
         Assertions.assertTrue(u.addUser(user));
+        
+        User user1 = u.getByUsername("A");
+        Assertions.assertEquals(user1.getFullname(), "AAA");
     }
     
     @Test
     public void updateSuccess() throws SQLException{
         List<User> users = u.getUser();
-        User user = new User(1 ,"A", "123", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
-
-        Assertions.assertTrue(u.updateUser(users.get(0).getId(),user));
+        User user = new User(1 ,"A", "1234", "AAA", 0, new Date(2002, 10, 12), "Nguyễn Hiền", "0988888888", 1, 1, new Date(2022, 5, 12));
+        User user1 = u.getByUsername("A");
+        
+        Assertions.assertTrue(u.updateUser(user1.getId(),user));
+        
+        User user2 = u.getByUsername("A");
+        Assertions.assertEquals(user2.getPassword(), "1234");
     }
     
     @Test
     public void deleteSuccess() throws SQLException {
-        Assertions.assertTrue(u.deleteUser(20));
+        User user = u.getByUsername("A");
+        Assertions.assertTrue(u.deleteUser(user.getId()));
+        
+        User user1 = u.getByUsername("A");
+        Assertions.assertNull(user1.getFullname());
     }
     
     @Test

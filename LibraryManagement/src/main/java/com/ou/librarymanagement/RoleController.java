@@ -52,7 +52,7 @@ public class RoleController implements Initializable {
 
         //Tìm kiếm loại quyền theo tên quyền
         this.txtKeyword.textProperty().addListener((evt) ->{
-            this.loadData(this.txtKeyword.getText());
+            this.loadData(this.txtKeyword.getText().trim());
         });
 
         //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
@@ -102,7 +102,7 @@ public class RoleController implements Initializable {
     }
     public void addRole(ActionEvent evt) throws SQLException{
         Role r = new Role();
-        r.setName(txtName.getText());
+        r.setName(txtName.getText().trim());
         if (s.addRole(r) == true){
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
@@ -114,7 +114,7 @@ public class RoleController implements Initializable {
 
     public void updateRole(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateRole(Integer.parseInt(this.txtId.getText()), this.txtName.getText()) == true){
+            if (s.updateRole(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }

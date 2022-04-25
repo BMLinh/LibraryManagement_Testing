@@ -54,7 +54,7 @@ public class DepartmentController implements Initializable {
 
         //Tìm kiếm đối tượng theo tên đối tượng
         this.txtKeyword.textProperty().addListener((evt) ->{
-            this.loadData(this.txtKeyword.getText());
+            this.loadData(this.txtKeyword.getText().trim());
         });
 
         //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
@@ -105,7 +105,7 @@ public class DepartmentController implements Initializable {
 
     public void addDepartment(ActionEvent evt) throws SQLException{
         Department d = new Department();
-        d.setName(txtName.getText());
+        d.setName(txtName.getText().trim());
         if (s.addDepartment(d)){
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
@@ -117,7 +117,7 @@ public class DepartmentController implements Initializable {
 
     public void updateDepartment(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText())){
+            if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim())){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }

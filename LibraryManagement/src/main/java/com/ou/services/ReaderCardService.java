@@ -137,4 +137,17 @@ public class ReaderCardService {
         }
     }
     
+    public boolean updateAmount (int amount, int id) throws SQLException {
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("UPDATE readercard SET amount=? WHERE id=?");
+            stm.setInt(1, amount);
+            stm.setInt(2, id);
+            return stm.executeUpdate() > 0;
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
 }
