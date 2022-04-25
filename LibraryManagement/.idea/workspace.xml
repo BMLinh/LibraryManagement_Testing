@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="babe9fec-a722-469c-8d9c-17b19e64ae50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/ou/tester/StatTestSuite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/BorrowBookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/CheckingUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/CheckingUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_EmsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/Home_UsrsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/librarymanagement/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ou/services/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ou/librarymanagement/FXMLHome-Usrs.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +54,7 @@
       <recent name="C:\Users\Asus\OneDrive\Desktop\BTLonKT\LibraryManagement_Testing\LibraryManagement\src\main\resources\com\ou\librarymanagement" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager" selected="JUnit.StatTestSuite.getStatFail">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ou.librarymanagement.App" />
       <module name="LibraryManagement" />
@@ -107,7 +100,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DepartmentTestSuite.testUpdateSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StatTestSuite.getStatFail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibraryManagement" />
       <extension name="coverage">
         <pattern>
@@ -116,14 +109,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.DepartmentTestSuite" />
-      <option name="METHOD_NAME" value="testUpdateSuccess" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.StatTestSuite" />
+      <option name="METHOD_NAME" value="getStatFail" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RoleTestSuite.testUpdateSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StatTestSuite.getStatSuccessful" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="LibraryManagement" />
       <extension name="coverage">
         <pattern>
@@ -132,8 +125,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ou.tester" />
-      <option name="MAIN_CLASS_NAME" value="com.ou.tester.RoleTestSuite" />
-      <option name="METHOD_NAME" value="testUpdateSuccess" />
+      <option name="MAIN_CLASS_NAME" value="com.ou.tester.StatTestSuite" />
+      <option name="METHOD_NAME" value="getStatSuccessful" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -141,11 +134,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.StatTestSuite.getStatFail" />
+        <item itemvalue="JUnit.StatTestSuite.getStatSuccessful" />
         <item itemvalue="Application.App" />
         <item itemvalue="JUnit.DepartmentTestSuite.testAddSuccess" />
         <item itemvalue="JUnit.DepartmentTestSuite.testUpdateFailWithExist" />
-        <item itemvalue="JUnit.DepartmentTestSuite.testUpdateSuccess" />
-        <item itemvalue="JUnit.RoleTestSuite.testUpdateSuccess" />
       </list>
     </recent_temporary>
   </component>
@@ -170,6 +163,8 @@
       <workItem from="1650765109252" duration="28314000" />
       <workItem from="1650800204346" duration="1772000" />
       <workItem from="1650803489325" duration="23411000" />
+      <workItem from="1650859500631" duration="2948000" />
+      <workItem from="1650864969793" duration="1285000" />
     </task>
     <servers />
   </component>
