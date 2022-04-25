@@ -87,7 +87,8 @@ public class LoginController implements Initializable {
         Scene mainScene = new Scene(root);
 
         if(roleName.trim().compareToIgnoreCase("admin") == 0){
-           
+           Home_AdmController home_admController = loader.getController();
+           home_admController.setCurrentUser(user);
         }
         else if (roleName.trim().compareToIgnoreCase("staff") == 0) {
             Home_EmsController home_emsController = loader.getController();
