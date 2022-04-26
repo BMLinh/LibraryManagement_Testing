@@ -82,10 +82,10 @@ public class OrderingBookService {
     }
 
     //Lấy tổng số lượng sách đặt của thẻ độc giả chưa đến nhận sách
-    public int getTotalAmountByOrderID(int orderId, boolean active) throws SQLException{
+    public int getTotalAmountByReaderCardID(int readerCardId, boolean active) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("select sum(amount) from orderingbook where reader_card_id= ? and active = ?");
-            stm.setInt(1, orderId);
+            stm.setInt(1, readerCardId);
             stm.setBoolean(2, active);
             ResultSet rs = stm.executeQuery();
             int amount = 0;

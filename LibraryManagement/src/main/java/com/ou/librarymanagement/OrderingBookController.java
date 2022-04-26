@@ -197,7 +197,7 @@ public class OrderingBookController implements Initializable {
                 oderBook.setExpiredDate(Utils.convertDateTimeToString(expiredDate));
                 try {
                     // Kiểm tra tổng số sách đặt trong 2 ngày có lớn hơn 5
-                    if (orderingBookService.getTotalAmountByOrderID(getCurrentCard().getId(),false) > 5){
+                    if (orderingBookService.getTotalAmountByReaderCardID(getCurrentCard().getId(),false) > 5){
                         Utils.setAlert("Không đặt hơn 5 quyển nếu chưa đến nhận sách đặt trước đó !", Alert.AlertType.ERROR).show();
                     }
                     else if (orderingBookService.addOrderBook(oderBook) == true){
