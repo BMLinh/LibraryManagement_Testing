@@ -175,9 +175,9 @@ public class OrderingBookController implements Initializable {
             if (amountOfBook < 0){
                 Utils.setAlert("Số lượng sách đặt phải lớn hơn 0!", Alert.AlertType.ERROR).show();
             }
-//            else if (amountOfBook > 5){
-//                Utils.setAlert("Bạn không được đặt hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
-//            }
+            else if (amountOfBook > 5){
+                Utils.setAlert("Bạn không được đặt hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
+            }
             else if(amountOfBook >Integer.parseInt(txtAmount.getText()) ){
                 Utils.setAlert("Không được đặt quá số lượng sách hiện tại!",Alert.AlertType.ERROR).show();
             }
@@ -196,8 +196,9 @@ public class OrderingBookController implements Initializable {
                 oderBook.setCreatedDate(Utils.convertDateTimeToString(currentDate));
                 oderBook.setExpiredDate(Utils.convertDateTimeToString(expiredDate));
                 try {
+                    // Kiểm tra tổng số sách đặt trong 2 ngày có lớn hơn 5
                     if (orderingBookService.getTotalAmountByOrderID(getCurrentCard().getId(),false) > 5){
-                        Utils.setAlert("Bạn không được đặt hơn 5 quyển sách nếu chưa đến lấy sách!", Alert.AlertType.ERROR).show();
+                        Utils.setAlert("Không đặt hơn 5 quyển nếu chưa đến nhận sách đặt trước đó !", Alert.AlertType.ERROR).show();
                     }
                     else if (orderingBookService.addOrderBook(oderBook) == true){
                         Map<String, String> param = new HashMap<>();
@@ -207,7 +208,7 @@ public class OrderingBookController implements Initializable {
 
                         // Lấy id của phiếu đặt sách để tiến hành set event auto tự update lại phiếu khi tới hạn trả
                         int orderId = orderingBookService.getOrderingBooks().get(orderingBookService.getOrderingBooks().size() - 1).getId();
-                        if (orderingBookService.setAutoUpdateOrderBook("order" + orderId ,2880, orderId) == true)
+                        if (orderingBookService.setAutoUpdateOrderBook("order" + orderId ,5, orderId) == true)
                             System.out.println(orderingBookService.getOrderingBooks().get(orderingBookService.getOrderingBooks().size()).getId());
                             Utils.setAlert("Đặt sách thành công!", Alert.AlertType.INFORMATION).show();
                         reset();

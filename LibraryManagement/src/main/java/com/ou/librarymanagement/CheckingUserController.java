@@ -150,14 +150,19 @@ public class CheckingUserController implements Initializable {
                             try {
                                 ReaderCard reader = readerCardService.findReaderCardById(order.getReaderCardId()).get(0);
                                 Book book = bookService.getById(order.getBookId());
-                                if(reader.getEndDate().after(new Date())){
+
+                                //Lấy tên event update order đã được định nghĩa trước, cú pháp order + id phiếu đặt ví dụ: order30
+                                String nameEvent = "order" + order.getId();
+
+                            if (orderingBookService.dropEventAutoUpdateOrder(nameEvent) == true){
                                     Map<String, String> param = new HashMap<>();
-                                    param.put("amount", String.valueOf(book.getAmount() + reader.getAmount()));
+                                    param.put("amount", String.valueOf(book.getAmount() + order.getAmount()));
                                     orderingBookService.updateActiveOrderBook(true, order.getId());
                                     bookService.update(book.getId(), param);
+                                    Utils.setAlert("Đã xác nhận đặt sách!!!", Alert.AlertType.ERROR).show();
                                 }
                                 else
-                                    Utils.setAlert("Thẻ độc giả hết hạn!!!", Alert.AlertType.ERROR).show();
+                                    Utils.setAlert("Xác nhận không thành công!!!", Alert.AlertType.ERROR).show();
                             } catch (SQLException ex) {
                                 Logger.getLogger(CheckingUserController.class.getName()).log(Level.SEVERE, null, ex);
                             }

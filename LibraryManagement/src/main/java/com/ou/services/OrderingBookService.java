@@ -12,16 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderingBookService {
-<<<<<<< HEAD
     public List<OrderingBook> getOrderingBooks() throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook order by id");
-=======
-
-    public List<OrderingBook> getOrderingBooks() throws SQLException {
-        try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook");
->>>>>>> 106e257bd79ffb3b9f1a54c2ebe99793e8394b10
             ResultSet rs = stm.executeQuery();
 
             List<OrderingBook> list = new ArrayList<>();
@@ -50,21 +43,13 @@ public class OrderingBookService {
             stm.setInt(3, order.getAmount());
             stm.setString(4, order.getCreatedDate());
             stm.setString(5, order.getExpiredDate());
-<<<<<<< HEAD
-            stm.execute();
-            return true;
-        }
-        catch (SQLException e){
-=======
             return stm.executeUpdate() > 0;
         } catch (SQLException e) {
->>>>>>> 106e257bd79ffb3b9f1a54c2ebe99793e8394b10
             e.printStackTrace();
             return false;
         }
     }
 
-<<<<<<< HEAD
     //Set envent auto cập nhật cho phiếu mượn (active , amount của sách) sau khoảng thời gian (để minute để thuận lợi cho việc test)
     public boolean setAutoUpdateOrderBook(String currentDay, int minute, int orderID) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
@@ -79,6 +64,18 @@ public class OrderingBookService {
             return stm.executeUpdate() > 0;
         }
         catch (SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    //Drop event auto cập nhật phiếu đặt
+    public boolean dropEventAutoUpdateOrder(String nameEvent) throws SQLException{
+        try (Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("DROP EVENT IF EXISTS "+nameEvent+" ");
+            stm.execute();
+            return true;
+        }catch (Exception ex){
             ex.printStackTrace();
             return false;
         }
@@ -105,14 +102,9 @@ public class OrderingBookService {
     
     public boolean updateActiveOrderBook(boolean ac, int id) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
-=======
-    public boolean updateActiveOrderBook(boolean ac, int id) throws SQLException {
-        try (Connection conn = JdbcUtils.getConn()) {
->>>>>>> 106e257bd79ffb3b9f1a54c2ebe99793e8394b10
             PreparedStatement stm = conn.prepareStatement("UPDATE orderingbook SET active=? WHERE id=?");
             stm.setBoolean(1, ac);
             stm.setInt(2, id);
-
             return stm.executeUpdate() > 0;
         }
     }
@@ -158,13 +150,6 @@ public class OrderingBookService {
                 list.add(new OrderingBook(id, bookId, readerCardId, amount, createdDate, expiredDate, active));
             }
             return list;
-        }
-    }
-
-    public void updateOdering() throws SQLException {
-        try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("UPDATE orderingbook SET active=true WHERE active=false and expired_date < NOW()");
-            stm.executeQuery();
         }
     }
 }
