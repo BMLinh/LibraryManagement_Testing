@@ -68,6 +68,12 @@ public class BookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtDescription.setWrapText(true);
+        this.txtBookName.setTextFormatter(new TextFormatter<>(change -> {
+            if(!change.getText().matches("[aA-zZ\\p{L} ]+$"))
+                change.setText("");
+            return change;
+        }));
+
         try {
             // TODO
             this.init();
