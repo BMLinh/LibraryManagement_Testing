@@ -51,9 +51,9 @@ public class OrderingBookService {
     }
 
     //Set envent auto cập nhật cho phiếu mượn (active , amount của sách) sau khoảng thời gian (để minute để thuận lợi cho việc test)
-    public boolean setAutoUpdateOrderBook(String currentDay, int minute, int orderID) throws SQLException{
+    public boolean setAutoUpdateOrderBook(String nameEvent, int minute, int orderID) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm =conn.prepareStatement("CREATE EVENT If not exists "+currentDay+" \n" +
+            PreparedStatement stm =conn.prepareStatement("CREATE EVENT If not exists "+nameEvent+" \n" +
                     "ON SCHEDULE at current_timestamp + interval ? minute\n" +
                     "DO\n" +
                     "Update orderingbook o, book b \n" +
@@ -82,10 +82,10 @@ public class OrderingBookService {
     }
 
     //Lấy tổng số lượng sách đặt của thẻ độc giả chưa đến nhận sách
-    public int getTotalAmountByOrderID(int orderId, boolean active) throws SQLException{
+    public int getTotalAmountByReaderCardID(int readerCardId, boolean active) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("select sum(amount) from orderingbook where reader_card_id= ? and active = ?");
-            stm.setInt(1, orderId);
+            stm.setInt(1, readerCardId);
             stm.setBoolean(2, active);
             ResultSet rs = stm.executeQuery();
             int amount = 0;
