@@ -107,26 +107,14 @@
                         <Insets left="15.0" />
                     </GridPane.margin>
                 </Text>
-                <TextField fx:id="txtBookName" GridPane.columnIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtAmount" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextArea fx:id="txtDescription" prefHeight="78.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextArea>
-            <DatePicker fx:id="datepickerDateOfEntering" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <TextField fx:id="txtBookName" GridPane.columnIndex="1" />
+            <TextField fx:id="txtAmount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="txtDescription" prefHeight="78.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+            <DatePicker fx:id="datepickerDateOfEntering" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <ComboBox fx:id="cbCategory" prefHeight="25.0" prefWidth="207.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <ComboBox fx:id="cbPublishingCompany" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <ComboBox fx:id="cbAuthor" prefHeight="25.0" prefWidth="209.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <DatePicker fx:id="datepickerPublishingYear" GridPane.columnIndex="3" />
+            <DatePicker fx:id="datepickerPublishingYear" editable="false" GridPane.columnIndex="3" />
             </children>
          <padding>
             <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />

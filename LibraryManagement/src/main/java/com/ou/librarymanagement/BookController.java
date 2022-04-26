@@ -68,6 +68,7 @@ public class BookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtDescription.setWrapText(true);
+
         try {
             // TODO
             this.init();
