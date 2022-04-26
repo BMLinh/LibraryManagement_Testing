@@ -16,7 +16,7 @@
             <children>
                 <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TRANG CHỦ ADMIN QUẢN LÝ">
                     <font>
-                        <Font name="Arial Bold" size="40.0" />
+                        <Font name="Arial Bold" size="48.0" />
                     </font>
                 </Text>
             </children>
