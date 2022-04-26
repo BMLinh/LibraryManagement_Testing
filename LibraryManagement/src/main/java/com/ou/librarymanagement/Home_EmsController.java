@@ -82,9 +82,9 @@ public class Home_EmsController implements Initializable {
         if (stage3 != null && stage3.isShowing()) {
             stage3.toFront();
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCheckingUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCheckUserOrder.fxml"));
             Parent node = loader.load();
-            BorrowingBookDetailController controller = new BorrowingBookDetailController();
+            CheckUserOrderController controller = new CheckUserOrderController();
             controller.setCurrentStaff(this.currentStaff);
             stage3 = new Stage();
             stage3.setScene(new Scene(node));
