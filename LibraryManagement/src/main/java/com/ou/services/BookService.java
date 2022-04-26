@@ -83,8 +83,7 @@ public class BookService {
     }
 
     public boolean add(Book book) throws SQLException {
-        List<Book> books = new ArrayList<>();
-        books = getBooks(book.getName());
+        List<Book> books = getBooks(book.getName());
         if (books.size() > 0)
             return false;
 

@@ -75,7 +75,7 @@ public class BorrowBookController implements Initializable {
     private static ReaderCard currentCard;
     private static User currentStaff;
     
-    private static int amount;
+    private int amount;
 
     private static final BookService bookService = new BookService();
     private static final UserService userService = new UserService();
@@ -169,54 +169,76 @@ public class BorrowBookController implements Initializable {
     }
 
     public void findBook(ActionEvent evt) throws SQLException {
-        if (this.bookService.getBooks(this.searchContentTxtFld.getText()).size() > 0) {
+        if (this.bookService.getBooks(this.searchContentTxtFld.getText().trim()).size() > 0) {
             reset();
-            loadData(this.searchContentTxtFld.getText());
+            loadData(this.searchContentTxtFld.getText().trim());
         } else {
             Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
         }
     }
 
      public void borrowBook(ActionEvent evt) throws IOException {
-        if(0 == this.bookTableView.getSelectionModel().getSelectedItem().getAmount())
-            Utils.setAlert("Hết sách!!!", Alert.AlertType.ERROR).show();
-        else{
-            TextInputDialog inp = new TextInputDialog();
-            inp.setHeaderText("Số lượng sách");
-            Optional<String> num = inp.showAndWait();
-            int tmp = amount + Integer.parseInt(num.get());
-            if(num.isPresent() && Integer.parseInt(num.get()) < 6 && Integer.parseInt(num.get()) > 0 && tmp < 6){
-                try {
-                    Date currentDate = new Date();
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(currentDate);
-                    cal.add(Calendar.DATE, 30);
-                    Date returnDate = cal.getTime();
-                    amount += Integer.parseInt(num.get());
-                    Map<String, String> param = new HashMap<>();
-                    Book book = this.bookTableView.getSelectionModel().getSelectedItem();
-                    ReaderCard readerCard = this.currentCard;
-                    readerCard.setAmount(amount);
-                    User staff = this.currentStaff;
-                    
-                    BorrowingBook bw = new BorrowingBook(0, staff.getId(), book.getId(),
-                            readerCard.getId(), Integer.parseInt(num.get()), currentDate, returnDate, 0, new BigDecimal(0));
-                    this.borrowingBookService.addBorrowingBook(bw);
-                    
-                    param.put("amount", String.valueOf(book.getAmount() - Integer.parseInt(num.get())));
-                    this.bookService.update(this.bookTableView.getSelectionModel().getSelectedItem().getId(), param);
-                    
-                    this.readerCardService.updateReaderCard(readerCard.getId(), readerCard);
-                } catch (SQLException ex) {
-                    Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
+        int tmp = 0;
+        if(null != this.bookTableView.getSelectionModel().getSelectedItem()){
+            if(0 == this.bookTableView.getSelectionModel().getSelectedItem().getAmount())
+                Utils.setAlert("Hết sách!!!", Alert.AlertType.ERROR).show();
+            else if(this.userIdTxtFld.getText().isBlank())
+                Utils.setAlert("Chưa kiểm tra thẻ!!!", Alert.AlertType.ERROR).show();
+            else {
+                TextInputDialog inp = new TextInputDialog();
+                inp.setHeaderText("Số lượng sách");
+                Optional<String> num = inp.showAndWait();
+                if (num.isPresent()){
+                    try{
+                        tmp = amount + Integer.parseInt(num.get());
+                    } catch (Exception ex){
+                        Utils.setAlert("Sai định dạng. Mời bạn nhập số!", Alert.AlertType.ERROR).show();
+                    }
                 }
-                Utils.setAlert("Đặt thành công!!!", Alert.AlertType.CONFIRMATION).show();
-                loadData(null);
+                if (Integer.parseInt(num.get()) < 1){
+                    Utils.setAlert("Số lượng sách đặt phải lớn hơn 0!", Alert.AlertType.ERROR).show();
+                }
+                else if (Integer.parseInt(num.get()) > 5){
+                    Utils.setAlert("Không được mượn hơn 5 quyển sách!", Alert.AlertType.ERROR).show();
+                }
+                else if(Integer.parseInt(num.get()) > this.bookTableView.getSelectionModel().getSelectedItem().getAmount()){
+                    Utils.setAlert("Không được mượn quá số lượng sách hiện tại!",Alert.AlertType.ERROR).show();
+                }
+                else if(tmp > 5){
+                    Utils.setAlert("Không được đặt quá 5 cuốn sách!!!", Alert.AlertType.ERROR).show();
+                }
+                else {
+                    try {
+                        Date currentDate = new Date();
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(currentDate);
+                        cal.add(Calendar.DATE, 30);
+                        Date returnDate = cal.getTime();
+                        amount += Integer.parseInt(num.get());
+                        Map<String, String> param = new HashMap<>();
+                        Book book = this.bookTableView.getSelectionModel().getSelectedItem();
+                        ReaderCard readerCard = this.currentCard;
+                        readerCard.setAmount(amount);
+                        User staff = this.currentStaff;
 
+                        BorrowingBook bw = new BorrowingBook(0, staff.getId(), book.getId(),
+                                readerCard.getId(), Integer.parseInt(num.get()), currentDate, returnDate, 0, new BigDecimal(0));
+                        this.borrowingBookService.addBorrowingBook(bw);
+
+                        param.put("amount", String.valueOf(book.getAmount() - Integer.parseInt(num.get())));
+                        this.bookService.update(this.bookTableView.getSelectionModel().getSelectedItem().getId(), param);
+
+                        this.readerCardService.updateReaderCard(readerCard.getId(), readerCard);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Utils.setAlert("Đặt thành công!!!", Alert.AlertType.CONFIRMATION).show();
+                    loadData(null);
+                }
             }
-            else
-                Utils.setAlert("Số lượng có thể quá số lượng sách đang có hoặc dữ liệu không hợp lệ hoặc số lượng sách đã mượn lớn hơn 5!!!", Alert.AlertType.ERROR).show();
         }
+        else
+            Utils.setAlert("Mời bạn chọn sách muốn mượn!!!", Alert.AlertType.ERROR).show();
     }
 
     /**

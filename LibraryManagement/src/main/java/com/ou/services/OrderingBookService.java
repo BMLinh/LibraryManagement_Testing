@@ -12,13 +12,20 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderingBookService {
+<<<<<<< HEAD
     public List<OrderingBook> getOrderingBooks() throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook order by id");
+=======
+
+    public List<OrderingBook> getOrderingBooks() throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook");
+>>>>>>> 106e257bd79ffb3b9f1a54c2ebe99793e8394b10
             ResultSet rs = stm.executeQuery();
-            
+
             List<OrderingBook> list = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 int bookId = rs.getInt("book_id");
                 int readerCardId = rs.getInt("reader_card_id");
@@ -26,32 +33,38 @@ public class OrderingBookService {
                 String createdDate = Utils.convertDateTimeToString(rs.getTimestamp("created_date"));
                 String expiredDate = Utils.convertDateTimeToString(rs.getTimestamp("expired_date"));
                 boolean active = rs.getBoolean("active");
-                
+
                 list.add(new OrderingBook(id, bookId, readerCardId, amount, createdDate, expiredDate, active));
             }
             return list;
         }
     }
-    
+
     public boolean addOrderBook(OrderingBook order) throws SQLException {
-        try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("INSERT INTO " +
-                    "orderingbook(book_id, reader_card_id, amount, created_date, expired_date) " +
-                    "VALUES (?,?,?,?,?)");
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO "
+                    + "orderingbook(book_id, reader_card_id, amount, created_date, expired_date) "
+                    + "VALUES (?,?,?,?,?)");
             stm.setInt(1, order.getBookId());
-            stm.setInt(2,order.getReaderCardId());
+            stm.setInt(2, order.getReaderCardId());
             stm.setInt(3, order.getAmount());
             stm.setString(4, order.getCreatedDate());
             stm.setString(5, order.getExpiredDate());
+<<<<<<< HEAD
             stm.execute();
             return true;
         }
         catch (SQLException e){
+=======
+            return stm.executeUpdate() > 0;
+        } catch (SQLException e) {
+>>>>>>> 106e257bd79ffb3b9f1a54c2ebe99793e8394b10
             e.printStackTrace();
             return false;
         }
     }
 
+<<<<<<< HEAD
     //Set envent auto cập nhật cho phiếu mượn (active , amount của sách) sau khoảng thời gian (để minute để thuận lợi cho việc test)
     public boolean setAutoUpdateOrderBook(String currentDay, int minute, int orderID) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
@@ -92,55 +105,66 @@ public class OrderingBookService {
     
     public boolean updateActiveOrderBook(boolean ac, int id) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
+=======
+    public boolean updateActiveOrderBook(boolean ac, int id) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+>>>>>>> 106e257bd79ffb3b9f1a54c2ebe99793e8394b10
             PreparedStatement stm = conn.prepareStatement("UPDATE orderingbook SET active=? WHERE id=?");
             stm.setBoolean(1, ac);
             stm.setInt(2, id);
-            
+
             return stm.executeUpdate() > 0;
         }
     }
-    
-    public List<OrderingBook> findByActive(boolean active1) throws SQLException{
-        try(Connection conn = JdbcUtils.getConn()){
+
+    public List<OrderingBook> findByActive(boolean active1) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook WHERE active=?");
             stm.setBoolean(1, active1);
             ResultSet rs = stm.executeQuery();
-            
+
             List<OrderingBook> list = new ArrayList<>();
-            while(rs.next()){
-               int id = rs.getInt("id");
+            while (rs.next()) {
+                int id = rs.getInt("id");
                 int bookId = rs.getInt("book_id");
                 int readerCardId = rs.getInt("reader_card_id");
                 int amount = rs.getInt("amount");
                 String createdDate = Utils.convertDateTimeToString(rs.getTimestamp("created_date"));
                 String expiredDate = Utils.convertDateTimeToString(rs.getTimestamp("expired_date"));
                 boolean active = rs.getBoolean("active");
-                
+
                 list.add(new OrderingBook(id, bookId, readerCardId, amount, createdDate, expiredDate, active));
             }
             return list;
         }
     }
-    
-    public List<OrderingBook> findByReaderCardId(int rd) throws SQLException{
-        try(Connection conn = JdbcUtils.getConn()){
+
+    public List<OrderingBook> findByReaderCardId(int rd) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook WHERE reader_card_id=?");
             stm.setInt(1, rd);
             ResultSet rs = stm.executeQuery();
-            
+
             List<OrderingBook> list = new ArrayList<>();
-            while(rs.next()){
-               int id = rs.getInt("id");
+            while (rs.next()) {
+                int id = rs.getInt("id");
                 int bookId = rs.getInt("book_id");
                 int readerCardId = rs.getInt("reader_card_id");
                 int amount = rs.getInt("amount");
                 String createdDate = Utils.convertDateTimeToString(rs.getTimestamp("created_date"));
                 String expiredDate = Utils.convertDateTimeToString(rs.getTimestamp("expired_date"));
                 boolean active = rs.getBoolean("active");
-                
+
                 list.add(new OrderingBook(id, bookId, readerCardId, amount, createdDate, expiredDate, active));
             }
             return list;
+        }
+    }
+
+    public void updateOdering() throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("UPDATE orderingbook SET active=true WHERE active=false and expired_date < NOW()");
+            stm.executeQuery();
         }
     }
 }

@@ -9,6 +9,8 @@ import com.ou.services.BookCategoryService;
 import com.ou.services.BookService;
 import com.ou.services.PublishingCompanyService;
 import com.ou.utils.Utils;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,6 +67,7 @@ public class BookController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtDescription.setWrapText(true);
         try {
             // TODO
             this.init();
@@ -92,7 +95,7 @@ public class BookController implements Initializable {
                 }
 
                 if (book.getDateOfEntering() != null) {
-                    calendar.setTime(book.getDateOfEntering());
+                     calendar.setTime(book.getDateOfEntering());
                     int year = calendar.get(Calendar.YEAR);
                     int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -128,7 +131,7 @@ public class BookController implements Initializable {
 
         TableColumn col4 = new TableColumn("Description");
         col4.setCellValueFactory(new PropertyValueFactory("description"));
-        col4.setPrefWidth(150);
+        col4.setPrefWidth(210);
 
         TableColumn col5 = new TableColumn("Ngày xuất bản");
         col5.setCellValueFactory(new PropertyValueFactory("publishingYear"));
@@ -137,7 +140,7 @@ public class BookController implements Initializable {
 
         TableColumn col6 = new TableColumn("Ngày nhập");
         col6.setCellValueFactory(new PropertyValueFactory("dateOfEntering"));
-        col6.setPrefWidth(130);
+        col6.setPrefWidth(100);
         col6.setStyle("-fx-alignment: CENTER;");
 
         TableColumn col7 = new TableColumn("Category Id");
@@ -167,6 +170,17 @@ public class BookController implements Initializable {
     }
 
     public void init() throws SQLException {
+        this.txtAmount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if (!t1.matches("\\d*"))
+                    txtAmount.setText(t1.replaceAll("[^\\d]", ""));
+                if (txtAmount.getText().length() > 12) {
+                    String s = txtAmount.getText().substring(0, 12);
+                    txtAmount.setText(s);
+                }
+            }
+        });
         this.cbCategory.setItems(FXCollections.observableList(bookCategoryService.getBookCategory(null)));
         this.cbAuthor.setItems(FXCollections.observableList(authorService.getAuthors(null)));
         this.cbPublishingCompany.setItems(FXCollections.observableList(publishingCompanyService.getPublishingCompanys(null)));
@@ -190,8 +204,9 @@ public class BookController implements Initializable {
     }
 
     private boolean checkValidForm() {
-        if (txtBookName.getText() == null)
+        if (txtBookName.getText() == null || txtBookName.getText().trim().equals(""))
             return false;
+
         if (cbCategory.getSelectionModel().getSelectedItem() == null)
             return false;
         if (cbPublishingCompany.getSelectionModel().getSelectedItem() == null)
@@ -235,13 +250,28 @@ public class BookController implements Initializable {
 
     @FXML
     void add(ActionEvent event) throws SQLException, ParseException {
+        Book book = this.getBookFromForm();
+        if (checkValidForm()) {
+            if (bookService.add(book)) {
+                reloadWindow();
+            } else {
+                Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+            }
+        } else {
+            Utils.setAlert("Thông tin sách không hợp lệ!!!", Alert.AlertType.ERROR).show();
+        }
+    }
+
+    @FXML
+    void update(ActionEvent event) throws ParseException, SQLException {
         if (bookTabView.getSelectionModel().getSelectedItem() != null) {
             Book book = this.getBookFromForm();
             if (checkValidForm()) {
-                if (bookService.add(book)) {
+                if (bookService.update(bookTabView.getSelectionModel().getSelectedItem().getId(), book)) {
                     reloadWindow();
-                } else
-                    Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+                } else {
+                    Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
+                }
             } else {
                 Utils.setAlert("Thông tin sách không hợp lệ!!!", Alert.AlertType.ERROR).show();
             }
@@ -264,16 +294,8 @@ public class BookController implements Initializable {
     @FXML
     void searchBooks(KeyEvent event) throws SQLException {
         System.out.println(searchKw.getText());
-        if (bookService.getBooks(this.searchKw.getText()).size() > 0) {
+        if (bookService.getBooks(this.searchKw.getText().trim().toLowerCase()).size() > 0) {
             this.bookTabView.setItems(FXCollections.observableList(bookService.getBooks(this.searchKw.getText())));
-        }
-    }
-
-    @FXML
-    void update(ActionEvent event) throws ParseException, SQLException {
-        if (bookTabView.getSelectionModel().getSelectedItem() != null) {
-            bookService.update(bookTabView.getSelectionModel().getSelectedItem().getId(), this.getBookFromForm());
-            reloadWindow();
         }
     }
 
