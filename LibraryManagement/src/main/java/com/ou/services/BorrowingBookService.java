@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class BorrowingBookService {
     public List<BorrowingBook> getBorrowingBooks() throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("SELECT *  FROM borrowingbook");
+            PreparedStatement stm = conn.prepareStatement("SELECT *  FROM borrowingbook ORDER BY id");
             ResultSet rs = stm.executeQuery();
             
             List<BorrowingBook> list = new ArrayList<>();
@@ -50,7 +50,7 @@ public class BorrowingBookService {
     
     public List<BorrowingBook> getBorrowingBooksByActive(boolean Active, String kw) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("SELECT br.id, u.fullname, b.name, br.reader_card_id, br.amount, br.created_date, br.return_date, br.active, br.fine, br.book_id FROM borrowingbook br, book b, user u, readercard rd WHERE active = ? and br.book_id=b.id and br.reader_card_id=rd.id and rd.user_id=u.id and u.fullname like concat('%', ?, '%')");
+            PreparedStatement stm = conn.prepareStatement("SELECT br.id, u.fullname, b.name, br.reader_card_id, br.amount, br.created_date, br.return_date, br.active, br.fine, br.book_id FROM borrowingbook br, book b, user u, readercard rd WHERE active = ? and br.book_id=b.id and br.reader_card_id=rd.id and rd.user_id=u.id and u.fullname like concat('%', ?, '%') ORDER BY br.id");
             stm.setBoolean(1, Active);
             if (kw == null)
                 kw ="";

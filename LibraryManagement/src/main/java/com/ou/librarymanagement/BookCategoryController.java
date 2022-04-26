@@ -127,10 +127,12 @@ public class BookCategoryController implements Initializable {
 
     public void addBookCategory(ActionEvent evt) throws SQLException {
         BookCategory b = new BookCategory();
-        b.setName(txtName.getText());
+        b.setName(txtName.getText().trim());
         b.setPosition(txtPosition.getText().trim());
         if ("" == txtName.getText().trim()) {
             Utils.setAlert("Mời nhập tên thể loại!", Alert.AlertType.ERROR).show();
+        } else if ("" == txtPosition.getText().trim()) {
+            Utils.setAlert("Mời nhập tên khu vực!", Alert.AlertType.ERROR).show();
         } else if (s.addBookCategory(b) == true) {
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
@@ -143,7 +145,9 @@ public class BookCategoryController implements Initializable {
     public void updateBookCategory(ActionEvent evt) throws SQLException {
         try {
             if ("" == txtName.getText().trim()) {
-                Utils.setAlert("Mời nhập tên thể loại!", Alert.AlertType.ERROR).show();
+            Utils.setAlert("Mời nhập tên thể loại!", Alert.AlertType.ERROR).show();
+            } else if ("" == txtPosition.getText().trim()) {
+            Utils.setAlert("Mời nhập tên khu vực!", Alert.AlertType.ERROR).show();
             } else if (s.updateBookCategory(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim(), this.txtPosition.getText().trim()) == true) {
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);

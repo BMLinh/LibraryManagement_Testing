@@ -104,11 +104,4 @@ public class OrderingBookService {
             return list;
         }
     }
-
-    public void updateOdering() throws SQLException {
-        try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("UPDATE orderingbook SET active=true WHERE active=false and expired_date < NOW()");
-            stm.executeQuery();
-        }
-    }
 }
