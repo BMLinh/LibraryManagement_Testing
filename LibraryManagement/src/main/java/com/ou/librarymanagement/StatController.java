@@ -17,48 +17,48 @@ import java.util.*;
 public class StatController implements Initializable {
 
     @FXML
-    private ComboBox cbCondition;
+    private ComboBox cbQuarterChoose;
     @FXML
-    private TextField txtConditionSearch;
+    private TextField txtYear;
     @FXML
     private TableView tbStat;
 
     private static final StatService statService = new StatService();
     private static final List<String> condition = new ArrayList<>();
     {
-        this.condition.add("Quý");
-        this.condition.add("Năm");
+        this.condition.add("1");
+        this.condition.add("2");
+        this.condition.add("3");
+        this.condition.add("4");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         init();
         this.loadColumns();
-        Map<String, String> paramUnit = new HashMap<>();
-        paramUnit.put("year",this.txtConditionSearch.getText());
-        this.loadData(paramUnit);
     }
     public void init(){
-        this.cbCondition.setItems(FXCollections.observableList(condition));
-        this.cbCondition.getSelectionModel().select(1);
+        this.cbQuarterChoose.setItems(FXCollections.observableList(condition));
+        this.cbQuarterChoose.getSelectionModel().select(0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         int currentYear = calendar.get(Calendar.YEAR);
-        this.txtConditionSearch.setText(String.valueOf(currentYear));
+        this.txtYear.setText(String.valueOf(currentYear));
+        loadData(Integer.parseInt(cbQuarterChoose.getValue().toString()), currentYear);
 
-        this.txtConditionSearch.textProperty().addListener(new ChangeListener<String>(){
+        this.txtYear.textProperty().addListener(new ChangeListener<String>(){
             @Override
             public void changed(ObservableValue<? extends String> ov, String t, String t1) {
                 if (!t1.matches("\\d*"))
-                    txtConditionSearch.setText(t1.replaceAll("[^\\d]", ""));
-                if (txtConditionSearch.getText().length() > 4) {
-                    String s = txtConditionSearch.getText().substring(0, 4);
-                    txtConditionSearch.setText(s);
+                    txtYear.setText(t1.replaceAll("[^\\d]", ""));
+                if (txtYear.getText().length() > 4) {
+                    String s = txtYear.getText().substring(0, 4);
+                    txtYear.setText(s);
                 }
             }
         });
 
-        this.txtConditionSearch.setTextFormatter(new TextFormatter<>(change -> {
+        this.txtYear.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getText().equals(" ")) {
                 change.setText("");
             }
@@ -66,9 +66,9 @@ public class StatController implements Initializable {
         }));
     }
 
-    private void loadData(Map<String,String> param){
+    private void loadData(int quarter, int year){
         try {
-            this.tbStat.setItems(FXCollections.observableList(statService.getStat(param)));
+            this.tbStat.setItems(FXCollections.observableList(statService.getStat(quarter, year)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,47 +77,32 @@ public class StatController implements Initializable {
     private void loadColumns(){
         TableColumn col1 = new TableColumn("Tháng");
         col1.setCellValueFactory(new PropertyValueFactory("month"));
-        col1.setPrefWidth(246);
+        col1.setPrefWidth(186);
 
-        TableColumn col2 = new TableColumn("Tên sách");
-        col2.setCellValueFactory(new PropertyValueFactory("bookName"));
-        col2.setPrefWidth(246);
+        TableColumn col2 = new TableColumn("Năm");
+        col2.setCellValueFactory(new PropertyValueFactory("year"));
+        col2.setPrefWidth(186);
 
-        TableColumn col3 = new TableColumn("Số lượng mượn");
-        col3.setCellValueFactory(new PropertyValueFactory("sum"));
-        col3.setPrefWidth(246);
+        TableColumn col3 = new TableColumn("Tên sách");
+        col3.setCellValueFactory(new PropertyValueFactory("bookName"));
+        col3.setPrefWidth(186);
 
-        this.tbStat.getColumns().addAll(col1, col2, col3);
+        TableColumn col4 = new TableColumn("Số lượng mượn");
+        col4.setCellValueFactory(new PropertyValueFactory("sum"));
+        col4.setPrefWidth(186);
+
+        this.tbStat.getColumns().addAll(col1, col2, col3, col4);
     }
 
     public void loadTableWithCondition(){
-        if (this.cbCondition.getSelectionModel().getSelectedIndex() ==0){
-            if (txtConditionSearch.getText() == "")
-                Utils.setAlert("Vui lòng nhập quý cần thống kê!", Alert.AlertType.ERROR).show();
-            else if (Integer.parseInt(txtConditionSearch.getText()) == 0)
-                Utils.setAlert("Quý không bằng 0!", Alert.AlertType.ERROR).show();
-            else if (Integer.parseInt(txtConditionSearch.getText()) > 4)
-                Utils.setAlert("Quý phải nhỏ hơn hoặc bằng 4!!", Alert.AlertType.ERROR).show();
-            else
-            {
-                Map<String, String> param = new HashMap<>();
-                param.put("quarter", txtConditionSearch.getText());
-                loadData(param);
-            }
-
-        }
+        if (txtYear.getText() == "")
+            Utils.setAlert("Vui lòng nhập năm cần thống kê!", Alert.AlertType.ERROR).show();
+        else if (Integer.parseInt(txtYear.getText()) == 0)
+            Utils.setAlert("Năm không bằng 0!", Alert.AlertType.ERROR).show();
+        else if (Integer.parseInt(txtYear.getText()) <= 1900)
+            Utils.setAlert("Năm nhập phải lơn hơn 1900!", Alert.AlertType.ERROR).show();
         else {
-            if (txtConditionSearch.getText() == "")
-                Utils.setAlert("Vui lòng nhập năm cần thống kê!", Alert.AlertType.ERROR).show();
-            else if (Integer.parseInt(txtConditionSearch.getText()) == 0)
-                Utils.setAlert("Năm không bằng 0!", Alert.AlertType.ERROR).show();
-            else if (Integer.parseInt(txtConditionSearch.getText()) <= 1900)
-                Utils.setAlert("Năm nhập phải lơn hơn 1900!", Alert.AlertType.ERROR).show();
-            else {
-                Map<String, String> param = new HashMap<>();
-                param.put("year", txtConditionSearch.getText());
-                loadData(param);
-            }
+            loadData(Integer.parseInt(cbQuarterChoose.getValue().toString()), Integer.parseInt(this.txtYear.getText()));
         }
     }
 

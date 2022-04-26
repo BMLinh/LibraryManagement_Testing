@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="631.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.StatController">
    <children>
       <HBox alignment="CENTER" prefHeight="102.0" prefWidth="771.0" style="-fx-background-color: #333;">
@@ -37,8 +36,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox fx:id="cbCondition" prefHeight="40.0" prefWidth="198.0" GridPane.rowIndex="1" />
-            <TextField fx:id="txtConditionSearch" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ComboBox fx:id="cbQuarterChoose" prefHeight="40.0" prefWidth="198.0" GridPane.rowIndex="1" />
+            <TextField fx:id="txtYear" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
@@ -48,6 +47,16 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quý:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Năm:" GridPane.columnIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
          </children>
       </GridPane>
    </children>

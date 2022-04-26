@@ -7,7 +7,6 @@ package com.ou.utils;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -46,5 +45,5 @@ public class Utils {
         SimpleDateFormat F = new SimpleDateFormat(pattern);
         return F.format(date);
     }
-    
+
 }
