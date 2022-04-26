@@ -48,6 +48,12 @@ public class AuthorController implements Initializable {
         this.loadData();
         this.txtId.setEditable(false);
 
+        this.txtName.setTextFormatter(new TextFormatter<>(change -> {
+            if(!change.getText().matches("[aA-zZ\\p{L} ]+$"))
+                change.setText("");
+            return change;
+        }));
+
         this.authorTabView.setRowFactory(et -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(r -> {
