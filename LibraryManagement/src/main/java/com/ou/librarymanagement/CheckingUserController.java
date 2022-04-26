@@ -159,7 +159,7 @@ public class CheckingUserController implements Initializable {
                                     param.put("amount", String.valueOf(book.getAmount() + order.getAmount()));
                                     orderingBookService.updateActiveOrderBook(true, order.getId());
                                     bookService.update(book.getId(), param);
-                                    Utils.setAlert("Đã xác nhận đặt sách!!!", Alert.AlertType.ERROR).show();
+                                    Utils.setAlert("Đã xác nhận đặt sách!!!", Alert.AlertType.INFORMATION).show();
                                 }
                                 else
                                     Utils.setAlert("Xác nhận không thành công!!!", Alert.AlertType.ERROR).show();

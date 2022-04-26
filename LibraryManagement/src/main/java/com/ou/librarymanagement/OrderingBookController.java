@@ -208,7 +208,7 @@ public class OrderingBookController implements Initializable {
 
                         // Lấy id của phiếu đặt sách để tiến hành set event auto tự update lại phiếu khi tới hạn trả
                         int orderId = orderingBookService.getOrderingBooks().get(orderingBookService.getOrderingBooks().size() - 1).getId();
-                        if (orderingBookService.setAutoUpdateOrderBook("order" + orderId ,5, orderId) == true)
+                        if (orderingBookService.setAutoUpdateOrderBook("order" + orderId ,2880, orderId) == true)
                             System.out.println(orderingBookService.getOrderingBooks().get(orderingBookService.getOrderingBooks().size()).getId());
                             Utils.setAlert("Đặt sách thành công!", Alert.AlertType.INFORMATION).show();
                         reset();
