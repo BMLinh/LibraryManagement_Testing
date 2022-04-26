@@ -21,7 +21,7 @@ import java.util.List;
 public class BookCategoryService {
     public List<BookCategory> getBookCategory(String kw) throws SQLException {
             try (Connection conn = JdbcUtils.getConn()) {
-                PreparedStatement stm = conn.prepareStatement("SELECT * FROM bookcategory WHERE name like concat('%', ?, '%')");
+                PreparedStatement stm = conn.prepareStatement("SELECT * FROM bookcategory WHERE name like concat('%', ?, '%') ORDER BY id");
                 if (kw == null)
                     kw ="";
                 stm.setString(1,kw);

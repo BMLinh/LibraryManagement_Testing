@@ -77,7 +77,7 @@ public class ReturnBooksController implements Initializable{
         this.btnReturnBook.setVisible(false);
         
         this.txtKeyword.textProperty().addListener((evt) ->{
-            this.loadData(this.txtKeyword.getText());
+            this.loadData(this.txtKeyword.getText().trim());
         });
         
         this.tbBorrowingBook.setRowFactory(et ->{
