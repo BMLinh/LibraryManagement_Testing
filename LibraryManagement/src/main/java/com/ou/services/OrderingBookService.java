@@ -51,9 +51,9 @@ public class OrderingBookService {
     }
 
     //Set envent auto cập nhật cho phiếu mượn (active , amount của sách) sau khoảng thời gian (để minute để thuận lợi cho việc test)
-    public boolean setAutoUpdateOrderBook(String currentDay, int minute, int orderID) throws SQLException{
+    public boolean setAutoUpdateOrderBook(String nameEvent, int minute, int orderID) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm =conn.prepareStatement("CREATE EVENT If not exists "+currentDay+" \n" +
+            PreparedStatement stm =conn.prepareStatement("CREATE EVENT If not exists "+nameEvent+" \n" +
                     "ON SCHEDULE at current_timestamp + interval ? minute\n" +
                     "DO\n" +
                     "Update orderingbook o, book b \n" +
