@@ -1,7 +1,6 @@
 package com.ou.tester;
 
 import com.ou.pojo.Department;
-import com.ou.pojo.Role;
 import com.ou.services.DepartmentService;
 import com.ou.utils.JdbcUtils;
 import org.junit.jupiter.api.AfterAll;
