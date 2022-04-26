@@ -42,6 +42,8 @@ public class Home_UsrsController implements Initializable {
     private LoginController loginController = new LoginController();
     private ReaderCard currentCard = null;
     private User currentUser = null;
+    private Stage stage1;
+    private Stage stage2;
     
 
     /**
@@ -55,26 +57,32 @@ public class Home_UsrsController implements Initializable {
     }
     
     public void switch1(ActionEvent evt) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLOrderBook.fxml"));
-        OrderingBookController controller = fxmlLoader.getController();
-        controller.setCurrentCard(this.getCurrentCard());
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Đặt sách");
-        stage.show();
+        if (stage1 != null && stage1.isShowing()) {
+            stage1.toFront();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLOrderBook.fxml"));
+            OrderingBookController controller = fxmlLoader.getController();
+            controller.setCurrentCard(this.getCurrentCard());
+            stage1 = new Stage();
+            stage1.setScene(new Scene(fxmlLoader.load()));
+            stage1.setTitle("Đặt sách");            
+            stage1.show();
+        }
     }
     
     public void switch4(ActionEvent evt) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLUserInfo.fxml"));
-        UserInfoController controller = fxmlLoader.getController();
-        controller.setCurrentUser(this.getCurrentUser());
-        controller.setCurrentCard(this.getCurrentCard());
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Xem thông tin");
-        stage.show();
+        if (stage2 != null && stage2.isShowing()) {
+            stage2.toFront();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLUserInfo.fxml"));
+            UserInfoController controller = fxmlLoader.getController();
+            controller.setCurrentUser(this.getCurrentUser());
+            controller.setCurrentCard(this.getCurrentCard());
+            stage2 = new Stage();
+            stage2.setScene(new Scene(fxmlLoader.load()));
+            stage2.setTitle("Xem thông tin");         
+            stage2.show();
+        }
     }
 
     /**
@@ -120,6 +128,10 @@ public class Home_UsrsController implements Initializable {
         Stage primaryStage = (Stage) btnLogout.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.show();
+        if (stage1 != null)
+            stage1.close();
+        if (stage2 != null)
+            stage2.close();
     }
 
 }

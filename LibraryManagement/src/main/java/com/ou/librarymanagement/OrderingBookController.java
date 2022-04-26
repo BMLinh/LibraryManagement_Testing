@@ -196,18 +196,27 @@ public class OrderingBookController implements Initializable {
                 oderBook.setCreatedDate(Utils.convertDateTimeToString(currentDate));
                 oderBook.setExpiredDate(Utils.convertDateTimeToString(expiredDate));
                 try {
-                    if (orderingBookService.addOrderBook(oderBook) == true){
+                    // Kiểm tra tổng số sách đặt trong 2 ngày có lớn hơn 5
+                    if (orderingBookService.getTotalAmountByOrderID(getCurrentCard().getId(),false) > 5){
+                        Utils.setAlert("Không đặt hơn 5 quyển nếu chưa đến nhận sách đặt trước đó !", Alert.AlertType.ERROR).show();
+                    }
+                    else if (orderingBookService.addOrderBook(oderBook) == true){
                         Map<String, String> param = new HashMap<>();
                         int amountOfBookAffter = Integer.parseInt(txtAmount.getText()) - amountOfBook;
                         param.put("amount", String.valueOf(amountOfBookAffter));
                         bookService.update(Integer.parseInt(txtBookId.getText()), param);
-                        Utils.setAlert("Đặt sách thành công!", Alert.AlertType.INFORMATION).show();
+
+                        // Lấy id của phiếu đặt sách để tiến hành set event auto tự update lại phiếu khi tới hạn trả
+                        int orderId = orderingBookService.getOrderingBooks().get(orderingBookService.getOrderingBooks().size() - 1).getId();
+                        if (orderingBookService.setAutoUpdateOrderBook("order" + orderId ,2880, orderId) == true)
+                            System.out.println(orderingBookService.getOrderingBooks().get(orderingBookService.getOrderingBooks().size()).getId());
+                            Utils.setAlert("Đặt sách thành công!", Alert.AlertType.INFORMATION).show();
                         reset();
                     }
                     else
                         Utils.setAlert("Đặt sách thất bại!", Alert.AlertType.ERROR).show();
                 }
-                catch (SQLException ex){
+                catch (IndexOutOfBoundsException ex){
                     ex.printStackTrace();
                 }
             }

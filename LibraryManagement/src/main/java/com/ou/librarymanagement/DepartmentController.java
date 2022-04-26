@@ -97,6 +97,7 @@ public class DepartmentController implements Initializable {
         this.btnDelete.setVisible(false);
         this.btnInsert.setVisible(true);
         this.tbDepartment.getSelectionModel().select(null);
+        this.txtKeyword.setText("");
     }
 
     public void resetHandler(ActionEvent evt){
@@ -120,7 +121,10 @@ public class DepartmentController implements Initializable {
 
     public void updateDepartment(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim())){
+            if (this.txtName.getText().trim() == ""){
+                Utils.setAlert("Mời nhập tên phòng ban!", Alert.AlertType.ERROR).show();
+            }
+            else if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim())){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }

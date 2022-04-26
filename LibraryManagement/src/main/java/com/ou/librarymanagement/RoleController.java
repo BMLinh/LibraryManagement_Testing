@@ -59,12 +59,18 @@ public class RoleController implements Initializable {
         this.tbRoles.setRowFactory(et ->{
             TableRow row = new TableRow();
             row.setOnMouseClicked(r ->{
-                this.btnDelete.setVisible(true);
-                this.btnUpdate.setVisible(true);
                 this.btnInsert.setVisible(false);
                 Role role = (Role) this.tbRoles.getSelectionModel().getSelectedItem();
                 this.txtId.setText(String.valueOf(role.getId()));
                 this.txtName.setText(role.getName());
+                if (this.txtName.getText().trim().compareToIgnoreCase("admin") != 0 && this.txtName.getText().trim().compareToIgnoreCase("staff") != 0){
+                    this.btnDelete.setVisible(true);
+                    this.btnUpdate.setVisible(true);
+                }
+                else {
+                    this.btnDelete.setVisible(false);
+                    this.btnUpdate.setVisible(false);
+                }
             });
             return row;
         });
@@ -96,6 +102,7 @@ public class RoleController implements Initializable {
         this.btnInsert.setVisible(true);
         this.btnDelete.setVisible(false);
         this.tbRoles.getSelectionModel().select(null);
+        this.txtKeyword.setText("");
     }
     public void resetHandler(ActionEvent evt){
         reset();
@@ -117,7 +124,10 @@ public class RoleController implements Initializable {
 
     public void updateRole(ActionEvent evt) throws SQLException{
         try {
-            if (s.updateRole(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim()) == true){
+            if(this.txtName.getText().trim() == ""){
+                Utils.setAlert("Mời nhập tên quyền!", Alert.AlertType.ERROR).show();
+            }
+            else if (s.updateRole(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim()) == true){
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
             }

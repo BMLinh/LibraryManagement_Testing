@@ -96,4 +96,25 @@ public class BorrowingBookTestSuite {
         list.forEach(r -> Assertions.assertNotNull(r.getAmount()));
         list.forEach(r -> Assertions.assertNotNull(r.getCreatedDate()));
     }
+    @Test
+    public void getBorrowBookByActive() throws SQLException {
+        List<BorrowingBook> borrowingBooks = b.getBorrowingBooksByActive(false, null);
+        borrowingBooks.forEach(b -> Assertions.assertTrue(b.getActive() == 0));
+        
+        List<BorrowingBook> borrowingBooksF = b.getBorrowingBooksByActive(true, null);
+        borrowingBooksF.forEach(b -> Assertions.assertTrue(b.getActive() == 1));        
+    }
+    
+    @Test
+    public void updateReturnBook() throws SQLException {
+        BorrowingBook bw = new BorrowingBook(1, 2, 1, 1, 1, new Date(2022,04,23), new Date(2022, 04, 30), 0, new BigDecimal(20000));
+        b.addBorrowingBook(bw);
+        bw = b.getBorrowingBooks().get(b.getBorrowingBooks().size()-1);
+        b.updateReturnBook(bw.getId(), 1, 0, new Date(2022, 04, 26));
+        bw = b.getBorrowingBooks().get(b.getBorrowingBooks().size()-1);
+        
+        Assertions.assertEquals(bw.getActive(), 1);
+        Assertions.assertNotEquals(bw.getReturnDate(), new Date(2022, 04, 30));
+        b.deleteBorrowingBook(bw.getId());
+    }
 }

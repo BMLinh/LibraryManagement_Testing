@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,16 +92,20 @@ public class AuthorController implements Initializable {
     }
 
     private boolean checkValidForm() {
-        if (txtName.getText().trim().isEmpty())
+        if (txtName.getText() == null || txtName.getText().trim().isEmpty())
             return false;
+        if (Utils.isContainNumber(txtName.getText().trim()))
+            return false;
+
         return true;
     }
 
     private Author getAuthorFromForm() {
         Author author = new Author();
 
-        if (!txtName.getText().trim().isEmpty())
-            author.setName(this.txtName.getText());
+        if (!txtName.getText().trim().isEmpty()) {
+            author.setName(Utils.stringNormalization(this.txtName.getText()));
+        }
 
         return author;
     }
@@ -141,10 +146,20 @@ public class AuthorController implements Initializable {
     }
 
     @FXML
-    void update(ActionEvent event) throws SQLException {
-        if (this.authorTabView.getSelectionModel().getSelectedItem() != null) {
-            authorService.update(authorTabView.getSelectionModel().getSelectedItem().getId(), this.txtName.getText());
-            reloadWindow();
+    void update(ActionEvent event) throws ParseException, SQLException {
+        if (authorTabView.getSelectionModel().getSelectedItem() != null) {
+            Author author = this.getAuthorFromForm();
+            if (checkValidForm()) {
+                if (authorService.update(authorTabView.getSelectionModel().getSelectedItem().getId(), author.getName())) {
+                    reloadWindow();
+                } else {
+                    Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
+                }
+            } else {
+                Utils.setAlert("Thông tin sách không hợp lệ!!!", Alert.AlertType.ERROR).show();
+            }
+        } else {
+            Utils.setAlert("Chưa chọn sách cần chỉnh sửa!!!", Alert.AlertType.ERROR).show();
         }
     }
 

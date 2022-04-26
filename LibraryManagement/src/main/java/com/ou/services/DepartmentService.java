@@ -10,7 +10,7 @@ import java.util.List;
 public class DepartmentService {
     public List<Department> getDepartments(String kw) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM department WHERE name like concat('%', ?, '%')");
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM department WHERE name like concat('%', ?, '%') order by id");
             if (kw == null)
                 kw ="";
             stm.setString(1,kw);
