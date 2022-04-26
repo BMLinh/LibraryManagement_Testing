@@ -53,7 +53,9 @@ public class Home_EmsController implements Initializable {
     }
 
     public void switch1(ActionEvent evt) throws IOException {
-        if (stage1 == null) {
+        if (stage1 != null && stage1.isShowing()) {
+            stage1.toFront();
+        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLBorrowingBookDetail.fxml"));
             Parent node = loader.load();
             BorrowingBookDetailController controller = new BorrowingBookDetailController();
@@ -61,29 +63,25 @@ public class Home_EmsController implements Initializable {
             stage1 = new Stage();
             stage1.setScene(new Scene(node));
             stage1.show();
-        } else if (stage1.isShowing()) {
-            stage1.toFront();
-        } else {
-            stage1.show();
         }
     }
 
     public void switch2() throws IOException {
-        if (stage2 == null) {
+        if (stage2 != null && stage2.isShowing()) {
+            stage2.toFront();
+        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLReturnBook.fxml"));
             Parent node = loader.load();
             stage2 = new Stage();
             stage2.setScene(new Scene(node));
             stage2.show();
-        } else if (stage2.isShowing()) {
-            stage2.toFront();
-        } else {
-            stage2.show();
         }
     }
 
     public void switch3() throws IOException {
-        if (stage3 == null) {
+        if (stage3 != null && stage3.isShowing()) {
+            stage3.toFront();
+        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLCheckingUser.fxml"));
             Parent node = loader.load();
             BorrowingBookDetailController controller = new BorrowingBookDetailController();
@@ -91,23 +89,17 @@ public class Home_EmsController implements Initializable {
             stage3 = new Stage();
             stage3.setScene(new Scene(node));
             stage3.show();
-        } else if (stage3.isShowing()) {
-            stage3.toFront();
-        } else {
-            stage3.show();
         }
     }
 
     public void switch4() throws IOException {
-        if (stage4 == null) {
+        if (stage4 != null && stage4.isShowing()) {
+            stage4.toFront();
+        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLStat.fxml"));
             Parent node = loader.load();
             stage4 = new Stage();
             stage4.setScene(new Scene(node));
-            stage4.show();
-        } else if (stage4.isShowing()) {
-            stage4.toFront();
-        } else {
             stage4.show();
         }
     }
@@ -127,6 +119,18 @@ public class Home_EmsController implements Initializable {
         Stage primaryStage = (Stage) btnLogout.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.show();
+        if (stage1 != null) {
+            stage1.close();
+        }
+        if (stage2 != null) {
+            stage2.close();
+        }
+        if (stage3 != null) {
+            stage3.close();
+        }
+        if (stage4 != null) {
+            stage4.close();
+        }
     }
 
     /**

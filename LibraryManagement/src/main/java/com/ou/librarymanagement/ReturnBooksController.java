@@ -44,7 +44,7 @@ public class ReturnBooksController implements Initializable{
     @FXML
     private TextField txtId;
     @FXML
-    private TextField txtStaffName;
+    private TextField txtReaderName;
     @FXML
     private TextField txtBookName;
     @FXML
@@ -87,7 +87,7 @@ public class ReturnBooksController implements Initializable{
                 this.txtId.setText(String.valueOf(brw.getId()));
                 this.txtBookName.setText(brw.getBookName());
                 this.txtAmount.setText(String.valueOf(brw.getAmount()));
-                this.txtStaffName.setText(brw.getUserName());
+                this.txtReaderName.setText(brw.getUserName());
                 this.txtReaderId.setText(String.valueOf(brw.getReaderCardId()));
                 this.dpCreatedDate.setValue(Utils.convertUtilToSql(brw.getCreatedDate()).toLocalDate());
                 this.dpReturnDate.setValue(Utils.convertUtilToSql(brw.getReturnDate()).toLocalDate());
@@ -148,10 +148,10 @@ public class ReturnBooksController implements Initializable{
         this.txtBookName.clear();
         this.txtId.clear();
         this.txtReaderId.clear();
-        this.txtStaffName.clear();
+        this.txtReaderName.clear();
         this.txtFine.clear();
-        this.dpCreatedDate.getEditor().clear();
-        this.dpReturnDate.getEditor().clear();
+        this.dpCreatedDate.setValue(null);
+        this.dpReturnDate.setValue(null);
         this.btnReturnBook.setVisible(false);
     }
     

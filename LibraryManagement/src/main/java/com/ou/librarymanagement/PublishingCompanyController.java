@@ -33,7 +33,8 @@ import javafx.stage.Stage;
  *
  * @author Linh
  */
-public class PublishingCompanyController implements Initializable{
+public class PublishingCompanyController implements Initializable {
+
     private static final PublishingCompanyService s = new PublishingCompanyService();
     @FXML
     private TextField txtKeyword;
@@ -60,18 +61,18 @@ public class PublishingCompanyController implements Initializable{
 
         //Ẩn button sửa
         this.btnUpdate.setVisible(false);
-        
+
         this.btnDelete.setVisible(false);
 
         //Tìm kiếm đối tượng theo tên đối tượng
-        this.txtKeyword.textProperty().addListener((evt) ->{
+        this.txtKeyword.textProperty().addListener((evt) -> {
             this.loadData(this.txtKeyword.getText().trim());
         });
 
         //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
-        this.tbPublishingCompany.setRowFactory(et ->{
+        this.tbPublishingCompany.setRowFactory(et -> {
             TableRow row = new TableRow();
-            row.setOnMouseClicked(r ->{
+            row.setOnMouseClicked(r -> {
                 this.btnUpdate.setVisible(true);
                 this.btnDelete.setVisible(true);
                 this.btnInsert.setVisible(false);
@@ -82,15 +83,16 @@ public class PublishingCompanyController implements Initializable{
             return row;
         });
     }
-    private void loadData(String kw){
+
+    private void loadData(String kw) {
         try {
             this.tbPublishingCompany.setItems(FXCollections.observableList(s.getPublishingCompanys(kw)));
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadColumns(){
+    private void loadColumns() {
         TableColumn col1 = new TableColumn("Id");
         col1.setCellValueFactory(new PropertyValueFactory("id"));
         col1.setPrefWidth(300);
@@ -110,45 +112,49 @@ public class PublishingCompanyController implements Initializable{
         this.tbPublishingCompany.getSelectionModel().select(null);
     }
 
-    public void resetHandler(ActionEvent evt){
+    public void resetHandler(ActionEvent evt) {
         reset();
     }
 
-    public void addPublishingCompany(ActionEvent evt) throws SQLException{
+    public void addPublishingCompany(ActionEvent evt) throws SQLException {
         PublishingCompany p = new PublishingCompany();
         p.setName(txtName.getText().trim());
-        if (s.addPublishingCompany(p)){
+        if ("" == txtName.getText().trim()) {
+            Utils.setAlert("Mời nhập tên nhà xuất bản!", Alert.AlertType.ERROR).show();
+        } else if (s.addPublishingCompany(p)) {
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
             this.loadData(null);
-        }
-        else
+        } else {
             Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+        }
     }
 
-    public void updatePublishingCompany(ActionEvent evt) throws SQLException{
+    public void updatePublishingCompany(ActionEvent evt) throws SQLException {
         try {
-            if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim())){
+            if ("" == txtName.getText().trim()) {
+                Utils.setAlert("Mời nhập tên nhà xuất bản!", Alert.AlertType.ERROR).show();
+            } else if (s.updateDepartment(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim())) {
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
-            }
-            else
+            } else {
                 Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
-    public void deletePublishingCompany(ActionEvent evt) throws SQLException{
-        try{
-            if (s.deletePublishingCompany(Integer.parseInt(this.txtId.getText()))){
+
+    public void deletePublishingCompany(ActionEvent evt) throws SQLException {
+        try {
+            if (s.deletePublishingCompany(Integer.parseInt(this.txtId.getText()))) {
                 Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
                 reset();
                 this.loadData(null);
-            }
-            else
+            } else {
                 Utils.setAlert("Xóa thất bại!!!", Alert.AlertType.ERROR).show();
-        }catch (SQLException e){
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
