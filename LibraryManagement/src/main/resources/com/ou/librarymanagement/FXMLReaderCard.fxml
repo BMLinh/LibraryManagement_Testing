@@ -96,10 +96,10 @@
             </Text>
             <TextField fx:id="readerCardIdTxtFld" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="userNameTxtFld" editable="false" GridPane.columnIndex="3" />
-            <DatePicker fx:id="startDateDP" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <DatePicker fx:id="endDateDP" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <TextField fx:id="amountTxtFld" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="userIdTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="startDateTxtFld" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <GridPane alignment="CENTER" layoutX="78.0" layoutY="401.0" prefHeight="50.0" prefWidth="600.0">

@@ -155,7 +155,7 @@ public class CheckingUserController implements Initializable {
                                 String nameEvent = "order" + order.getId();
 
                             if (orderingBookService.dropEventAutoUpdateOrder(nameEvent) == true){
-                                    Map<String, String> param = new HashMap<>();
+                                     Map<String, String> param = new HashMap<>();
                                     param.put("amount", String.valueOf(book.getAmount() + order.getAmount()));
                                     orderingBookService.updateActiveOrderBook(true, order.getId());
                                     bookService.update(book.getId(), param);

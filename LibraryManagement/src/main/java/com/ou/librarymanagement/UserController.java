@@ -273,13 +273,14 @@ public class UserController implements Initializable {
         this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(1));
         this.createdDateTxtFld.clear();
         this.birthTxtFld.setValue(null);
+        this.userTabView.getSelectionModel().clearSelection();
     }
 
     public void addUser(ActionEvent evt) throws SQLException {
         if(!this.usernameTxtFld.getText().isBlank() &&
-                !this.fullnameTxtFld.getText().isBlank() && 
-                !this.passwordTxtFld.getText().isBlank() && 
-                !this.phoneTxtFld.getText().isBlank()){
+            !this.fullnameTxtFld.getText().isBlank() && 
+            !this.passwordTxtFld.getText().isBlank() && 
+            !this.phoneTxtFld.getText().isBlank()){
             User user = this.getUserFromFx();
             user.setFullname(Utils.chuannHoa(this.fullnameTxtFld.getText()));
             user.setAddress(Utils.chuannHoa(this.addressTxtFld.getText()));
@@ -299,11 +300,14 @@ public class UserController implements Initializable {
     public void updateUser(ActionEvent evt) throws SQLException {
         if(!this.idTxtFld.getText().isBlank()){
             if(!this.usernameTxtFld.getText().isBlank() &&
-                !this.fullnameTxtFld.getText().isBlank() && 
-                !this.passwordTxtFld.getText().isBlank() && 
-                !this.phoneTxtFld.getText().isBlank()){
+            !this.fullnameTxtFld.getText().isBlank() && 
+            !this.passwordTxtFld.getText().isBlank() && 
+            !this.phoneTxtFld.getText().isBlank()){
+                User user = this.getUserFromFx();
+                user.setFullname(Utils.chuannHoa(this.fullnameTxtFld.getText()));
+                user.setAddress(Utils.chuannHoa(this.addressTxtFld.getText()));
                 if(this.userService.findUserByPhone(this.phoneTxtFld.getText()).isEmpty() && this.userService.findUserByUsername(this.usernameTxtFld.getText()).isEmpty()){
-                    if (userService.updateUser(userTabView.getSelectionModel().getSelectedItem().getId(), this.getUserFromFx())) {
+                    if (userService.updateUser(userTabView.getSelectionModel().getSelectedItem().getId(), user)) {
                         Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                         this.loadData();
                         reset();
@@ -312,8 +316,7 @@ public class UserController implements Initializable {
                 } else Utils.setAlert("Có User trùng với thông tin đang sửa hoặc Không có thay đổi với User đang được sửa!!!", Alert.AlertType.ERROR).show();
             } else Utils.setAlert("Mời bạn nhập đủ thông tin!!!", Alert.AlertType.ERROR).show();
         }
-        else
-            Utils.setAlert("Chưa có User cần sửa!!!", Alert.AlertType.ERROR).show();
+        else Utils.setAlert("Chưa chọn User cần sửa!!!", Alert.AlertType.ERROR).show();
     }
 
     public void resetHandler(ActionEvent evt) throws SQLException {
@@ -322,13 +325,15 @@ public class UserController implements Initializable {
     }
 
     public void deleteUser(ActionEvent evt) throws SQLException {
-        if (userService.deleteUser(this.userTabView.getSelectionModel().getSelectedItem().getId())) {
-            Utils.setAlert("Xoá thành công!!!", Alert.AlertType.INFORMATION).show();
-            this.loadData();
-            reset();
-        } else
-            Utils.setAlert("Xoá thất bại!!!", Alert.AlertType.ERROR).show();
-    }
+        if(!this.idTxtFld.getText().isBlank()){
+            if (userService.deleteUser(this.userTabView.getSelectionModel().getSelectedItem().getId())) {
+                Utils.setAlert("Xoá thành công!!!", Alert.AlertType.INFORMATION).show();
+                this.loadData();
+                reset();
+            } else
+                Utils.setAlert("Xoá thất bại!!!", Alert.AlertType.ERROR).show();
+        } else Utils.setAlert("Chưa chọn User cần xoá!!!", Alert.AlertType.ERROR).show();
+    } 
 
     public void searchUser(ActionEvent evt) throws SQLException {
         if (userService.findUserByPhone(this.searchContentTxtFld.getText()).size() > 0) {
