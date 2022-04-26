@@ -6,6 +6,8 @@ import com.ou.services.ReaderCardService;
 import com.ou.services.RoleService;
 import com.ou.services.ReaderCardService;
 import com.ou.services.UserService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +28,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-
 
     private App app = new App();
 
@@ -130,6 +131,13 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.txtUsername.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
+                if (t1.contains(" "))
+                    txtUsername.setText(t1.replaceAll(" ", ""));
+            }
+        });
         lbNotification.setVisible(false);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(295);
