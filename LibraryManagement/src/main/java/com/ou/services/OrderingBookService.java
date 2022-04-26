@@ -109,10 +109,11 @@ public class OrderingBookService {
         }
     }
 
-    public List<OrderingBook> findByActive(boolean active1) throws SQLException {
+    public List<OrderingBook> findByActive(boolean active1, int orderId) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook WHERE active=?");
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM orderingbook WHERE active=? and reader_card_id = ?");
             stm.setBoolean(1, active1);
+            stm.setInt(2,orderId);
             ResultSet rs = stm.executeQuery();
 
             List<OrderingBook> list = new ArrayList<>();
