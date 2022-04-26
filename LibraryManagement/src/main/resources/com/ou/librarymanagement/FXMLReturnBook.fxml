@@ -86,7 +86,7 @@
                </GridPane.margin>
             </Text>
             <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1" />
-            <TextField fx:id="txtReadername" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtReaderName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtBookName" editable="false" GridPane.columnIndex="3" />
             <TextField fx:id="txtAmount" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <DatePicker fx:id="dpCreatedDate" editable="false" prefHeight="25.0" prefWidth="179.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
