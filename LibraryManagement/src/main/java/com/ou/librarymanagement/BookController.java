@@ -95,7 +95,7 @@ public class BookController implements Initializable {
                 }
 
                 if (book.getDateOfEntering() != null) {
-                     calendar.setTime(book.getDateOfEntering());
+                    calendar.setTime(book.getDateOfEntering());
                     int year = calendar.get(Calendar.YEAR);
                     int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -181,6 +181,7 @@ public class BookController implements Initializable {
                 }
             }
         });
+
         this.cbCategory.setItems(FXCollections.observableList(bookCategoryService.getBookCategory(null)));
         this.cbAuthor.setItems(FXCollections.observableList(authorService.getAuthors(null)));
         this.cbPublishingCompany.setItems(FXCollections.observableList(publishingCompanyService.getPublishingCompanys(null)));
@@ -207,6 +208,11 @@ public class BookController implements Initializable {
         if (txtBookName.getText() == null || txtBookName.getText().trim().equals(""))
             return false;
 
+        LocalDate publishingYear = datepickerPublishingYear.getValue();
+        LocalDate dateOfEntering = datepickerDateOfEntering.getValue();
+
+        if (publishingYear.compareTo(dateOfEntering) > 0)
+            return false;
         if (cbCategory.getSelectionModel().getSelectedItem() == null)
             return false;
         if (cbPublishingCompany.getSelectionModel().getSelectedItem() == null)
@@ -221,7 +227,7 @@ public class BookController implements Initializable {
         Book book = new Book();
 
         if (!txtBookName.getText().trim().isEmpty())
-            book.setName(this.txtBookName.getText());
+            book.setName(Utils.stringNormalization(this.txtBookName.getText()));
 
         if (!txtAmount.getText().trim().isEmpty())
             book.setAmount(Integer.parseInt(this.txtAmount.getText()));
@@ -275,6 +281,8 @@ public class BookController implements Initializable {
             } else {
                 Utils.setAlert("Thông tin sách không hợp lệ!!!", Alert.AlertType.ERROR).show();
             }
+        } else {
+            Utils.setAlert("Chưa chọn sách cần chỉnh sửa!!!", Alert.AlertType.ERROR).show();
         }
     }
 
@@ -283,6 +291,8 @@ public class BookController implements Initializable {
         if (bookTabView.getSelectionModel().getSelectedItem() != null) {
             bookService.delete(this.bookTabView.getSelectionModel().getSelectedItem().getId());
             reloadWindow();
+        } else {
+            Utils.setAlert("Chưa chọn sách cần xoá!!!", Alert.AlertType.ERROR).show();
         }
     }
 
