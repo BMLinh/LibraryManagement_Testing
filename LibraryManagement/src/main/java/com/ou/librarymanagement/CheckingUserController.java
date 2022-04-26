@@ -4,23 +4,18 @@
  */
 package com.ou.librarymanagement;
 
-import com.ou.pojo.Book;
-import com.ou.pojo.OrderingBook;
-import com.ou.pojo.ReaderCard;
-import com.ou.pojo.User;
+import com.ou.pojo.*;
 import com.ou.services.BookService;
+import com.ou.services.BorrowingBookService;
 import com.ou.services.OrderingBookService;
 import com.ou.services.ReaderCardService;
 import com.ou.utils.Utils;
+
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
@@ -29,13 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
@@ -47,63 +36,69 @@ import javafx.util.Callback;
 public class CheckingUserController implements Initializable {
     @FXML
     private TableView<OrderingBook> orderingBookTb;
+
     @FXML
-    private TextField readerCardIdTxtFld;
-    
+    private TextField txtNameBook;
+    @FXML
+    private TextField txtAmout;
+    @FXML
+    private TextField txtCreatedDate;
+    @FXML
+    private TextField txtExpiredDate;
+
     private static User currentStaff;
+    private static User currentUser;
+    private static ReaderCard currentCard;
     
     private static final OrderingBookService orderingBookService = new OrderingBookService();
     private static final ReaderCardService readerCardService = new ReaderCardService();
     private static final BookService bookService = new BookService();
+    private static final BorrowingBookService borrowingBookService = new BorrowingBookService();
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            init();
-        } catch (SQLException ex) {
-            Logger.getLogger(CheckingUserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         // TODO
         loadTableView();
         loadData();
-    }    
-    
-    private void init() throws SQLException{
-        List<OrderingBook> list = this.orderingBookService.getOrderingBooks();
-        list.forEach(r -> {
-            if(Timestamp.valueOf(r.getExpiredDate()).before(new Timestamp(new Date().getTime())))
+        this.txtNameBook.setEditable(false);
+        this.txtAmout.setEditable(false);
+        this.txtCreatedDate.setEditable(false);
+        this.txtExpiredDate.setEditable(false);
+
+        //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
+        this.orderingBookTb.setRowFactory(et -> {
+            TableRow row = new TableRow();
+            row.setOnMouseClicked(r -> {
+                OrderingBook orderB = (OrderingBook) this.orderingBookTb.getSelectionModel().getSelectedItem();
                 try {
-                    this.orderingBookService.updateActiveOrderBook(true, r.getId());
-            } catch (SQLException ex) {
-                Logger.getLogger(CheckingUserController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    this.txtNameBook.setText(bookService.getById(orderB.getBookId()).getName());
+                    this.txtAmout.setText(String.valueOf(orderB.getAmount()));
+                    this.txtCreatedDate.setText(String.valueOf(orderB.getCreatedDate()));
+                    this.txtExpiredDate.setText(String.valueOf(orderB.getExpiredDate()));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+            return row;
         });
-        
-        this.readerCardIdTxtFld.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1) {
-                if (!t1.matches("\\d*"))
-                    readerCardIdTxtFld.setText(t1.replaceAll("[^\\d]", ""));
-            }
-        });
-        
-        this.readerCardIdTxtFld.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getText().equals(" ")) {
-                change.setText("");
-            }
-            return change;
-        }));
     }
     
     public void loadData(){
         try {
-            this.orderingBookTb.setItems(FXCollections.observableList(this.orderingBookService.findByActive(false)));
+            this.orderingBookTb.setItems(FXCollections.observableList(this.orderingBookService.findByActive(false, currentCard.getId())));
         } catch (SQLException ex) {
             Logger.getLogger(CheckingUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void reset(){
+        this.txtNameBook.setText("");
+        this.txtAmout.setText("");
+        this.txtCreatedDate.setText("");
+        this.txtExpiredDate.setText("");
     }
     
     public void loadTableView(){
@@ -148,18 +143,24 @@ public class CheckingUserController implements Initializable {
                             TableCell c = (TableCell)((Button)evt.getSource()).getParent();
                             OrderingBook order = (OrderingBook) c.getTableRow().getItem();
                             try {
-                                ReaderCard reader = readerCardService.findReaderCardById(order.getReaderCardId()).get(0);
                                 Book book = bookService.getById(order.getBookId());
 
                                 //Lấy tên event update order đã được định nghĩa trước, cú pháp order + id phiếu đặt ví dụ: order30
                                 String nameEvent = "order" + order.getId();
 
                             if (orderingBookService.dropEventAutoUpdateOrder(nameEvent) == true){
-                                     Map<String, String> param = new HashMap<>();
-                                    param.put("amount", String.valueOf(book.getAmount() + order.getAmount()));
+                                    Date currentDate = new Date();
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(currentDate);
+                                    cal.add(Calendar.DATE, 30);
+                                    Date returnDate = cal.getTime();
+                                    currentCard.setAmount(order.getAmount());
+                                    BorrowingBook bw = new BorrowingBook(0, currentStaff.getId(), book.getId(),
+                                            currentCard.getId(), order.getAmount(), currentDate, returnDate, 0, new BigDecimal(0));
+                                    borrowingBookService.addBorrowingBook(bw);
+                                    readerCardService.updateReaderCard(currentCard.getId(), currentCard);
                                     orderingBookService.updateActiveOrderBook(true, order.getId());
-                                    bookService.update(book.getId(), param);
-                                    Utils.setAlert("Đã xác nhận đặt sách!!!", Alert.AlertType.INFORMATION).show();
+                                    Utils.setAlert("Đã xác nhận đặt sách. Đã tạo phiếu mượn!!!", Alert.AlertType.INFORMATION).show();
                                 }
                                 else
                                     Utils.setAlert("Xác nhận không thành công!!!", Alert.AlertType.ERROR).show();
@@ -167,6 +168,7 @@ public class CheckingUserController implements Initializable {
                                 Logger.getLogger(CheckingUserController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             loadData();
+                            reset();
                         });
                     }
 
@@ -186,17 +188,7 @@ public class CheckingUserController implements Initializable {
         
         this.orderingBookTb.getColumns().addAll(t1,t2,t3,t4,t5,t6,t7,t8);
     }
-    
-    public void findOrderingBooks() throws SQLException{
-        if(!this.orderingBookService.findByReaderCardId(Integer.parseInt(this.readerCardIdTxtFld.getText())).isEmpty()){
-            this.orderingBookTb.setItems(FXCollections.observableList(this.orderingBookService.findByReaderCardId(Integer.parseInt(this.readerCardIdTxtFld.getText()))));
-            this.readerCardIdTxtFld.clear();
-        }
-        else{
-            Utils.setAlert("Không có dữ liệu!!!", Alert.AlertType.ERROR).show();
-            loadData();
-        }
-    }
+
     
     /**
      * @return the currentStaff
@@ -210,6 +202,34 @@ public class CheckingUserController implements Initializable {
      */
     public static void setCurrentStaff(User aCurrentStaff) {
         currentStaff = aCurrentStaff;
+    }
+
+    /**
+     * @return the currentUser
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
+     * @param aCurrentUser the currentUser to set
+     */
+    public static void setCurrentUser(User aCurrentUser) {
+        currentUser = aCurrentUser;
+    }
+
+    /**
+     * @return the currentCard
+     */
+    public static ReaderCard getCurrentCard() {
+        return currentCard;
+    }
+
+    /**
+     * @param aCurrentCard the currentCard to set
+     */
+    public static void setCurrentCard(ReaderCard aCurrentCard) {
+        currentCard = aCurrentCard;
     }
 }
 

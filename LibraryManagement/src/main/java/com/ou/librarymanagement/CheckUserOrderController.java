@@ -1,42 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.ou.librarymanagement;
 
-import com.ou.pojo.Book;
 import com.ou.pojo.ReaderCard;
 import com.ou.pojo.User;
 import com.ou.services.DepartmentService;
 import com.ou.services.ReaderCardService;
 import com.ou.services.UserService;
 import com.ou.utils.Utils;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Admin
- */
-public class BorrowingBookDetailController implements Initializable {
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.ResourceBundle;
+
+public class CheckUserOrderController implements Initializable {
 
     @FXML
     private TextField readerCardIdTxtFld;
@@ -48,26 +37,21 @@ public class BorrowingBookDetailController implements Initializable {
     private TextField amountTxtFld;
     @FXML
     private Button submit;
-    
-    
+
+
     private static ReaderCard currentCard;
     private static User currentUser;
     private static User currentStaff;
-    
-    
+
+
     private static final ReaderCardService readerCardService = new ReaderCardService();
     private static final UserService userService = new UserService();
     private static final DepartmentService departmentService = new DepartmentService();
-    
-    /**
-     * Initializes the controller class.
-     */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        init();
-        // TODO
-    }    
-    
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
     private void init(){
         this.readerCardIdTxtFld.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -76,7 +60,7 @@ public class BorrowingBookDetailController implements Initializable {
                     readerCardIdTxtFld.setText(t1.replaceAll("[^\\d]", ""));
             }
         });
-        
+
         this.readerCardIdTxtFld.setTextFormatter(new TextFormatter<>(change -> {
             if (change.getText().equals(" ")) {
                 change.setText("");
@@ -106,8 +90,8 @@ public class BorrowingBookDetailController implements Initializable {
         }
 
     }
-    
-    public void borrowBook(ActionEvent event) throws IOException{
+
+    public void borrowBook(ActionEvent event) throws IOException {
         if(this.nameTxtFld.getText().isBlank())
             Utils.setAlert("Chưa có thẻ độc giả. Mời bạn kiểm tra thẻ độc giả!!!", Alert.AlertType.ERROR).show();
         else if(this.currentCard.getId() != Integer.parseInt(this.readerCardIdTxtFld.getText()))
@@ -121,20 +105,20 @@ public class BorrowingBookDetailController implements Initializable {
                 Utils.setAlert("Chưa trả hết sách!!!", Alert.AlertType.ERROR).show();
 
             else{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLBorrowBook.fxml"));
-                BorrowBookController controller = fxmlLoader.getController();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLCheckingUser.fxml"));
+                CheckingUserController controller = fxmlLoader.getController();
                 controller.setCurrentUser(this.getCurrentUser());
                 controller.setCurrentCard(this.getCurrentCard());
                 controller.setCurrentStaff(this.getCurrentStaff());
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setTitle("Mượn sách");
+                stage.setTitle("Test sách");
                 stage.show();
-            }       
+            }
         }
     }
-    
+
     public void reset(ActionEvent evt){
         this.amountTxtFld.clear();
         this.departmentTxtFld.clear();
@@ -185,5 +169,4 @@ public class BorrowingBookDetailController implements Initializable {
     public static void setCurrentStaff(User aCurrentStaff) {
         currentStaff = aCurrentStaff;
     }
-
 }

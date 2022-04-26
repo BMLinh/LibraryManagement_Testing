@@ -21,6 +21,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.centerOnScreen();
+        stage.setTitle("Đăng nhập");
         stage.show();
     }
 

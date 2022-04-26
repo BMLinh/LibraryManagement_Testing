@@ -44,6 +44,7 @@ public class Home_AdmController implements Initializable {
     private Button btnUserManagement;
     
     private static User currentUser; 
+    private static String title;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,46 +59,55 @@ public class Home_AdmController implements Initializable {
         Stage primaryStage = (Stage) btn.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
+        primaryStage.setTitle(title);
         primaryStage.show();
     }
 
     @FXML
     void authorManagement(ActionEvent event) throws IOException {
+        title = "Quản lý tác giả";
         changeScene(btnAuthorManagement, "FXMLAuthor.fxml");
     }
 
     @FXML
     void bookManagement(ActionEvent event) throws IOException {
+        title = "Quản lý sách";
         changeScene(btnBookManagement, "FXMLBook.fxml");
     }
 
     @FXML
     void categoryManagement(ActionEvent event) throws IOException {
+        title = "Quản lý danh mục";
         changeScene(btnCategoryManagement, "FXMLBookCategory.fxml");
     }
 
     @FXML
     void departmentManagement(ActionEvent event) throws IOException {
+        title = "Quản lý khoa";
         changeScene(btnDepartmentManagement, "FXMLDepartment.fxml");
     }
 
     @FXML
     void pubComManagement(ActionEvent event) throws IOException {
+        title = "Quản lý nhà xuất bản";
         changeScene(btnPubComManagement, "FXMLPublishingcompany.fxml");
     }
 
     @FXML
     void readerCardManagement(ActionEvent event) throws IOException {
+        title = "Quản lý thẻ độc giả";
         changeScene(btnReaderCardManagement, "FXMLReaderCard.fxml");
     }
 
     @FXML
     void roleManagement(ActionEvent event) throws IOException {
+        title = "Quản lý chức vụ";
         changeScene(btnRoleManagement, "FXMLRole.fxml");
     }
 
     @FXML
     void userManagement(ActionEvent event) throws IOException {
+        title = "Quản lý người dùng";
         changeScene(btnUserManagement, "FXMLUser.fxml");
     }
 
@@ -113,6 +123,7 @@ public class Home_AdmController implements Initializable {
         Scene mainScene = new Scene(root);
         Stage primaryStage = (Stage) btnLogout.getScene().getWindow();
         primaryStage.setScene(mainScene);
+        primaryStage.setTitle("Đăng nhập");
         primaryStage.show();
     }
 

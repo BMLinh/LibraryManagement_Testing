@@ -108,6 +108,7 @@ public class LoginController implements Initializable {
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
+        primaryStage.setTitle("Trang chủ");
         primaryStage.show();
     }
 

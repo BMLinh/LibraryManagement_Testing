@@ -172,6 +172,7 @@ public class AuthorController implements Initializable {
         Stage primaryStage = (Stage) btnBack.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
+        primaryStage.setTitle("Trang chủ");
         primaryStage.show();
     }
 

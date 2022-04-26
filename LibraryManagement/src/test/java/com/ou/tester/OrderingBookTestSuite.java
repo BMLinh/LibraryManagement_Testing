@@ -73,12 +73,12 @@ public class OrderingBookTestSuite {
     public void findSuccess() throws SQLException{
         boolean flag = false;
         
-        Assertions.assertTrue(o.findByActive(flag).size() > 0);
+        Assertions.assertTrue(o.findByActive(flag,4).size() > 0);
     }
     
     @Test 
     public void findInvalid() throws SQLException{
-        Assertions.assertFalse(o.findByActive(true).size() > 0);
+        Assertions.assertFalse(o.findByActive(true,4).size() > 0);
     }
     
     @Test

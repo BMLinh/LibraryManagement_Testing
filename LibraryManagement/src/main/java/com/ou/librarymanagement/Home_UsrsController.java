@@ -127,6 +127,7 @@ public class Home_UsrsController implements Initializable {
         Scene mainScene = new Scene(root);
         Stage primaryStage = (Stage) btnLogout.getScene().getWindow();
         primaryStage.setScene(mainScene);
+        primaryStage.setTitle("Đăng nhập");
         primaryStage.show();
         if (stage1 != null)
             stage1.close();
