@@ -6,7 +6,6 @@
 package com.ou.librarymanagement;
 
 import com.ou.pojo.BookCategory;
-import com.ou.pojo.PublishingCompany;
 import com.ou.services.BookCategoryService;
 import com.ou.utils.Utils;
 
@@ -34,7 +33,8 @@ import javafx.stage.Stage;
  *
  * @author Linh
  */
-public class BookCategoryController implements Initializable{
+public class BookCategoryController implements Initializable {
+
     private static final BookCategoryService s = new BookCategoryService();
     @FXML
     private TextField txtKeyword;
@@ -63,18 +63,18 @@ public class BookCategoryController implements Initializable{
 
         //Ẩn button sửa
         this.btnUpdate.setVisible(false);
-        
+
         this.btnDelete.setVisible(false);
 
         //Tìm kiếm đối tượng theo tên đối tượng
-        this.txtKeyword.textProperty().addListener((evt) ->{
+        this.txtKeyword.textProperty().addListener((evt) -> {
             this.loadData(this.txtKeyword.getText().trim());
         });
 
         //Chọn 1 dòng trên TableView đổ dữ liệu lên các controls
-        this.tbBookCategory.setRowFactory(et ->{
+        this.tbBookCategory.setRowFactory(et -> {
             TableRow row = new TableRow();
-            row.setOnMouseClicked(r ->{
+            row.setOnMouseClicked(r -> {
                 this.btnUpdate.setVisible(true);
                 this.btnDelete.setVisible(true);
                 this.btnInsert.setVisible(false);
@@ -86,15 +86,16 @@ public class BookCategoryController implements Initializable{
             return row;
         });
     }
-    private void loadData(String kw){
+
+    private void loadData(String kw) {
         try {
             this.tbBookCategory.setItems(FXCollections.observableList(s.getBookCategory(kw)));
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadColumns(){
+    private void loadColumns() {
         TableColumn col1 = new TableColumn("Id");
         col1.setCellValueFactory(new PropertyValueFactory("id"));
         col1.setPrefWidth(300);
@@ -102,11 +103,11 @@ public class BookCategoryController implements Initializable{
         TableColumn col2 = new TableColumn("Tên thể loại");
         col2.setCellValueFactory(new PropertyValueFactory("name"));
         col2.setPrefWidth(300);
-        
+
         TableColumn col3 = new TableColumn("Vị trí");
         col3.setCellValueFactory(new PropertyValueFactory("position"));
         col3.setPrefWidth(300);
-        
+
         this.tbBookCategory.getColumns().addAll(col1, col2, col3);
     }
 
@@ -120,46 +121,50 @@ public class BookCategoryController implements Initializable{
         this.tbBookCategory.getSelectionModel().select(null);
     }
 
-    public void resetHandler(ActionEvent evt){
+    public void resetHandler(ActionEvent evt) {
         reset();
     }
 
-    public void addBookCategory(ActionEvent evt) throws SQLException{
+    public void addBookCategory(ActionEvent evt) throws SQLException {
         BookCategory b = new BookCategory();
         b.setName(txtName.getText());
         b.setPosition(txtPosition.getText().trim());
-        if (s.addBookCategory(b) == true){
+        if ("" == txtName.getText().trim()) {
+            Utils.setAlert("Mời nhập tên thể loại!", Alert.AlertType.ERROR).show();
+        } else if (s.addBookCategory(b) == true) {
             Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
             reset();
             this.loadData(null);
-        }
-        else
+        } else {
             Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
+        }
     }
 
-    public void updateBookCategory(ActionEvent evt) throws SQLException{
+    public void updateBookCategory(ActionEvent evt) throws SQLException {
         try {
-            if (s.updateBookCategory(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim(), this.txtPosition.getText().trim()) == true){
+            if ("" == txtName.getText().trim()) {
+                Utils.setAlert("Mời nhập tên thể loại!", Alert.AlertType.ERROR).show();
+            } else if (s.updateBookCategory(Integer.parseInt(this.txtId.getText()), this.txtName.getText().trim(), this.txtPosition.getText().trim()) == true) {
                 Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
                 this.loadData(null);
-            }
-            else
+            } else {
                 Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
-    public void deleteBookCategory(ActionEvent evt) throws SQLException{
-        try{
-            if (s.deleteBookCategory(Integer.parseInt(this.txtId.getText())) == true){
+
+    public void deleteBookCategory(ActionEvent evt) throws SQLException {
+        try {
+            if (s.deleteBookCategory(Integer.parseInt(this.txtId.getText())) == true) {
                 Utils.setAlert("Xóa thành công!!!", Alert.AlertType.INFORMATION).show();
                 reset();
                 this.loadData(null);
-            }
-            else
+            } else {
                 Utils.setAlert("Xóa thất bại!!!", Alert.AlertType.ERROR).show();
-        }catch (SQLException e){
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
