@@ -62,6 +62,7 @@ public class Home_EmsController implements Initializable {
             controller.setCurrentStaff(this.currentStaff);
             stage1 = new Stage();
             stage1.setScene(new Scene(node));
+            stage1.setTitle("Mượn sách");
             stage1.show();
         }
     }
@@ -74,6 +75,7 @@ public class Home_EmsController implements Initializable {
             Parent node = loader.load();
             stage2 = new Stage();
             stage2.setScene(new Scene(node));
+            stage2.setTitle("Trả sách");
             stage2.show();
         }
     }
@@ -88,6 +90,7 @@ public class Home_EmsController implements Initializable {
             controller.setCurrentStaff(this.currentStaff);
             stage3 = new Stage();
             stage3.setScene(new Scene(node));
+            stage3.setTitle("Kiểm tra đặt sách");
             stage3.show();
         }
     }
@@ -100,6 +103,7 @@ public class Home_EmsController implements Initializable {
             Parent node = loader.load();
             stage4 = new Stage();
             stage4.setScene(new Scene(node));
+            stage4.setTitle("Thống kê");
             stage4.show();
         }
     }
@@ -118,6 +122,7 @@ public class Home_EmsController implements Initializable {
         Scene mainScene = new Scene(root);
         Stage primaryStage = (Stage) btnLogout.getScene().getWindow();
         primaryStage.setScene(mainScene);
+        primaryStage.setTitle("Đăng nhập");
         primaryStage.show();
         if (stage1 != null) {
             stage1.close();

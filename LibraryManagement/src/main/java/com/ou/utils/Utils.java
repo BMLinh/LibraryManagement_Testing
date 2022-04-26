@@ -47,6 +47,19 @@ public class Utils {
         SimpleDateFormat F = new SimpleDateFormat(pattern);
         return F.format(date);
     }
+    
+    public static final String chuannHoa(String st) {
+        st=st.trim().toLowerCase();
+        st = st.replaceAll("\\s+", " ");
+        String[] temp= st.split(" ");
+        st="";
+        for(int i=0;i<temp.length;i++) {
+            st+=String.valueOf(temp[i].charAt(0)).toUpperCase() + temp[i].substring(1);
+            if(i<temp.length-1)
+                st+=" ";
+        }
+        return st;
+    }
 
     public static final boolean isContainNumber(String str) {
         char[] chars = str.toCharArray();

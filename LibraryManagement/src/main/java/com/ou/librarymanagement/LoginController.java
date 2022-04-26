@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.scene.control.TextFormatter;
 
 public class LoginController implements Initializable {
 
@@ -108,6 +109,7 @@ public class LoginController implements Initializable {
         Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
+        primaryStage.setTitle("Trang chủ");
         primaryStage.show();
     }
 
@@ -141,6 +143,19 @@ public class LoginController implements Initializable {
         lbNotification.setVisible(false);
         btnLogin.setLayoutX(78);
         btnLogin.setLayoutY(295);
+        
+        this.txtUsername.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getText().equals(" ")) {
+                change.setText("");
+            }
+            return change;
+        }));
+        this.txtPassword.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getText().equals(" ")) {
+                change.setText("");
+            }
+            return change;
+        }));
     }
 
     /**

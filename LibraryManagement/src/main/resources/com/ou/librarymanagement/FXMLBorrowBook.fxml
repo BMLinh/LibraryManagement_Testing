@@ -13,20 +13,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="802.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.BorrowBookController">
+<AnchorPane id="AnchorPane" prefHeight="802.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.BorrowBookController">
    <children>
       <Pane layoutX="722.0" layoutY="141.0" prefHeight="117.0" prefWidth="277.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <children>
-            <Text layoutX="120.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User">
+            <Text layoutX="113.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Text>
          </children>
       </Pane>
       <Pane layoutX="723.0" layoutY="283.0" prefHeight="140.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
       <Pane layoutX="54.0" layoutY="141.0" prefHeight="280.0" prefWidth="618.0" style="-fx-border-color: black; -fx-border-radius: 10;" />
-      <HBox alignment="CENTER" layoutY="-11.0" prefHeight="117.0" prefWidth="1094.0" style="-fx-background-color: #333;">
+      <HBox alignment="CENTER" layoutY="-11.0" prefHeight="117.0" prefWidth="1074.0" style="-fx-background-color: #333;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MƯỢN SÁCH">
                <font>
@@ -35,7 +35,7 @@
             </Text>
          </children>
       </HBox>
-      <HBox layoutX="22.0" layoutY="487.0" prefHeight="301.0" prefWidth="1036.0">
+      <HBox layoutX="19.0" layoutY="487.0" prefHeight="301.0" prefWidth="1036.0">
          <children>
             <TableView fx:id="bookTableView" prefHeight="301.0" prefWidth="1097.0" />
          </children>
@@ -58,7 +58,7 @@
                   <Insets left="15.0" />
                </GridPane.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nhà xuất bản:" GridPane.rowIndex="2">
@@ -66,7 +66,7 @@
                   <Insets left="15.0" />
                </GridPane.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Năm xuất bản:" GridPane.rowIndex="1">
@@ -74,7 +74,7 @@
                   <Insets left="15.0" />
                </GridPane.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tên sách:" GridPane.columnIndex="2">
@@ -82,7 +82,7 @@
                   <Insets left="15.0" />
                </GridPane.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Danh mục:" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -90,28 +90,28 @@
                   <Insets left="15.0" />
                </GridPane.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <TextField fx:id="bookIdTxtFld" editable="false" GridPane.columnIndex="1">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></TextField>
             <TextField fx:id="bookPublisherTxtFld" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></TextField>
             <TextField fx:id="bookPublishedDateTxtFld" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></TextField>
             <TextField fx:id="bookNameTxtFld" editable="false" GridPane.columnIndex="3">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></TextField>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tác giả: " GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -119,22 +119,22 @@
             </Text>
             <TextField fx:id="bookCateTxtFld" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></TextField>
             <TextField fx:id="bookAuthorTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></TextField>
          </children>
       </GridPane>
-      <Button layoutX="287.0" layoutY="430.0" mnemonicParsing="false" onAction="#borrowBook" text="Mượn sách">
+      <Button layoutX="307.0" layoutY="436.0" mnemonicParsing="false" onAction="#borrowBook" text="Mượn sách">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="824.0" layoutY="434.0" mnemonicParsing="false" onAction="#findBook" text="Tìm">
+      <Button layoutX="834.0" layoutY="436.0" mnemonicParsing="false" onAction="#findBook" text="Tìm">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="18.0" />
          </font>
       </Button>
       <HBox layoutX="68.0" layoutY="301.0" prefHeight="111.0" prefWidth="588.0">
@@ -144,7 +144,7 @@
                   <Insets top="5.0" />
                </HBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <TextField fx:id="bookDescriptionTxtFld" alignment="TOP_LEFT" editable="false" prefHeight="127.0" prefWidth="563.0">
@@ -155,7 +155,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </TextField>
          </children>
@@ -171,12 +171,12 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm sách">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="1">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font></TextField>
          </children>
       </GridPane>
@@ -192,7 +192,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reader card ID:" GridPane.rowIndex="1">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -200,7 +200,7 @@
             </Text>
             <TextField fx:id="readerCardIdTxtFld" editable="false" prefHeight="35.0" prefWidth="128.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </TextField>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User ID:">
@@ -208,12 +208,12 @@
                   <Insets left="15.0" />
                </GridPane.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
             <TextField fx:id="userIdTxtFld" editable="false" GridPane.columnIndex="1">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </TextField>
          </children>

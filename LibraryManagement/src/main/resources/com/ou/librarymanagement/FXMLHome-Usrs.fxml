@@ -16,7 +16,7 @@
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TRANG CHỦ">
                <font>
-                  <Font name="Arial Bold" size="48.0" />
+                  <Font name="Arial Bold" size="64.0" />
                </font>
             </Text>
          </children>

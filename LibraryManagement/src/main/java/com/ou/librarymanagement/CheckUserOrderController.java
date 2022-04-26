@@ -113,7 +113,7 @@ public class CheckUserOrderController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setTitle("tesst sách");
+                stage.setTitle("Test sách");
                 stage.show();
             }
         }

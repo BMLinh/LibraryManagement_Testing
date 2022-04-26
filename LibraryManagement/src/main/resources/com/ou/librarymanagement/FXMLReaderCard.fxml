@@ -17,13 +17,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="802.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.ReaderCardController">
    <children>
-      <Pane layoutX="749.0" layoutY="234.0" prefHeight="149.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
+      <Pane layoutX="749.0" layoutY="234.0" prefHeight="128.0" prefWidth="277.0" style="-fx-border-color: Black; -fx-border-radius: 10;" />
       <Pane layoutX="61.0" layoutY="176.0" prefHeight="185.0" prefWidth="617.0" style="-fx-border-color: black; -fx-border-radius: 10;" />
       <HBox alignment="CENTER" prefHeight="110.0" prefWidth="1080.0" style="-fx-background-color: #333;">
          <children>
             <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ THẺ MƯỢN">
                <font>
-                  <Font name="Arial Bold" size="60.0" />
+                  <Font name="System Bold" size="64.0" />
                </font>
             </Text>
          </children>
@@ -48,7 +48,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -56,7 +56,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày mở:" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -64,7 +64,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số lượng:" GridPane.rowIndex="2">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -72,7 +72,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User Id:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -80,7 +80,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày hết hạn:" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -88,18 +88,33 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Họ tên:" GridPane.columnIndex="2">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="readerCardIdTxtFld" editable="false" GridPane.columnIndex="1" />
-            <TextField fx:id="userNameTxtFld" editable="false" GridPane.columnIndex="3" />
-            <DatePicker fx:id="startDateDP" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="readerCardIdTxtFld" editable="false" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="userNameTxtFld" editable="false" GridPane.columnIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
             <DatePicker fx:id="endDateDP" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="amountTxtFld" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="userIdTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="amountTxtFld" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="userIdTxtFld" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="startDateTxtFld" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
          </children>
       </GridPane>
       <GridPane alignment="CENTER" layoutX="78.0" layoutY="401.0" prefHeight="50.0" prefWidth="600.0">
@@ -113,29 +128,29 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#addReaderCard" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Thêm">
+            <Button mnemonicParsing="false" onAction="#addReaderCard" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Thêm">
                <font>
-                  <Font name="Arial" size="20.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#updateReaderCard" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Sửa" GridPane.columnIndex="1">
                <font>
-                  <Font name="Arial" size="20.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#deleteReaderCard" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Xoá" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" onAction="#deleteReaderCard" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Xoá" GridPane.columnIndex="2">
                <font>
-                  <Font name="Arial" size="20.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#resetHandler" prefHeight="44.0" prefWidth="120.0" style="-fx-font-size: 20; -fx-font-family: arial;" text="Làm mới" GridPane.columnIndex="3">
                <font>
-                  <Font name="Arial" size="20.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <GridPane layoutX="765.0" layoutY="242.0" prefHeight="131.0" prefWidth="244.0">
+      <GridPane layoutX="765.0" layoutY="242.0" prefHeight="117.0" prefWidth="244.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -145,18 +160,24 @@
          </rowConstraints>
          <children>
             <ComboBox fx:id="searchCb" prefHeight="25.0" prefWidth="253.0" GridPane.rowIndex="1" />
-            <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="1" />
+            <TextField fx:id="searchContentTxtFld" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tìm kiếm UserID">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Text>
          </children>
       </GridPane>
-      <Button layoutX="827.0" layoutY="404.0" mnemonicParsing="false" onAction="#searchReaderCard" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm" />
-      <Button fx:id="btnBack" layoutX="749.0" layoutY="167.0" mnemonicParsing="false" onAction="#backToAdmin" prefHeight="25.0" prefWidth="277.0" text="Back to Admin">
+      <Button layoutX="827.0" layoutY="404.0" mnemonicParsing="false" onAction="#searchReaderCard" prefHeight="44.0" prefWidth="120.0" style="-fx-font-family: arial; -fx-font-size: 20;" text="Tìm">
          <font>
-            <Font name="Calibri" size="24.0" />
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnBack" layoutX="749.0" layoutY="176.0" mnemonicParsing="false" onAction="#backToAdmin" prefHeight="25.0" prefWidth="277.0" text="Back to Admin">
+         <font>
+            <Font size="18.0" />
          </font>
       </Button>
    </children>

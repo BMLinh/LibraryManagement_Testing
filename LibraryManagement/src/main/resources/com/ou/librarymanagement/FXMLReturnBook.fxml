@@ -8,14 +8,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.ReturnBooksController">
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="911.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ou.librarymanagement.ReturnBooksController">
     <children>
-        <GridPane layoutX="14.0" layoutY="40.0" prefHeight="176.0" prefWidth="579.0">
+        <GridPane layoutX="45.0" layoutY="136.0" prefHeight="176.0" prefWidth="579.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.19998779296876" minWidth="10.0" prefWidth="129.19998779296876" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.20001220703122" minWidth="10.0" prefWidth="145.20001220703122" />
@@ -31,7 +33,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tên độc giả:" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -39,7 +41,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mã độc giả:" GridPane.rowIndex="2">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -47,7 +49,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -55,7 +57,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số lượng:" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -63,7 +65,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày mượn:" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -71,7 +73,7 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày trả:" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
@@ -79,42 +81,74 @@
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tên sách:" GridPane.columnIndex="2">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1" />
-            <TextField fx:id="txtReaderName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtBookName" editable="false" GridPane.columnIndex="3" />
-            <TextField fx:id="txtAmount" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="txtReaderName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="txtBookName" editable="false" GridPane.columnIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="txtAmount" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
             <DatePicker fx:id="dpCreatedDate" editable="false" prefHeight="25.0" prefWidth="179.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <DatePicker fx:id="dpReturnDate" editable="false" prefHeight="25.0" prefWidth="179.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <TextField fx:id="txtReaderId" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtReaderId" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiền phạt:" GridPane.rowIndex="3">
                <font>
-                  <Font name="Arial" size="16.0" />
+                  <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="txtFine" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtFine" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
          </children>
       </GridPane>
-        <VBox layoutY="230.0" prefHeight="267.0" prefWidth="910.0">
+        <VBox layoutX="1.0" layoutY="343.0" prefHeight="267.0" prefWidth="910.0">
             <children>
-                <TextField fx:id="txtKeyword" promptText="Nhập tên sách cần tìm..." />
+                <TextField fx:id="txtKeyword" promptText="Nhập tên sách cần tìm...">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
                 <TableView fx:id="tbBorrowingBook" prefHeight="244.0" prefWidth="901.0" />
             </children>
         </VBox>
-      <Text layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ PHIẾU MƯỢN SÁCH" textAlignment="CENTER" wrappingWidth="910.4000000000001">
+      <Button fx:id="btnRefresh" layoutX="705.0" layoutY="159.0" mnemonicParsing="false" onAction="#resetHandler" prefHeight="39.0" prefWidth="111.0" text="Làm mới">
          <font>
-            <Font size="26.0" />
-         </font>
-      </Text>
-      <Button fx:id="btnRefresh" layoutX="725.0" layoutY="181.0" mnemonicParsing="false" onAction="#resetHandler" prefHeight="26.0" prefWidth="70.0" text="Làm mới" />
-      <Button fx:id="btnReturnBook" layoutX="825.0" layoutY="182.0" mnemonicParsing="false" onAction="#returnBook" prefHeight="25.0" prefWidth="70.0" text="Trả sách" />
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnReturnBook" layoutX="705.0" layoutY="257.0" mnemonicParsing="false" onAction="#returnBook" prefHeight="39.0" prefWidth="111.0" text="Trả sách">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="912.0" style="-fx-background-color: #333;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="QUẢN LÝ PHIẾU MƯỢN SÁCH" textAlignment="CENTER" wrappingWidth="910.4000000000001">
+               <font>
+                  <Font name="System Bold" size="64.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <Pane layoutX="37.0" layoutY="120.0" prefHeight="209.0" prefWidth="606.0" style="-fx-border-color: black; -fx-border-radius: 10;" />
     </children>
 </AnchorPane>

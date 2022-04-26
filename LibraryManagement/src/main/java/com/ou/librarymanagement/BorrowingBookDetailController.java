@@ -129,7 +129,7 @@ public class BorrowingBookDetailController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setTitle("tesst sách");
+                stage.setTitle("Mượn sách");
                 stage.show();
             }       
         }

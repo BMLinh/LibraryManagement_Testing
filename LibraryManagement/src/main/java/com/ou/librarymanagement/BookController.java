@@ -68,11 +68,6 @@ public class BookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtDescription.setWrapText(true);
-        this.txtBookName.setTextFormatter(new TextFormatter<>(change -> {
-            if(!change.getText().matches("[aA-zZ\\p{L} ]+$"))
-                change.setText("");
-            return change;
-        }));
 
         try {
             // TODO
@@ -324,6 +319,7 @@ public class BookController implements Initializable {
         Stage primaryStage = (Stage) btnBack.getScene().getWindow();
         primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
+        primaryStage.setTitle("Trang chủ");
         primaryStage.show();
     }
 

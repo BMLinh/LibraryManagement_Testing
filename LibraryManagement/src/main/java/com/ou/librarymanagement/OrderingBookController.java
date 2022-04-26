@@ -27,7 +27,7 @@ public class OrderingBookController implements Initializable {
     @FXML
     private TextField txtBookName;
     @FXML
-    private TextField txtBookDescription;
+    private TextArea txtBookDescription;
     @FXML
     private TextField txtAmount;
     @FXML

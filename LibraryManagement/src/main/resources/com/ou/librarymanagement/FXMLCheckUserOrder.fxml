@@ -25,7 +25,7 @@
       </Pane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #333;">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kiểm tra User">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="KIỂM TRA USER">
                <font>
                   <Font name="Arial Bold" size="64.0" />
                </font>
@@ -36,7 +36,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nhập mã thẻ độc giả: ">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font size="18.0" />
                </font>
                <HBox.margin>
                   <Insets right="15.0" />
@@ -44,12 +44,12 @@
             </Text>
             <TextField fx:id="readerCardIdTxtFld">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font size="18.0" />
                </font>
             </TextField>
             <Button mnemonicParsing="false" onAction="#checkUser" prefHeight="33.0" prefWidth="105.0" text="Kiểm tra">
                <font>
-                  <Font name="Arial" size="18.0" />
+                  <Font size="18.0" />
                </font>
                <HBox.margin>
                   <Insets left="15.0" />
