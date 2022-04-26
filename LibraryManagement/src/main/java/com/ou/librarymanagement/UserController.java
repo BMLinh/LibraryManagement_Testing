@@ -137,7 +137,11 @@ public class UserController implements Initializable {
 
         this.genderCb.getSelectionModel().select(0);
 
-        this.birthTxtFld.setValue(LocalDate.now(ZoneId.systemDefault()));
+        this.birthTxtFld.setValue(null);
+        
+        this.roleCb.getSelectionModel().select(this.roleService.getRoleById(1));
+        
+        this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(1));
 
         this.phoneTxtFld.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -167,6 +171,7 @@ public class UserController implements Initializable {
             if (change.getText().equals(" ")) {
                 change.setText("");
             }
+            
             return change;
         }));
 
@@ -174,9 +179,29 @@ public class UserController implements Initializable {
             if (change.getText().equals(" ")) {
                 change.setText("");
             }
+           
             return change;
         }));
-
+        
+        this.fullnameTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(!change.getText().matches("[aA-zZ0-9\\p{L} ]+$"))
+                change.setText("");
+            return change;
+        }));
+        
+        this.addressTxtFld.setTextFormatter(new TextFormatter<>(change -> {
+            if(!change.getText().matches("[aA-zZ0-9\\p{L} ]+$"))
+                change.setText("");
+            return change;
+        }));
+        
+        this.birthTxtFld.setDayCellFactory(param -> new DateCell(){
+            @Override
+            public void updateItem(LocalDate ld, boolean bln) {
+                super.updateItem(ld, bln);
+                setDisable(bln || ld.compareTo(LocalDate.now()) > 0);
+            }
+        });
     }
 
     public void loadData() {
@@ -240,36 +265,55 @@ public class UserController implements Initializable {
         this.usernameTxtFld.clear();
         this.passwordTxtFld.clear();
         this.fullnameTxtFld.clear();
-        this.birthTxtFld.setValue(LocalDate.now(ZoneId.systemDefault()));
+        this.birthTxtFld.setValue(null);
         this.addressTxtFld.clear();
         this.phoneTxtFld.clear();
         this.genderCb.getSelectionModel().select(0);
-        this.roleCb.getSelectionModel().select(null);
-        this.departmentCb.getSelectionModel().select(null);
+        this.roleCb.getSelectionModel().select(this.roleService.getRoleById(1));
+        this.departmentCb.getSelectionModel().select(this.departmentService.getDepartmentById(1));
         this.createdDateTxtFld.clear();
         this.birthTxtFld.setValue(null);
     }
 
     public void addUser(ActionEvent evt) throws SQLException {
-        User user = this.getUserFromFx();
-        if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(this.usernameTxtFld.getText()).isEmpty()){
-            if(this.userService.addUser(this.getUserFromFx())){
-                Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
-                this.loadData();
-                reset();
+        if(!this.usernameTxtFld.getText().isBlank() &&
+                !this.fullnameTxtFld.getText().isBlank() && 
+                !this.passwordTxtFld.getText().isBlank() && 
+                !this.phoneTxtFld.getText().isBlank()){
+            User user = this.getUserFromFx();
+            user.setFullname(Utils.chuannHoa(this.fullnameTxtFld.getText()));
+            user.setAddress(Utils.chuannHoa(this.addressTxtFld.getText()));
+            if(this.userService.findUserByPhone(user.getPhone()).isEmpty() && this.userService.findUserByUsername(this.usernameTxtFld.getText()).isEmpty()){
+                if(this.userService.addUser(user)){
+                    Utils.setAlert("Thêm thành công!!!", Alert.AlertType.INFORMATION).show();
+                    this.loadData();
+                    reset();
+                } else
+                    Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
             } else
-                Utils.setAlert("Thêm thất bại!!!", Alert.AlertType.ERROR).show();
-        } else
-            Utils.setAlert("Có User trùng!!!", Alert.AlertType.ERROR).show();
+                Utils.setAlert("Có User trùng!!!", Alert.AlertType.ERROR).show();
+        }
+        else Utils.setAlert("Mời bạn nhập đủ thông tin!!!", Alert.AlertType.ERROR).show();
     }
 
     public void updateUser(ActionEvent evt) throws SQLException {
-        if (userService.updateUser(userTabView.getSelectionModel().getSelectedItem().getId(), this.getUserFromFx())) {
-            Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
-            this.loadData();
-            reset();
-        } else
-            Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
+        if(!this.idTxtFld.getText().isBlank()){
+            if(!this.usernameTxtFld.getText().isBlank() &&
+                !this.fullnameTxtFld.getText().isBlank() && 
+                !this.passwordTxtFld.getText().isBlank() && 
+                !this.phoneTxtFld.getText().isBlank()){
+                if(this.userService.findUserByPhone(this.phoneTxtFld.getText()).isEmpty() && this.userService.findUserByUsername(this.usernameTxtFld.getText()).isEmpty()){
+                    if (userService.updateUser(userTabView.getSelectionModel().getSelectedItem().getId(), this.getUserFromFx())) {
+                        Utils.setAlert("Sửa thành công!!!", Alert.AlertType.INFORMATION).show();
+                        this.loadData();
+                        reset();
+                    } else
+                        Utils.setAlert("Sửa thất bại!!!", Alert.AlertType.ERROR).show();
+                } else Utils.setAlert("Có User trùng với thông tin đang sửa hoặc Không có thay đổi với User đang được sửa!!!", Alert.AlertType.ERROR).show();
+            } else Utils.setAlert("Mời bạn nhập đủ thông tin!!!", Alert.AlertType.ERROR).show();
+        }
+        else
+            Utils.setAlert("Chưa có User cần sửa!!!", Alert.AlertType.ERROR).show();
     }
 
     public void resetHandler(ActionEvent evt) throws SQLException {
@@ -296,21 +340,26 @@ public class UserController implements Initializable {
     }
 
     private User getUserFromFx() {
-        User u = new User();
-        u.setUsername(this.usernameTxtFld.getText());
-        u.setPassword(this.passwordTxtFld.getText());
-        u.setFullname(this.fullnameTxtFld.getText());
-        u.setBirth(Utils.convertUtilToSql(Date.from(this.birthTxtFld.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
-        if (1 == this.genderCb.getSelectionModel().getSelectedIndex())
-            u.setGender(1);
-        else u.setGender(0);
-        u.setAddress(this.addressTxtFld.getText());
-        u.setPhone(this.phoneTxtFld.getText());
-        u.setRoleId(this.roleCb.getSelectionModel().getSelectedItem().getId());
-        u.setDepartmentId(this.departmentCb.getSelectionModel().getSelectedItem().getId());
-        u.setCreatedDate(new Date());
+        try{    
+            User u = new User();
+            u.setUsername(this.usernameTxtFld.getText());
+            u.setPassword(this.passwordTxtFld.getText());
+            u.setFullname(this.fullnameTxtFld.getText());
+            u.setBirth(Utils.convertUtilToSql(Date.from(this.birthTxtFld.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant())));
+            if (1 == this.genderCb.getSelectionModel().getSelectedIndex())
+                u.setGender(1);
+            else u.setGender(0);
+            u.setAddress(this.addressTxtFld.getText());
+            u.setPhone(this.phoneTxtFld.getText());
+            u.setRoleId(this.roleCb.getSelectionModel().getSelectedItem().getId());
+            u.setDepartmentId(this.departmentCb.getSelectionModel().getSelectedItem().getId());
+            u.setCreatedDate(new Date());
 
-        return u;
+            return u;
+        }catch(NullPointerException ex){
+            Utils.setAlert("Mời bạn kiểm tra lại thông tin!!!", Alert.AlertType.ERROR).show();
+        }
+        return new User();
     }
 
     @FXML
